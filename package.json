@@ -3,7 +3,10 @@
   "type": "module",
   "scripts": {
     "scrape": "node scrape.js",
-    "test-scrape": "node scrape.js --test"
+    "test-scrape": "node scrape.js --test",
+    "scrape:airbnb": "node scrape.js --only=airbnb",
+    "scrape:kateandtoms": "node scrape.js --only=kateandtoms",
+    "scrape:ga": "node scrape.js --only=groupaccommodation"
   },
   "dependencies": {
     "playwright": "^1.52.0"
