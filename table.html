@@ -115,20 +115,10 @@
         <div class="no-results" id="no-results" style="display:none;">No matching properties found.</div>
     </div>
 
+    <script src="./stars.js"></script>
     <script>
-        var STARRED_KEY = 'house-search-starred';
-        function getStarred() {
-            try { return new Set(JSON.parse(localStorage.getItem(STARRED_KEY) || '[]')); }
-            catch (e) { return new Set(); }
-        }
-        function toggleStar(url) {
-            var s = getStarred();
-            if (s.has(url)) s.delete(url); else s.add(url);
-            localStorage.setItem(STARRED_KEY, JSON.stringify([...s]));
-            return s.has(url);
-        }
-        function toggleStarAndRender(url, btn) {
-            var isNow = toggleStar(url);
+        async function toggleStarAndRender(url, btn) {
+            var isNow = await toggleStar(url);
             btn.textContent = isNow ? '★' : '☆';
             btn.classList.toggle('starred', isNow);
             var row = btn.closest('tr');
@@ -181,12 +171,11 @@
             var bonusOnly = document.getElementById('bonusOnly').checked;
             var starredOnly = document.getElementById('starredOnly').checked;
             var query = document.getElementById('search').value.toLowerCase().trim();
-            var starred = starredOnly ? getStarred() : null;
 
             displayed = allProperties.filter(function(p) {
                 if (!sources.includes(p.source)) return false;
                 if (bonusOnly && !p.has_games_bonus) return false;
-                if (starredOnly && !starred.has(p.url)) return false;
+                if (starredOnly && !isStarred(p.url)) return false;
                 if (query) {
                     var searchable = [p.name, p.location, (p.games||[]).join(' ')].join(' ').toLowerCase();
                     if (!searchable.includes(query)) return false;
@@ -222,15 +211,14 @@
             }
             noResults.style.display = 'none';
 
-            var starred = getStarred();
             var html = '';
             for (var i = 0; i < displayed.length; i++) {
                 var p = displayed[i];
-                var isStarred = starred.has(p.url);
-                var rowClass = (p.has_games_bonus ? 'bonus' : '') + (isStarred ? ' starred' : '');
+                var isStarredProp = isStarred(p.url);
+                var rowClass = (p.has_games_bonus ? 'bonus' : '') + (isStarredProp ? ' starred' : '');
                 html += '<tr class="' + rowClass + '">';
                 // Star button
-                html += '<td style="text-align:center;padding:4px;"><button class="star-btn' + (isStarred ? ' starred' : '') + '" onclick="toggleStarAndRender(\'' + p.url + '\', this)">' + (isStarred ? '★' : '☆') + '</button></td>';
+                html += '<td style="text-align:center;padding:4px;"><button class="star-btn' + (isStarredProp ? ' starred' : '') + '" onclick="toggleStarAndRender(\'' + p.url + '\', this)">' + (isStarredProp ? '★' : '☆') + '</button></td>';
                 // Thumbnail with hover-to-enlarge
                 if (p.image) {
                     html += '<td style="padding:4px 8px;">'
@@ -290,18 +278,19 @@
             }
         });
 
-        // Load data
-        fetch('./properties.json')
-            .then(function(r) { return r.ok ? r.json() : []; })
-            .then(function(data) {
-                allProperties = data;
-                displayed = data.slice();
-                sortAndRender();
-            })
-            .catch(function() {
-                document.getElementById('no-results').style.display = 'block';
-                document.getElementById('no-results').textContent = 'Could not load properties.json. Run npm run scrape first.';
-            });
+        // Load data and starred state in parallel
+        Promise.all([
+            fetch('./properties.json').then(function(r) { return r.ok ? r.json() : []; }).catch(function() { return []; }),
+            loadStarred()
+        ]).then(function(results) {
+            var data = results[0];
+            allProperties = data;
+            displayed = data.slice();
+            sortAndRender();
+        }).catch(function() {
+            document.getElementById('no-results').style.display = 'block';
+            document.getElementById('no-results').textContent = 'Could not load properties.json. Run npm run scrape first.';
+        });
     </script>
 </body>
 </html>

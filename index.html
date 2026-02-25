@@ -64,19 +64,8 @@
         <strong>Show:</strong>
     </div>
 
+    <script src="./stars.js"></script>
     <script>
-        const STARRED_KEY = 'house-search-starred';
-        function getStarred() {
-            try { return new Set(JSON.parse(localStorage.getItem(STARRED_KEY) || '[]')); }
-            catch (e) { return new Set(); }
-        }
-        function toggleStar(url) {
-            var s = getStarred();
-            if (s.has(url)) s.delete(url); else s.add(url);
-            localStorage.setItem(STARRED_KEY, JSON.stringify([...s]));
-            return s.has(url);
-        }
-
         let leafletMap;
         const layerGroups = {};
         const markersByUrl = {}; // url -> { marker, group, prop }
@@ -103,14 +92,14 @@
         }
 
         function getIcon(prop) {
-            if (getStarred().has(prop.url)) return createIcon('#f39c12', 32);
+            if (isStarred(prop.url)) return createIcon('#f39c12', 32);
             if (prop.has_games_bonus) return createIcon('#e74c3c', 28);
             if (prop.source === 'airbnb') return createIcon('#27ae60', 24);
             return createIcon('#3498db', 24);
         }
 
-        function toggleStarFromPopup(url, btn) {
-            var isNow = toggleStar(url);
+        async function toggleStarFromPopup(url, btn) {
+            var isNow = await toggleStar(url);
             btn.textContent = isNow ? '★ Starred' : '☆ Star this';
             btn.style.background = isNow ? '#f39c12' : '#95a5a6';
             var entry = markersByUrl[url];
@@ -119,13 +108,12 @@
         }
 
         function applyStarredFilter() {
-            var starred = getStarred();
             var starredOnly = document.getElementById('show_starred_only') && document.getElementById('show_starred_only').checked;
             Object.keys(markersByUrl).forEach(function(url) {
                 var entry = markersByUrl[url];
                 var sourceCb = document.getElementById('show_' + entry.prop.source);
                 var sourceOn = !sourceCb || sourceCb.checked;
-                var starOn = !starredOnly || starred.has(url);
+                var starOn = !starredOnly || isStarred(url);
                 if (sourceOn && starOn) {
                     if (!entry.group.hasLayer(entry.marker)) entry.group.addLayer(entry.marker);
                 } else {
@@ -182,14 +170,14 @@
 
             html += '<p style="margin:2px 0;font-size:11px;color:#888;">Source: ' + sourceLabel(prop.source) + '</p>';
 
-            var isStarred = getStarred().has(prop.url);
+            var isStarredProp = isStarred(prop.url);
             html += '<div style="margin-top:8px;display:flex;gap:8px;align-items:center;">';
             html += '<a href="' + esc(prop.url) + '" target="_blank" rel="noopener noreferrer"'
                 + ' style="display:inline-block;padding:6px 14px;' + sourceLinkStyle(prop.source) + ';color:white;text-decoration:none;border-radius:4px;font-size:13px;flex:1;">'
                 + 'View Property &rarr;</a>';
             html += '<button onclick="toggleStarFromPopup(' + JSON.stringify(prop.url) + ', this)"'
-                + ' style="padding:6px 10px;background:' + (isStarred ? '#f39c12' : '#95a5a6') + ';color:white;border:none;border-radius:4px;font-size:13px;cursor:pointer;white-space:nowrap;">'
-                + (isStarred ? '★ Starred' : '☆ Star this') + '</button>';
+                + ' style="padding:6px 10px;background:' + (isStarredProp ? '#f39c12' : '#95a5a6') + ';color:white;border:none;border-radius:4px;font-size:13px;cursor:pointer;white-space:nowrap;">'
+                + (isStarredProp ? '★ Starred' : '☆ Star this') + '</button>';
             html += '</div>';
             html += '</div>';
             return html;
@@ -207,7 +195,8 @@
         }
 
         async function init() {
-            var properties = await loadProperties();
+            var results = await Promise.all([loadProperties(), loadStarred()]);
+            var properties = results[0];
 
             // Group by source
             var bySource = {};
