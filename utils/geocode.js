@@ -7,7 +7,11 @@ export async function geocode(locationStr) {
   if (!locationStr) return null;
 
   // Clean up location string
-  const query = locationStr.replace(/[()]/g, '').trim();
+  let query = locationStr
+    .replace(/[()]/g, '')
+    .replace(/\//g, ', ')  // "Cumbria/Lake District" → "Cumbria, Lake District"
+    .replace(/\s+/g, ' ')
+    .trim();
   if (!query) return null;
 
   if (cache.has(query)) return cache.get(query);
@@ -39,6 +43,39 @@ export async function geocode(locationStr) {
     }
   } catch (err) {
     console.warn(`[Geocode] Failed for "${query}": ${err.message}`);
+  }
+
+  // Fallback: try just the last comma-separated part (most specific place name)
+  const parts = query.split(',').map(s => s.trim());
+  if (parts.length > 1) {
+    const fallback = parts[parts.length - 1];
+    if (fallback && !cache.has(fallback)) {
+      await sleep(1100);
+      try {
+        const params2 = new URLSearchParams({
+          q: fallback + ', United Kingdom',
+          format: 'json',
+          limit: '1',
+          countrycodes: 'gb',
+        });
+        const resp2 = await fetch(`${NOMINATIM_URL}?${params2}`, {
+          headers: { 'User-Agent': 'HouseSearchScraper/1.0 (personal use)' },
+        });
+        if (resp2.ok) {
+          const results2 = await resp2.json();
+          if (results2.length > 0) {
+            const result = { lat: parseFloat(results2[0].lat), lng: parseFloat(results2[0].lon) };
+            cache.set(query, result);
+            cache.set(fallback, result);
+            return result;
+          }
+        }
+      } catch {}
+    } else if (cache.has(fallback)) {
+      const cached = cache.get(fallback);
+      cache.set(query, cached);
+      return cached;
+    }
   }
 
   cache.set(query, null);

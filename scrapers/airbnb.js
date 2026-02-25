@@ -37,8 +37,30 @@ export async function scrapeAirbnb() {
       await rateLimit();
     }
 
-    const results = [...allProperties.values()].map(p => normalise(p, 'airbnb'));
-    console.log(`[Airbnb] Total unique properties: ${results.length}`);
+    // Visit each listing page to get real name and max guests
+    const enriched = [];
+    const entries = [...allProperties.values()];
+    console.log(`[Airbnb] Enriching ${entries.length} listings with detail pages...`);
+    for (const prop of entries) {
+      try {
+        await rateLimit();
+        const details = await scrapeListingPage(context, prop.url);
+        if (details.maxGuests && details.maxGuests < 20) {
+          console.log(`[Airbnb] Skipping ${details.name || prop.name} (max ${details.maxGuests} guests)`);
+          continue;
+        }
+        if (details.name) prop.name = details.name;
+        if (details.maxGuests) prop.sleeps = details.maxGuests;
+        if (details.location) prop.location = details.location;
+        enriched.push(prop);
+      } catch (err) {
+        console.warn(`[Airbnb] Could not enrich ${prop.url}: ${err.message}`);
+        enriched.push(prop); // keep it with search data
+      }
+    }
+
+    const results = enriched.map(p => normalise(p, 'airbnb'));
+    console.log(`[Airbnb] Total properties after filtering: ${results.length}`);
     return results;
   } finally {
     await browser.close();
@@ -46,114 +68,101 @@ export async function scrapeAirbnb() {
 }
 
 async function searchDateRange(context, range) {
-  const url = `https://www.airbnb.co.uk/s/England/homes?adults=20&checkin=${range.checkin}&checkout=${range.checkout}&pets=1&price_max=6000&l2_property_type_ids%5B%5D=1`;
-  const page = await context.newPage();
+  const baseUrl = `https://www.airbnb.co.uk/s/England/homes?adults=20&checkin=${range.checkin}&checkout=${range.checkout}&pets=1&price_max=6000&l2_property_type_ids%5B%5D=1`;
   const allProperties = [];
 
-  try {
-    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
+  for (let pageNum = 1; pageNum <= 3; pageNum++) {
+    const url = pageNum === 1 ? baseUrl : `${baseUrl}&items_offset=${(pageNum - 1) * 18}`;
+    console.log(`[Airbnb] Processing page ${pageNum} for ${range.label}...`);
 
-    // Wait for listings to appear
-    await page.waitForSelector('[itemprop="itemListElement"], [data-testid="card-container"], [class*="listing"]', { timeout: 15000 }).catch(() => {});
-
-    // Give extra time for dynamic content
-    await sleep(3000);
-
-    let pageNum = 1;
-    while (true) {
-      console.log(`[Airbnb] Processing page ${pageNum} for ${range.label}...`);
-
-      const properties = await extractProperties(page);
-      allProperties.push(...properties);
-
-      // Try to get coordinates from deferred state data
-      const coords = await extractCoordinates(page);
-      // Match coordinates to properties by index if possible
-      if (coords.length > 0) {
-        const startIdx = allProperties.length - properties.length;
-        for (let i = 0; i < properties.length && i < coords.length; i++) {
-          if (coords[i]) {
-            allProperties[startIdx + i].lat = coords[i].lat;
-            allProperties[startIdx + i].lng = coords[i].lng;
-          }
-        }
-      }
-
-      // Check for next page
-      const hasNext = await page.evaluate(() => {
-        const nextBtn = document.querySelector('a[aria-label="Next"], nav[aria-label*="pagination"] a:last-child');
-        if (nextBtn && !nextBtn.hasAttribute('disabled') && nextBtn.getAttribute('aria-disabled') !== 'true') {
-          return nextBtn.href || true;
-        }
-        return false;
-      });
-
-      if (!hasNext || pageNum >= 3) break;
-
-      // Click next page
-      await page.evaluate(() => {
-        const nextBtn = document.querySelector('a[aria-label="Next"], nav[aria-label*="pagination"] a:last-child');
-        if (nextBtn) nextBtn.click();
-      });
-      pageNum++;
+    const page = await context.newPage();
+    try {
+      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
+      await page.waitForSelector('[itemprop="itemListElement"], [data-testid="card-container"], [class*="listing"]', { timeout: 15000 }).catch(() => {});
       await sleep(3000);
-      await page.waitForSelector('[itemprop="itemListElement"], [data-testid="card-container"]', { timeout: 10000 }).catch(() => {});
+
+      const properties = await extractListings(page);
+      if (properties.length === 0) break;
+      allProperties.push(...properties);
+    } finally {
+      await page.close();
     }
-  } finally {
-    await page.close();
+
+    await rateLimit();
   }
 
   return allProperties;
 }
 
-async function extractProperties(page) {
+async function extractListings(page) {
   return page.evaluate(() => {
-    const results = [];
+    // Build a map of listing ID -> coordinates from deferred state JSON.
+    // Airbnb stores data in <script type="application/json" id="data-deferred-state-0">.
+    // Parent objects have base64-encoded IDs like "RGVtYW5kU3RheUxpc3Rpbmc6NDk5ODMwMjY="
+    // which decode to "DemandStayListing:49983026" — the number is the room ID.
+    const coordsById = {};
 
-    // Try structured data first
-    const listItems = document.querySelectorAll('[itemprop="itemListElement"]');
-    if (listItems.length > 0) {
-      for (const item of listItems) {
-        const link = item.querySelector('a[href*="/rooms/"]');
-        const nameEl = item.querySelector('[id^="title_"]') || item.querySelector('div[data-testid="listing-card-title"]') || item.querySelector('span[style*="font-weight"]');
-        const priceEl = item.querySelector('span._1y74zjx, ._tyxjp1, [class*="price"]');
-        const imgEl = item.querySelector('img');
-
-        if (!link) continue;
-
-        const href = link.href;
-        const roomMatch = href.match(/\/rooms\/(\d+)/);
-        const url = roomMatch ? `https://www.airbnb.co.uk/rooms/${roomMatch[1]}` : href.split('?')[0];
-
-        results.push({
-          name: nameEl?.textContent?.trim() || 'Airbnb Property',
-          url,
-          price: priceEl?.textContent?.trim() || null,
-          image: imgEl?.src || null,
-          location: 'England',
-          lat: null,
-          lng: null,
-          games: [],
-          sleeps: 20,
-          available_dates: [],
-        });
-      }
-      return results;
+    function extractIdFromBase64(b64) {
+      try {
+        const decoded = atob(b64);
+        const match = decoded.match(/:(\d+)$/);
+        return match ? match[1] : null;
+      } catch { return null; }
     }
 
-    // Fallback: try card containers
-    const cards = document.querySelectorAll('[data-testid="card-container"], .g1qv1ctd');
-    for (const card of cards) {
-      const link = card.querySelector('a[href*="/rooms/"]');
+    function walk(obj, depth) {
+      if (!obj || typeof obj !== 'object' || depth > 20) return;
+      // Match objects with id + location.coordinate structure
+      if (obj.id && obj.location && obj.location.coordinate) {
+        const coord = obj.location.coordinate;
+        if (coord.latitude && coord.longitude) {
+          const numericId = extractIdFromBase64(String(obj.id)) || String(obj.id);
+          coordsById[numericId] = { lat: coord.latitude, lng: coord.longitude };
+        }
+      }
+      if (Array.isArray(obj)) {
+        for (const item of obj) walk(item, depth + 1);
+      } else {
+        for (const key of Object.keys(obj)) {
+          try { walk(obj[key], depth + 1); } catch {}
+        }
+      }
+    }
+
+    // Parse deferred state script tags
+    for (const script of document.querySelectorAll('script[type="application/json"]')) {
+      if (!script.id || !script.id.startsWith('data-deferred-state')) continue;
+      try {
+        const data = JSON.parse(script.textContent);
+        walk(data, 0);
+      } catch {}
+    }
+
+    // Extract listing cards from DOM, matching IDs to coordinates
+    const results = [];
+    const listItems = document.querySelectorAll('[itemprop="itemListElement"]');
+    const items = listItems.length > 0
+      ? listItems
+      : document.querySelectorAll('[data-testid="card-container"], .g1qv1ctd');
+
+    for (const item of items) {
+      const link = item.querySelector('a[href*="/rooms/"]');
       if (!link) continue;
 
       const href = link.href;
       const roomMatch = href.match(/\/rooms\/(\d+)/);
-      const url = roomMatch ? `https://www.airbnb.co.uk/rooms/${roomMatch[1]}` : href.split('?')[0];
+      if (!roomMatch) continue;
 
-      const nameEl = card.querySelector('[id^="title_"]') || card.querySelector('div[data-testid="listing-card-title"]');
-      const priceEl = card.querySelector('[class*="price"], span._1y74zjx');
-      const imgEl = card.querySelector('img');
+      const listingId = roomMatch[1];
+      const url = 'https://www.airbnb.co.uk/rooms/' + listingId;
+
+      const nameEl = item.querySelector('[id^="title_"]')
+        || item.querySelector('div[data-testid="listing-card-title"]')
+        || item.querySelector('span[style*="font-weight"]');
+      const priceEl = item.querySelector('span._1y74zjx, ._tyxjp1, [class*="price"]');
+      const imgEl = item.querySelector('img');
+
+      const coord = coordsById[listingId];
 
       results.push({
         name: nameEl?.textContent?.trim() || 'Airbnb Property',
@@ -161,8 +170,8 @@ async function extractProperties(page) {
         price: priceEl?.textContent?.trim() || null,
         image: imgEl?.src || null,
         location: 'England',
-        lat: null,
-        lng: null,
+        lat: coord ? coord.lat : null,
+        lng: coord ? coord.lng : null,
         games: [],
         sleeps: 20,
         available_dates: [],
@@ -173,47 +182,38 @@ async function extractProperties(page) {
   });
 }
 
-async function extractCoordinates(page) {
-  return page.evaluate(() => {
-    const coords = [];
+async function scrapeListingPage(context, url) {
+  const page = await context.newPage();
+  try {
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+    await sleep(2000);
 
-    // Method 1: Try data-deferred-state JSON blobs (Airbnb embeds listing data here)
-    const deferredEls = document.querySelectorAll('[data-deferred-state]');
-    for (const el of deferredEls) {
-      try {
-        const data = JSON.parse(el.getAttribute('data-deferred-state'));
-        const str = JSON.stringify(data);
-        // Look for coordinate patterns in the JSON
-        const latMatches = str.matchAll(/"lat(?:itude)?"\s*:\s*([-\d.]+)/g);
-        const lngMatches = str.matchAll(/"l(?:on|ng|ongitude)"\s*:\s*([-\d.]+)/g);
-        const lats = [...latMatches].map(m => parseFloat(m[1])).filter(v => v > 49 && v < 61);
-        const lngs = [...lngMatches].map(m => parseFloat(m[1])).filter(v => v > -8 && v < 2);
-        const pairs = Math.min(lats.length, lngs.length);
-        for (let i = 0; i < pairs; i++) {
-          coords.push({ lat: lats[i], lng: lngs[i] });
-        }
-      } catch {}
-    }
+    return await page.evaluate(() => {
+      const result = { name: null, maxGuests: null, location: null };
 
-    // Method 2: Try script tags with __NEXT_DATA__ or similar
-    if (coords.length === 0) {
-      for (const script of document.querySelectorAll('script')) {
-        const text = script.textContent;
-        if (text.includes('latitude') && text.includes('longitude')) {
-          try {
-            const latMatches = text.matchAll(/"lat(?:itude)?"\s*:\s*([-\d.]+)/g);
-            const lngMatches = text.matchAll(/"l(?:on|ng|ongitude)"\s*:\s*([-\d.]+)/g);
-            const lats = [...latMatches].map(m => parseFloat(m[1])).filter(v => v > 49 && v < 61);
-            const lngs = [...lngMatches].map(m => parseFloat(m[1])).filter(v => v > -8 && v < 2);
-            const pairs = Math.min(lats.length, lngs.length);
-            for (let i = 0; i < pairs; i++) {
-              coords.push({ lat: lats[i], lng: lngs[i] });
-            }
-          } catch {}
-        }
-      }
-    }
+      // Real property name from the h1
+      const h1 = document.querySelector('h1');
+      if (h1) result.name = h1.textContent.trim();
 
-    return coords;
-  });
+      // Max guests — look for "X guests" text in the page
+      const pageText = document.body?.textContent || '';
+
+      // Pattern: "X guests" in the highlights/details section
+      const guestMatch = pageText.match(/(\d+)\s+guests?/i);
+      if (guestMatch) result.maxGuests = parseInt(guestMatch[1], 10);
+
+      // Also check for "maximum of X guests"
+      const maxMatch = pageText.match(/maximum\s+of\s+(\d+)\s+guests?/i);
+      if (maxMatch) result.maxGuests = parseInt(maxMatch[1], 10);
+
+      // Location from breadcrumb or subtitle
+      const locEl = document.querySelector('[data-testid="listing-card-subtitle"]')
+        || document.querySelector('span[class*="location"]');
+      if (locEl) result.location = locEl.textContent.trim();
+
+      return result;
+    });
+  } finally {
+    await page.close();
+  }
 }

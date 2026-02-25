@@ -175,36 +175,58 @@ async function scrapeProperty(context, url, enrichmentData) {
       const image = document.querySelector('meta[property="og:image"]')?.content
         || document.querySelector('.property-image img, .gallery img, img[class*="property"]')?.src || null;
 
-      return { name, sleeps, location, lat, lng, petsAllowed, games, image };
+      return { name, sleeps, location, _rawLocation: location, lat, lng, petsAllowed, games, image };
     });
 
     if (!details.name) return null;
 
-    // Enrich with property-details.json data
-    const enriched = enrichmentData.find(e =>
-      details.name.toLowerCase().includes(e.name.toLowerCase()) ||
-      e.name.toLowerCase().includes(details.name.toLowerCase()) ||
-      (e.url && url.includes(e.url.split('/properties/')[1]?.split('?')[0] || '___'))
-    );
+    // Clean up breadcrumb location: "Europe, UK, England, South West England, Cornwall, Newquay"
+    // → extract last 2-3 meaningful parts (skip Europe, UK, England, region)
+    if (details.location) {
+      const parts = details.location.split(',').map(s => s.trim());
+      const skipPrefixes = ['europe', 'uk', 'united kingdom', 'england', 'scotland', 'wales',
+        'south west england', 'south east england', 'north west england', 'north east england',
+        'east of england', 'east midlands', 'west midlands', 'yorkshire'];
+      const useful = parts.filter(p => !skipPrefixes.includes(p.toLowerCase()));
+      details.location = useful.length > 0 ? useful.join(', ') : parts.slice(-2).join(', ');
+    }
+
+    // Skip non-UK results
+    const origBreadcrumb = (details._rawLocation || details.location || '').toLowerCase();
+    const nonUkCountries = ['greece', 'france', 'spain', 'portugal', 'italy', 'australia',
+      'new zealand', 'south africa', 'ireland', 'croatia', 'turkey', 'morocco', 'germany'];
+    if (nonUkCountries.some(c => origBreadcrumb.includes(c))) {
+      console.log(`[GA] Skipping non-UK property: ${details.name}`);
+      return null;
+    }
+
+    // Enrich with property-details.json data — match on URL slug
+    const urlSlug = url.split('/properties/')[1]?.replace(/\/$/, '') || '';
+    const enriched = enrichmentData.find(e => {
+      const eSlug = (e.url || '').split('/properties/')[1]?.replace(/\/$/, '') || '';
+      if (eSlug && urlSlug && eSlug === urlSlug) return true;
+      if (details.name.toLowerCase().includes(e.name.toLowerCase())) return true;
+      if (e.name.toLowerCase().includes(details.name.toLowerCase())) return true;
+      return false;
+    });
 
     if (enriched) {
-      // Use enriched games data if our page extraction found less
+      console.log(`[GA] Enriched "${details.name}" from property-details.json`);
       if (enriched.key_features?.games?.length > details.games.length) {
         details.games = enriched.key_features.games;
       }
-      // Use enriched coordinates if page didn't have them
       if (!details.lat && enriched.location?.coordinates_approximate) {
         details.lat = enriched.location.coordinates_approximate.lat;
         details.lng = enriched.location.coordinates_approximate.lng;
       }
-      // Use enriched location
-      if (!details.location && enriched.location) {
+      if (enriched.location) {
         const loc = enriched.location;
-        details.location = [loc.village, loc.town, loc.county].filter(Boolean).join(', ');
+        const enrichedLoc = [loc.village, loc.town, loc.county].filter(Boolean).join(', ');
+        if (enrichedLoc) details.location = enrichedLoc;
       }
     }
 
-    // Geocode if no coordinates
+    // Geocode if still no coordinates
     if (!details.lat && details.location) {
       const coords = await geocode(details.location);
       if (coords) {
