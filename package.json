@@ -1,0 +1,10 @@
+{
+  "name": "house-search",
+  "type": "module",
+  "scripts": {
+    "scrape": "node scrape.js"
+  },
+  "dependencies": {
+    "playwright": "^1.52.0"
+  }
+}

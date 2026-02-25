@@ -1,0 +1,457 @@
+[
+  {
+    "id": 1,
+    "name": "Cotswold Park Barns",
+    "url": "https://www.groupaccommodation.com/properties/cotswold-park-barns-woodmancote-gloucestershire",
+    "own_website": "https://www.cotswoldparkbarns.co.uk/",
+    "location": {
+      "village": "Woodmancote",
+      "town": "Cirencester",
+      "county": "Gloucestershire",
+      "region": "Cotswolds",
+      "postcode": "GL7 7EL",
+      "full_address": "Cotswold Park Barns, Woodmancote, Cirencester, GL7 7EL",
+      "coordinates_approximate": {
+        "lat": 51.82,
+        "lng": -1.92,
+        "note": "Approximate based on postcode GL7 7EL"
+      }
+    },
+    "sleeps": "20 adults (22 with sofa beds)",
+    "bedrooms": 10,
+    "bathrooms": "10 (all en suite)",
+    "dogs_allowed": true,
+    "dogs_details": "Dogs allowed at a small charge per night per dog. No animals allowed in bedrooms.",
+    "price": {
+      "notes": "Exclusive hire basis - pricing not publicly listed. Contact property directly.",
+      "price_url": "https://www.cotswoldparkbarns.co.uk/properties/cotswold-park-barns/calendar"
+    },
+    "key_features": {
+      "games": [],
+      "games_room": false,
+      "games_notes": "No games room. No snooker, pool, or table tennis. Outdoor tennis court available May-September.",
+      "outdoor": [
+        "Outdoor heated swimming pool",
+        "Tennis court (May-September)",
+        "3 acres of grounds"
+      ],
+      "indoor": [
+        "6 en suite bedrooms in The Dairy",
+        "4 en suite bedrooms in The Hay Barn",
+        "Large dining room for 22 in The Threshing Barn",
+        "Spacious hand-crafted kitchen"
+      ]
+    },
+    "property_type": "Luxury Cotswold stone barn conversion",
+    "description": "Original dairy buildings belonging to Cotswold Park House, converted into luxury accommodation in the heart of the Cotswolds, close to Cheltenham and Cirencester.",
+    "notes": "No games room at all. Good for outdoor activities (pool, tennis) but lacks indoor games."
+  },
+  {
+    "id": 2,
+    "name": "Overcliff Lodge",
+    "url": "https://www.groupaccommodation.com/properties/overcliff-lodge-mundesley-norfolk",
+    "own_website": "http://www.overclifflodge.co.uk",
+    "location": {
+      "village": "Mundesley",
+      "county": "Norfolk",
+      "region": "North Norfolk Heritage Coast",
+      "postcode": "NR11 8DB",
+      "full_address": "46 Cromer Road, Mundesley, Norfolk, NR11 8DB",
+      "coordinates_approximate": {
+        "lat": 52.87,
+        "lng": 1.43,
+        "note": "Approximate based on postcode NR11 8DB"
+      }
+    },
+    "sleeps": "20 (up to 22)",
+    "bedrooms": 11,
+    "bathrooms": "8 en suite",
+    "dogs_allowed": true,
+    "dogs_details": "3 well-behaved dogs allowed. Additional dogs may be allowed at owner's discretion for an additional fee.",
+    "price": {
+      "notes": "Pricing varies by season - check booking sites for current rates. No booking fees or commission when booking direct via groupaccommodation.com."
+    },
+    "contact": {
+      "phone": "01263 720016",
+      "email": "enquiries@overclifflodge.co.uk"
+    },
+    "key_features": {
+      "games": [
+        "Pool table (in games room)",
+        "Wii gaming console"
+      ],
+      "games_room": true,
+      "games_notes": "Separate games room at far end of house with pool table, Wii, and TV. Views to garden via patio doors. No table tennis or snooker.",
+      "outdoor": [
+        "Hot tub",
+        "100 yards from blue flag sandy beach",
+        "Sea views"
+      ],
+      "indoor": [
+        "5-star award-winning Victorian holiday home",
+        "Set on two levels",
+        "11 bedrooms with 8 en suites",
+        "Games room with pool table and Wii"
+      ]
+    },
+    "property_type": "Victorian seaside holiday home",
+    "description": "Large award-winning Victorian family holiday home on two levels, 100 yards from a blue flag sandy beach on the North Norfolk Heritage Coast.",
+    "notes": "Seaside location is a big draw. Games room has pool table but no snooker or table tennis."
+  },
+  {
+    "id": 3,
+    "name": "The Barns",
+    "url": "https://www.groupaccommodation.com/properties/the-barns-lyonshall-herefordshire",
+    "own_website": "https://thebarns.com/",
+    "location": {
+      "village": "Lyonshall",
+      "town": "Kington",
+      "county": "Herefordshire",
+      "postcode": "HR5 3JN",
+      "full_address": "The Barns at Upper House, Lyonshall, Kington, Herefordshire, HR5 3JN",
+      "directions": "Outskirts of Lyonshall village, on Spond Lane accessed off the A480 Hereford road",
+      "coordinates_approximate": {
+        "lat": 52.22,
+        "lng": -3.04,
+        "note": "Approximate based on postcode HR5 3JN"
+      }
+    },
+    "sleeps": "20 (Stables & Granary) or up to 48 (full estate)",
+    "bedrooms": "8 (Stables & Granary) / 20 (full estate)",
+    "bathrooms": "8 (Stables & Granary) / 20 (full estate)",
+    "dogs_allowed": true,
+    "dogs_details": "2 well-behaved dogs welcome. Outdoor taps for muddy paws, fabulous walks from door, garden entirely enclosed for dog safety.",
+    "price": {
+      "full_estate_weekend_from": 8000,
+      "full_estate_weekly_from": 13300,
+      "currency": "GBP",
+      "notes": "Prices shown are for full estate (48 guests). Contact for Stables & Granary (sleeps 20) pricing."
+    },
+    "key_features": {
+      "games": [
+        "Table tennis",
+        "Table football",
+        "Air hockey",
+        "Pool table"
+      ],
+      "games_room": true,
+      "games_notes": "Games rooms with table tennis, table football, air hockey, and pool table. Best games selection of the requested properties.",
+      "outdoor": [
+        "Hot tub",
+        "Enclosed garden for dogs",
+        "Glorious Herefordshire walks from the door"
+      ],
+      "indoor": [
+        "Luxury stone barn conversions on family farm",
+        "Huge modern open plan living/dining",
+        "Dining for 22 guests (Stables & Granary)"
+      ]
+    },
+    "property_type": "Luxury barn conversion estate",
+    "description": "Beautifully furnished stone barn conversions on a family farm in Herefordshire. Bookable as Stables & Granary (sleeps 20) or full estate (sleeps 48).",
+    "notes": "BEST games selection of all requested properties: table tennis, table football, air hockey, and pool table. Dog-friendly with enclosed garden. Can scale from 20 to 48 guests."
+  },
+  {
+    "id": 4,
+    "name": "Walcot Hall",
+    "url": "https://www.groupaccommodation.com/properties/walcot-hall-scunthorpe",
+    "own_website": "https://www.statelystaycation.co.uk/",
+    "location": {
+      "village": "Alkborough",
+      "town_nearest": "Scunthorpe (7 miles)",
+      "county": "North Lincolnshire",
+      "postcode": "DN15 9JT",
+      "full_address": "Walcot Hall, Walcot, Nr. Alkborough, North Lincolnshire, DN15 9JT",
+      "coordinates_approximate": {
+        "lat": 53.68,
+        "lng": -0.67,
+        "note": "Approximate based on postcode DN15 9JT"
+      }
+    },
+    "sleeps": "22 (main hall) or up to 28 with Yurt and Lodge",
+    "bedrooms": 8,
+    "bathrooms": "Not confirmed",
+    "dogs_allowed": true,
+    "dogs_details": "Up to 2 well-behaved dogs per unit. Dogs cost £20 per night. Must be kept to ground floor, kept on lead outside.",
+    "price": {
+      "dogs_per_night": 20,
+      "currency": "GBP",
+      "accommodation_price": "Contact property directly for rates",
+      "notes": "Various accommodation options (Hall, Yurt, Lodge) with different pricing."
+    },
+    "contact": {
+      "phone": "01724 720420",
+      "email": "enquiries@walcothallestate.co.uk"
+    },
+    "key_features": {
+      "games": [],
+      "games_room": false,
+      "games_notes": "No games kept on site. Property can provide space for guests to bring own games - notify when booking.",
+      "outdoor": [
+        "27 acres of parkland",
+        "5 acres of formal landscaped gardens",
+        "Private tennis court",
+        "Hot tub"
+      ],
+      "indoor": [
+        "Grade II listed Georgian Hall (built 1726)",
+        "8 spectacularly-appointed bedrooms",
+        "Fully equipped modern kitchen",
+        "Additional Luxury Yurt and Lodge"
+      ]
+    },
+    "property_type": "Grade II listed Georgian country house",
+    "description": "Privately owned Grade II listed Georgian Hall built in 1726, set in 27 acres of stunning countryside in the historic North Lincolnshire village of Alkborough.",
+    "awards": ["TripAdvisor Traveller's Choice Award 2022"],
+    "notes": "No games on site at all - guests must bring their own. Beautiful historic property with tennis court and hot tub. Good for weddings/corporate events."
+  },
+  {
+    "id": 5,
+    "name": "Garden House",
+    "url": "https://www.groupaccommodation.com/properties/garden-house-st-martins-stamford-lincolnshire",
+    "own_website": "https://stamford.holiday/garden-house/",
+    "location": {
+      "area": "St Martins",
+      "town": "Stamford",
+      "county": "Lincolnshire",
+      "postcode": "PE9 2LP",
+      "car_park_postcode": "PE9 2LS (off Kettering Road on Pinfold Lane)",
+      "full_address": "42 High Street, St Martins, Stamford, PE9 2LP",
+      "coordinates_approximate": {
+        "lat": 52.65,
+        "lng": -0.48,
+        "note": "Approximate based on postcode PE9 2LP"
+      }
+    },
+    "sleeps": "Up to 42 (listed as 49 on groupaccommodation.com but other sources say 42 across 20 en suite rooms)",
+    "bedrooms": 20,
+    "bathrooms": "20 (all en suite, no bunks)",
+    "dogs_allowed": true,
+    "dogs_details": "Dogs allowed with no charge.",
+    "price": {
+      "nightly_from": 800,
+      "nightly_to": 1100,
+      "currency": "GBP",
+      "includes": "Sole use for up to 42 guests",
+      "minimum_stay": "2 nights at weekends",
+      "midweek": "Available nightly; individuals and couples can book by room"
+    },
+    "contact": {
+      "phone": "01780 430310",
+      "email": "hello@stamford.holiday"
+    },
+    "key_features": {
+      "games": [
+        "Pool table (in games room)"
+      ],
+      "games_room": true,
+      "games_notes": "Dedicated games room with pool table and selection of other activities. No snooker or table tennis mentioned.",
+      "outdoor": [
+        "Large twin hot tubs (seats 14)",
+        "Large walled garden",
+        "Parking for 20 cars",
+        "Burghley Park across the road"
+      ],
+      "indoor": [
+        "Georgian stone building (former hotel)",
+        "20 en suite rooms (no bunks)",
+        "40ft open plan kitchen/diner",
+        "Communal lounges"
+      ]
+    },
+    "property_type": "Georgian townhouse (former hotel)",
+    "description": "Beautiful stone Georgian building on the edge of Stamford, formerly a hotel, now offering luxury self-catering accommodation. Opposite Burghley Park. Walking distance to historic Stamford centre.",
+    "notes": "Largest capacity property on this list (42 guests). Dogs free of charge. Games room with pool table. Very flexible booking (sole use weekends, room-by-room midweek). Great value at £800-1100/night for up to 42 guests."
+  },
+  {
+    "id": 6,
+    "name": "Penbridge Court Estate",
+    "search_category": "Somerset with snooker/games room sleeps 20+",
+    "url": "https://www.groupaccommodation.com/properties/penbridge-court-estate-trebles-holford-taunton-somerset",
+    "own_website": "https://www.penbridgecourt.co.uk/",
+    "location": {
+      "village": "Trebles Holford",
+      "town_nearest": "Taunton",
+      "county": "Somerset",
+      "region": "Edge of Quantock Hills AONB",
+      "postcode": "TA4 3HA",
+      "full_address": "Penbridge Court, Trebles Holford, Taunton, Somerset, TA4 3HA",
+      "coordinates_approximate": {
+        "lat": 51.08,
+        "lng": -3.18,
+        "note": "Approximate based on postcode TA4 3HA"
+      }
+    },
+    "sleeps": "20 (main barn), up to 28 with all 4 cottages",
+    "dogs_allowed": true,
+    "dogs_details": "Up to 3 dogs welcome. £50 for first dog, £25 for additional dogs, up to £100 maximum.",
+    "price": {
+      "range_from": 2021,
+      "range_to": 6575,
+      "currency": "GBP",
+      "notes": "Price varies by season and unit. Hot tub costs £100 extra.",
+      "period": "Per booking (not specified if weekend or weekly)"
+    },
+    "key_features": {
+      "games": [
+        "Pool table (in games room)"
+      ],
+      "games_room": true,
+      "games_notes": "Games room with pool table for rainy days. No snooker or table tennis mentioned.",
+      "outdoor": [
+        "Hot tub (£100 extra)",
+        "Quantock Hills AONB on doorstep"
+      ],
+      "indoor": [
+        "Converted threshing barn (~1800) with 3 farm cottages",
+        "Central courtyard",
+        "Oak and elm beams",
+        "19th century chandeliers",
+        "Log-burning fireplaces",
+        "Rustically refurbished country kitchen"
+      ]
+    },
+    "property_type": "Converted barn estate",
+    "description": "Beautifully restored converted threshing barn with three farm cottages around a central courtyard, on the edge of the Quantock Hills AONB near Taunton.",
+    "notes": "Somerset option with pool table games room. Child, golfer and dog friendly. No snooker - for snooker in Somerset see the Axbridge Georgian Manor."
+  },
+  {
+    "id": 7,
+    "name": "Somerset Georgian Manor (Axbridge)",
+    "search_category": "Somerset with snooker/games room sleeps 20+",
+    "url": "https://www.groupaccommodation.com/locations/axbridge",
+    "location": {
+      "town": "Axbridge",
+      "county": "Somerset",
+      "note": "Exact property name could not be confirmed from search results - listed on the Axbridge location page of groupaccommodation.com"
+    },
+    "sleeps": "20",
+    "bedrooms": 10,
+    "dogs_allowed": "Unknown - not confirmed in search results",
+    "price": {
+      "notes": "Not available from search results. Contact via groupaccommodation.com."
+    },
+    "key_features": {
+      "games": [
+        "Snooker room"
+      ],
+      "games_room": true,
+      "games_notes": "Dedicated snooker room. Only property in this list with confirmed snooker.",
+      "outdoor": [
+        "Tennis court",
+        "Nature trail",
+        "Putting green"
+      ],
+      "indoor": [
+        "Georgian manor house",
+        "Luxury spa",
+        "10 bedrooms"
+      ]
+    },
+    "property_type": "Georgian manor house",
+    "description": "Somerset Georgian manor sleeping 20 in 10 bedrooms with luxury spa, tennis court, snooker room, nature trail and putting green.",
+    "notes": "Only property with confirmed SNOOKER room. Also has spa, tennis, nature trail and putting green. Could not confirm exact property name, dog policy, or pricing."
+  },
+  {
+    "id": 8,
+    "name": "The Crescent",
+    "search_category": "Devon dog-friendly sleeps 20+",
+    "url": "https://www.groupaccommodation.com/properties/crescent-mortehoe-woolacombe-devon",
+    "own_website": "https://www.mortehoeholiday.co.uk/",
+    "location": {
+      "village": "Mortehoe",
+      "town_nearest": "Woolacombe",
+      "county": "Devon",
+      "region": "North Devon",
+      "postcode": "EX34 7DX",
+      "full_address": "The Crescent, Mortehoe, Woolacombe, Devon, EX34 7DX",
+      "coordinates_approximate": {
+        "lat": 51.19,
+        "lng": -4.21,
+        "note": "Approximate based on postcode EX34 7DX"
+      }
+    },
+    "sleeps": "8-20 (2 adjacent houses: The Buttery sleeps 2-10, Cromlech House sleeps 2-10, each with additional sofa bed)",
+    "dogs_allowed": true,
+    "dogs_details": "Dogs allowed. Excellent area for dog walking. Dogs must be kept off soft furnishings and carpets.",
+    "price": {
+      "notes": "Not publicly listed - contact property via enquiry form."
+    },
+    "key_features": {
+      "games": [
+        "Games room (details not specified)",
+        "Tennis"
+      ],
+      "games_room": true,
+      "games_notes": "Tennis and games room available within 6 acres of grounds. Specific games room equipment not detailed in search results.",
+      "outdoor": [
+        "6 acres of grounds",
+        "Tennis facilities",
+        "Sea views",
+        "Near beaches",
+        "Coastal paths and moorland walks",
+        "Woolacombe surfing nearby"
+      ],
+      "indoor": [
+        "2 adjacent Victorian houses",
+        "Near 2 pubs in village centre"
+      ]
+    },
+    "property_type": "Paired Victorian seaside houses",
+    "description": "2 dog-friendly adjacent houses in the heart of Mortehoe village, sleeping 20 total, with sea views, 6 acres and games room, near beaches and Exmoor.",
+    "notes": "Dog-friendly Devon option. Unique setup as 2 adjacent houses. Great coastal/outdoor location. Games room and tennis confirmed but specific games equipment unknown. UNESCO Biosphere reserve and AONB area."
+  },
+  {
+    "id": 9,
+    "name": "Ewe Time Holiday Barn",
+    "search_category": "Lancashire/Yorkshire dog-friendly sleeps 20+",
+    "url": "https://www.groupaccommodation.com/properties/ewe-time-holiday-barn-kelbrook-lancashire",
+    "own_website": "https://ewetimeholidaybarn.com/",
+    "location": {
+      "village": "Kelbrook",
+      "town_nearest": "Barnoldswick",
+      "county": "Lancashire (on Yorkshire-Lancashire border)",
+      "postcode": "BB18 6TS",
+      "full_address": "5a Dotcliffe Road, Kelbrook, BB18 6TS",
+      "coordinates_approximate": {
+        "lat": 53.91,
+        "lng": -2.15,
+        "note": "Approximate based on postcode BB18 6TS"
+      }
+    },
+    "sleeps": "20 (up to 24)",
+    "bedrooms": 7,
+    "bathrooms": "7 (all en suite)",
+    "dogs_allowed": true,
+    "dogs_details": "Dogs welcome by prior arrangement. Secure rear garden backing onto grazing fields. Dogs must not be left unattended, not allowed in bedrooms, kitchen, dining areas, or on furniture.",
+    "price": {
+      "nightly_from": 1000,
+      "nightly_to": 1250,
+      "currency": "GBP"
+    },
+    "key_features": {
+      "games": [
+        "Pool table (in living room)",
+        "Dartboard (in living room)"
+      ],
+      "games_room": false,
+      "games_notes": "No separate games room. The 30ft living room includes a pool table and dartboard alongside seating for 20+ and a wood-burning stove.",
+      "outdoor": [
+        "Alpine-style wood-fired hot tub",
+        "Secure rear garden",
+        "Patio with giant picnic bench",
+        "BBQ and firepit",
+        "Parking for 7 vehicles"
+      ],
+      "indoor": [
+        "18th century restored barn",
+        "30ft living room with wood-burning stove",
+        "7 en suite bedrooms (flexible singles/superkings)",
+        "4 ground floor bedrooms (1 adapted for disabled guests)"
+      ]
+    },
+    "property_type": "Converted 18th century barn",
+    "description": "Lovingly restored 18th century barn on the Lancashire-Yorkshire border, sleeping 20 with a pool table, hot tub, and secure dog-friendly garden.",
+    "notes": "Lancashire/Yorkshire border option. Pool table and darts in living room but no dedicated games room. Dog-friendly with secure garden. Disabled-accessible bedroom on ground floor."
+  }
+]

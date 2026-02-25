@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Search - Dog Friendly (Sleeps 20+) | Sep 2026</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        #map { width: 100%; height: 100vh; }
+        .legend {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            font-size: 13px;
+            z-index: 1000;
+            max-width: 340px;
+        }
+        .legend h3 { margin-bottom: 8px; font-size: 14px; }
+        .legend-item { display: flex; align-items: center; gap: 6px; margin: 4px 0; }
+        .legend-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+        .legend-dot.red { background: #e74c3c; }
+        .legend-dot.blue { background: #3498db; }
+        .legend-dot.green { background: #27ae60; }
+        .filter-controls {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: white;
+            padding: 10px 14px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            z-index: 1000;
+            font-size: 13px;
+        }
+        .filter-controls label { display: block; margin: 3px 0; cursor: pointer; }
+        .filter-controls label input { margin-right: 6px; }
+        .loading-overlay {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255,255,255,0.9);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 2000; font-size: 18px; color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div id="loading" class="loading-overlay">Loading properties...</div>
+    <div class="legend">
+        <h3>House Search - Sep 2026</h3>
+        <div class="legend-item"><span class="legend-dot red"></span> Has snooker / table tennis</div>
+        <div class="legend-item"><span class="legend-dot blue"></span> Kate & Tom's / Group Accom.</div>
+        <div class="legend-item"><span class="legend-dot green"></span> Airbnb</div>
+        <p style="margin-top:8px;font-size:11px;color:#666;">Click pins for details & links. Dogs | Sleeps 20+ | 24-27 or 25-28 Sep</p>
+    </div>
+    <div class="filter-controls" id="filters">
+        <strong>Show:</strong>
+    </div>
+
+    <script>
+        let leafletMap;
+        const layerGroups = {};
+
+        function toggleLayer(source) {
+            if (!leafletMap || !layerGroups[source]) return;
+            const cb = document.getElementById('show_' + source);
+            if (cb.checked) {
+                layerGroups[source].addTo(leafletMap);
+            } else {
+                leafletMap.removeLayer(layerGroups[source]);
+            }
+        }
+
+        function createIcon(color, size) {
+            return L.divIcon({
+                className: 'custom-pin',
+                html: '<div style="width:' + size + 'px;height:' + size + 'px;background:' + color + ';border:3px solid white;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.4);"></div>',
+                iconSize: [size, size],
+                iconAnchor: [size/2, size/2],
+                popupAnchor: [0, -size/2 - 2]
+            });
+        }
+
+        function getIcon(prop) {
+            if (prop.has_games_bonus) return createIcon('#e74c3c', 28);
+            if (prop.source === 'airbnb') return createIcon('#27ae60', 24);
+            return createIcon('#3498db', 24);
+        }
+
+        function sourceLabel(source) {
+            var labels = {
+                kateandtoms: "Kate & Tom's",
+                groupaccommodation: 'Group Accom.',
+                airbnb: 'Airbnb'
+            };
+            return labels[source] || source;
+        }
+
+        function sourceLinkStyle(source) {
+            if (source === 'airbnb') return 'background:#FF5A5F';
+            return 'background:#2c3e50';
+        }
+
+        function esc(str) {
+            if (!str) return '';
+            return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+
+        function buildPopup(prop) {
+            var html = '<div style="font-family:-apple-system,BlinkMacSystemFont,\'Segoe UI\',Roboto,sans-serif;min-width:220px;">';
+            html += '<h3 style="margin:0 0 6px;font-size:15px;">' + esc(prop.name) + '</h3>';
+
+            if (prop.sleeps) html += '<p style="margin:2px 0;font-size:13px;"><strong>Sleeps:</strong> ' + prop.sleeps + '</p>';
+            if (prop.location) html += '<p style="margin:2px 0;font-size:13px;"><strong>Location:</strong> ' + esc(prop.location) + '</p>';
+            if (prop.games && prop.games.length) html += '<p style="margin:2px 0;font-size:13px;"><strong>Games:</strong> ' + esc(prop.games.join(', ')) + '</p>';
+            if (prop.price) html += '<p style="margin:2px 0;font-size:13px;"><strong>Price:</strong> ' + esc(prop.price) + '</p>';
+            if (prop.rating) html += '<p style="margin:2px 0;font-size:13px;"><strong>Rating:</strong> ' + esc(prop.rating) + '</p>';
+            if (prop.available_dates && prop.available_dates.length) {
+                html += '<p style="margin:2px 0;font-size:13px;"><strong>Available:</strong> ' + esc(prop.available_dates.join(', ')) + '</p>';
+            }
+
+            if (prop.has_games_bonus) {
+                html += '<p style="margin:4px 0 2px;font-size:11px;color:#e74c3c;font-weight:bold;">&#9733; HAS TABLE TENNIS / SNOOKER</p>';
+            }
+
+            html += '<p style="margin:2px 0;font-size:11px;color:#888;">Source: ' + sourceLabel(prop.source) + '</p>';
+
+            html += '<a href="' + esc(prop.url) + '" target="_blank" rel="noopener noreferrer"'
+                + ' style="display:inline-block;margin-top:8px;padding:6px 14px;' + sourceLinkStyle(prop.source) + ';color:white;text-decoration:none;border-radius:4px;font-size:13px;">'
+                + 'View Property &rarr;</a>';
+            html += '</div>';
+            return html;
+        }
+
+        async function loadProperties() {
+            try {
+                var resp = await fetch('./properties.json');
+                if (!resp.ok) throw new Error('HTTP ' + resp.status);
+                return await resp.json();
+            } catch (err) {
+                console.warn('Could not load properties.json:', err.message);
+                return [];
+            }
+        }
+
+        async function init() {
+            var properties = await loadProperties();
+
+            // Group by source
+            var bySource = {};
+            for (var i = 0; i < properties.length; i++) {
+                var prop = properties[i];
+                if (!prop.lat || !prop.lng) continue;
+                var src = prop.source || 'unknown';
+                if (!bySource[src]) bySource[src] = [];
+                bySource[src].push(prop);
+            }
+
+            // Load Leaflet
+            var leafletCSS = document.createElement('link');
+            leafletCSS.rel = 'stylesheet';
+            leafletCSS.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+            document.head.appendChild(leafletCSS);
+
+            var leafletJS = document.createElement('script');
+            leafletJS.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+            leafletJS.onload = function() {
+                document.getElementById('loading').style.display = 'none';
+
+                leafletMap = L.map('map').setView([52.0, -1.8], 6);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; OpenStreetMap contributors',
+                    maxZoom: 18
+                }).addTo(leafletMap);
+
+                var filtersEl = document.getElementById('filters');
+                var allMarkers = [];
+
+                var sources = Object.keys(bySource);
+                for (var s = 0; s < sources.length; s++) {
+                    var source = sources[s];
+                    var props = bySource[source];
+                    var group = L.layerGroup();
+
+                    for (var j = 0; j < props.length; j++) {
+                        var p = props[j];
+                        var marker = L.marker([p.lat, p.lng], { icon: getIcon(p) });
+                        marker.bindPopup(buildPopup(p), { maxWidth: 320 });
+                        group.addLayer(marker);
+                        allMarkers.push(marker);
+                    }
+
+                    group.addTo(leafletMap);
+                    layerGroups[source] = group;
+
+                    var label = document.createElement('label');
+                    label.innerHTML = '<input type="checkbox" id="show_' + source + '" checked onchange="toggleLayer(\'' + source + '\')"> ' + sourceLabel(source) + ' (' + props.length + ')';
+                    filtersEl.appendChild(label);
+                }
+
+                if (allMarkers.length > 0) {
+                    var featureGroup = L.featureGroup(allMarkers);
+                    leafletMap.fitBounds(featureGroup.getBounds().pad(0.1));
+                }
+
+                if (properties.length === 0) {
+                    document.getElementById('loading').style.display = 'flex';
+                    document.getElementById('loading').textContent = 'No properties found. Run npm run scrape to generate properties.json';
+                }
+            };
+            document.head.appendChild(leafletJS);
+        }
+
+        init();
+    </script>
+</body>
+</html>
