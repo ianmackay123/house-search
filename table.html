@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Search - All Properties | Sep 2026</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; }
+        .header {
+            background: #2c3e50; color: white; padding: 16px 24px;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+        }
+        .header h1 { font-size: 20px; font-weight: 600; }
+        .header a { color: #74b9ff; text-decoration: none; font-size: 14px; }
+        .header a:hover { text-decoration: underline; }
+        .controls {
+            padding: 12px 24px; background: white; border-bottom: 1px solid #ddd;
+            display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+        }
+        .controls label { font-size: 13px; cursor: pointer; }
+        .controls input[type="checkbox"] { margin-right: 4px; }
+        .controls input[type="text"] {
+            padding: 6px 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; width: 200px;
+        }
+        .controls .count { font-size: 13px; color: #666; margin-left: auto; }
+        .table-wrap { padding: 0 24px 24px; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; background: white; margin-top: 12px; font-size: 13px; }
+        thead { position: sticky; top: 0; z-index: 10; }
+        th {
+            background: #34495e; color: white; padding: 10px 12px; text-align: left;
+            cursor: pointer; user-select: none; white-space: nowrap;
+        }
+        th:hover { background: #4a6785; }
+        th .arrow { font-size: 10px; margin-left: 4px; opacity: 0.5; }
+        th.sorted .arrow { opacity: 1; }
+        td { padding: 8px 12px; border-bottom: 1px solid #eee; vertical-align: top; }
+        tr:hover td { background: #f0f7ff; }
+        tr.bonus td { background: #fff5f5; }
+        tr.bonus:hover td { background: #ffe8e8; }
+        .source-badge {
+            display: inline-block; padding: 2px 8px; border-radius: 10px;
+            font-size: 11px; font-weight: 600; color: white;
+        }
+        .source-badge.kateandtoms { background: #3498db; }
+        .source-badge.groupaccommodation { background: #8e44ad; }
+        .source-badge.airbnb { background: #FF5A5F; }
+        .bonus-star { color: #e74c3c; font-weight: bold; }
+        .games-list { font-size: 12px; color: #555; }
+        .games-list .highlight { color: #e74c3c; font-weight: 600; }
+        a.prop-link { color: #2980b9; text-decoration: none; font-weight: 500; }
+        a.prop-link:hover { text-decoration: underline; }
+        .dates { font-size: 12px; color: #27ae60; }
+        .no-results { text-align: center; padding: 40px; color: #999; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>House Search - All Properties</h1>
+        <div>
+            <a href="./index.html">View Map</a>
+        </div>
+    </div>
+    <div class="controls" id="controls">
+        <strong style="font-size:13px;">Source:</strong>
+        <label><input type="checkbox" data-source="kateandtoms" checked onchange="applyFilters()"> Kate & Tom's</label>
+        <label><input type="checkbox" data-source="airbnb" checked onchange="applyFilters()"> Airbnb</label>
+        <label><input type="checkbox" data-source="groupaccommodation" checked onchange="applyFilters()"> Group Accom.</label>
+        <strong style="font-size:13px;margin-left:8px;">Filter:</strong>
+        <label><input type="checkbox" id="bonusOnly" onchange="applyFilters()"> Snooker/table tennis only</label>
+        <input type="text" id="search" placeholder="Search name, location..." oninput="applyFilters()">
+        <span class="count" id="count"></span>
+    </div>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr id="header-row">
+                    <th data-col="name">Name <span class="arrow">&#9650;</span></th>
+                    <th data-col="source">Source <span class="arrow">&#9650;</span></th>
+                    <th data-col="sleeps">Sleeps <span class="arrow">&#9650;</span></th>
+                    <th data-col="location">Location <span class="arrow">&#9650;</span></th>
+                    <th data-col="games">Games / Features <span class="arrow">&#9650;</span></th>
+                    <th data-col="price">Price <span class="arrow">&#9650;</span></th>
+                    <th data-col="rating">Rating <span class="arrow">&#9650;</span></th>
+                    <th data-col="available_dates">Availability <span class="arrow">&#9650;</span></th>
+                </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+        </table>
+        <div class="no-results" id="no-results" style="display:none;">No matching properties found.</div>
+    </div>
+
+    <script>
+        var allProperties = [];
+        var displayed = [];
+        var sortCol = 'name';
+        var sortAsc = true;
+
+        function sourceLabel(s) {
+            return { kateandtoms: "Kate & Tom's", groupaccommodation: 'Group Accom.', airbnb: 'Airbnb' }[s] || s;
+        }
+
+        function esc(str) {
+            if (!str) return '';
+            return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+
+        function highlightGames(games) {
+            if (!games || !games.length) return '<span style="color:#ccc;">-</span>';
+            var keywords = ['snooker', 'table tennis', 'ping pong'];
+            return games.map(function(g) {
+                var isHighlight = keywords.some(function(kw) { return g.toLowerCase().includes(kw); });
+                return isHighlight ? '<span class="highlight">' + esc(g) + '</span>' : esc(g);
+            }).join(', ');
+        }
+
+        function getValue(prop, col) {
+            switch (col) {
+                case 'name': return (prop.name || '').toLowerCase();
+                case 'source': return prop.source || '';
+                case 'sleeps': return prop.sleeps || 0;
+                case 'location': return (prop.location || '').toLowerCase();
+                case 'games': return (prop.games || []).join(' ').toLowerCase();
+                case 'price': return prop.price || '';
+                case 'rating': return prop.rating || '';
+                case 'available_dates': return (prop.available_dates || []).length;
+                default: return '';
+            }
+        }
+
+        function applyFilters() {
+            var sources = [];
+            document.querySelectorAll('[data-source]').forEach(function(cb) {
+                if (cb.checked) sources.push(cb.dataset.source);
+            });
+            var bonusOnly = document.getElementById('bonusOnly').checked;
+            var query = document.getElementById('search').value.toLowerCase().trim();
+
+            displayed = allProperties.filter(function(p) {
+                if (!sources.includes(p.source)) return false;
+                if (bonusOnly && !p.has_games_bonus) return false;
+                if (query) {
+                    var searchable = [p.name, p.location, (p.games||[]).join(' ')].join(' ').toLowerCase();
+                    if (!searchable.includes(query)) return false;
+                }
+                return true;
+            });
+
+            sortAndRender();
+        }
+
+        function sortAndRender() {
+            displayed.sort(function(a, b) {
+                var va = getValue(a, sortCol);
+                var vb = getValue(b, sortCol);
+                if (typeof va === 'number' && typeof vb === 'number') {
+                    return sortAsc ? va - vb : vb - va;
+                }
+                va = String(va); vb = String(vb);
+                return sortAsc ? va.localeCompare(vb) : vb.localeCompare(va);
+            });
+            render();
+        }
+
+        function render() {
+            var tbody = document.getElementById('tbody');
+            var noResults = document.getElementById('no-results');
+            document.getElementById('count').textContent = displayed.length + ' of ' + allProperties.length + ' properties';
+
+            if (displayed.length === 0) {
+                tbody.innerHTML = '';
+                noResults.style.display = 'block';
+                return;
+            }
+            noResults.style.display = 'none';
+
+            var html = '';
+            for (var i = 0; i < displayed.length; i++) {
+                var p = displayed[i];
+                var rowClass = p.has_games_bonus ? 'bonus' : '';
+                html += '<tr class="' + rowClass + '">';
+                html += '<td><a class="prop-link" href="' + esc(p.url) + '" target="_blank">' + esc(p.name) + '</a>';
+                if (p.has_games_bonus) html += ' <span class="bonus-star">&#9733;</span>';
+                html += '</td>';
+                html += '<td><span class="source-badge ' + p.source + '">' + sourceLabel(p.source) + '</span></td>';
+                html += '<td>' + (p.sleeps || '-') + '</td>';
+                html += '<td>' + esc(p.location) + '</td>';
+                html += '<td class="games-list">' + highlightGames(p.games) + '</td>';
+                html += '<td>' + esc(p.price) + '</td>';
+                html += '<td>' + esc(p.rating) + '</td>';
+                html += '<td class="dates">' + (p.available_dates && p.available_dates.length ? esc(p.available_dates.join(', ')) : '<span style="color:#ccc;">-</span>') + '</td>';
+                html += '</tr>';
+            }
+            tbody.innerHTML = html;
+        }
+
+        // Sort on header click
+        document.getElementById('header-row').addEventListener('click', function(e) {
+            var th = e.target.closest('th');
+            if (!th) return;
+            var col = th.dataset.col;
+            if (!col) return;
+
+            if (sortCol === col) {
+                sortAsc = !sortAsc;
+            } else {
+                sortCol = col;
+                sortAsc = true;
+            }
+
+            // Update header arrows
+            document.querySelectorAll('#header-row th').forEach(function(h) {
+                h.classList.remove('sorted');
+                h.querySelector('.arrow').innerHTML = '&#9650;';
+            });
+            th.classList.add('sorted');
+            th.querySelector('.arrow').innerHTML = sortAsc ? '&#9650;' : '&#9660;';
+
+            sortAndRender();
+        });
+
+        // Load data
+        fetch('./properties.json')
+            .then(function(r) { return r.ok ? r.json() : []; })
+            .then(function(data) {
+                allProperties = data;
+                displayed = data.slice();
+                sortAndRender();
+            })
+            .catch(function() {
+                document.getElementById('no-results').style.display = 'block';
+                document.getElementById('no-results').textContent = 'Could not load properties.json. Run npm run scrape first.';
+            });
+    </script>
+</body>
+</html>
