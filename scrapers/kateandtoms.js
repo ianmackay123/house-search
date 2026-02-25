@@ -139,6 +139,7 @@ async function scrapeProperty(context, slug) {
       if (widgetTexts.includes('air hockey')) games.push('Air hockey');
       if (widgetTexts.includes('games console') || widgetTexts.includes('playstation') || widgetTexts.includes('xbox') || widgetTexts.includes('nintendo')) games.push('Games console');
       if (widgetTexts.includes('cinema') || widgetTexts.includes('movie room') || widgetTexts.includes('film room')) games.push('Cinema');
+      if (widgetTexts.includes('piano') || widgetTexts.includes('grand piano') || widgetTexts.includes('upright piano')) games.push('Piano');
       if (widgetTexts.includes('hot tub')) games.push('Hot tub');
       if (widgetTexts.includes('indoor pool') || widgetTexts.includes('swimming pool')) games.push('Swimming pool');
 
