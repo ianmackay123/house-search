@@ -177,7 +177,17 @@ async function scrapeProperty(context, url, enrichmentData) {
       const image = document.querySelector('meta[property="og:image"]')?.content
         || document.querySelector('.property-image img, .gallery img, img[class*="property"]')?.src || null;
 
-      return { name, sleeps, location, _rawLocation: location, lat, lng, petsAllowed, games, image };
+      // Detect hotels: description calls itself a hotel/hostel/inn (not just the name)
+      const descriptionText = (
+        document.querySelector('meta[name="description"]')?.content ||
+        document.querySelector('.property-description, [class*="description"], [class*="intro"]')?.textContent ||
+        ''
+      ).toLowerCase();
+      const hotelDescKeywords = ['hotel', 'hostel', 'inn', 'bed and breakfast', 'b&b', 'guesthouse'];
+      const isHotel = hotelDescKeywords.some(kw => descriptionText.includes(kw))
+        || hotelDescKeywords.some(kw => textLower.slice(0, 500).includes(kw));
+
+      return { name, sleeps, location, _rawLocation: location, lat, lng, petsAllowed, games, image, isHotel };
     });
 
     if (!details.name) return null;
@@ -185,7 +195,7 @@ async function scrapeProperty(context, url, enrichmentData) {
     // Skip hotels/hostels — we only want full rental properties
     const nameLower = details.name.toLowerCase();
     const hotelKeywords = ['hotel', 'hostel', 'b&b', 'bed and breakfast', 'motel'];
-    if (hotelKeywords.some(kw => nameLower.includes(kw))) {
+    if (hotelKeywords.some(kw => nameLower.includes(kw)) || details.isHotel) {
       console.log(`[GA] Skipping non-rental property: ${details.name}`);
       return null;
     }
