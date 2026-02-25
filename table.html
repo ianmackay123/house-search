@@ -68,6 +68,12 @@
             pointer-events: none;
             transform: translate(-50%, calc(-100% - 10px));
         }
+        .star-btn { background: none; border: none; cursor: pointer; font-size: 18px; padding: 0 2px; color: #ddd; line-height: 1; }
+        .star-btn.starred { color: #f39c12; }
+        .star-btn:hover { color: #f39c12; }
+        tr.starred td { background: #fffbf0; }
+        tr.starred.bonus td { background: #fff0e0; }
+        tr.starred:hover td, tr.starred.bonus:hover td { background: #fff3d0; }
     </style>
 </head>
 <body>
@@ -84,6 +90,7 @@
         <label><input type="checkbox" data-source="groupaccommodation" checked onchange="applyFilters()"> Group Accom.</label>
         <strong style="font-size:13px;margin-left:8px;">Filter:</strong>
         <label><input type="checkbox" id="bonusOnly" onchange="applyFilters()"> Snooker/table tennis only</label>
+        <label><input type="checkbox" id="starredOnly" onchange="applyFilters()"> ★ Starred only</label>
         <input type="text" id="search" placeholder="Search name, location..." oninput="applyFilters()">
         <span class="count" id="count"></span>
     </div>
@@ -91,6 +98,7 @@
         <table>
             <thead>
                 <tr id="header-row">
+                    <th style="width:32px;cursor:default;text-align:center;" title="Star properties you're interested in">★</th>
                     <th style="width:70px;cursor:default;">Photo</th>
                     <th data-col="name">Name <span class="arrow">&#9650;</span></th>
                     <th data-col="source">Source <span class="arrow">&#9650;</span></th>
@@ -108,6 +116,26 @@
     </div>
 
     <script>
+        var STARRED_KEY = 'house-search-starred';
+        function getStarred() {
+            try { return new Set(JSON.parse(localStorage.getItem(STARRED_KEY) || '[]')); }
+            catch (e) { return new Set(); }
+        }
+        function toggleStar(url) {
+            var s = getStarred();
+            if (s.has(url)) s.delete(url); else s.add(url);
+            localStorage.setItem(STARRED_KEY, JSON.stringify([...s]));
+            return s.has(url);
+        }
+        function toggleStarAndRender(url, btn) {
+            var isNow = toggleStar(url);
+            btn.textContent = isNow ? '★' : '☆';
+            btn.classList.toggle('starred', isNow);
+            var row = btn.closest('tr');
+            if (row) row.classList.toggle('starred', isNow);
+            if (document.getElementById('starredOnly').checked) applyFilters();
+        }
+
         var allProperties = [];
         var displayed = [];
         var sortCol = 'name';
@@ -151,11 +179,14 @@
                 if (cb.checked) sources.push(cb.dataset.source);
             });
             var bonusOnly = document.getElementById('bonusOnly').checked;
+            var starredOnly = document.getElementById('starredOnly').checked;
             var query = document.getElementById('search').value.toLowerCase().trim();
+            var starred = starredOnly ? getStarred() : null;
 
             displayed = allProperties.filter(function(p) {
                 if (!sources.includes(p.source)) return false;
                 if (bonusOnly && !p.has_games_bonus) return false;
+                if (starredOnly && !starred.has(p.url)) return false;
                 if (query) {
                     var searchable = [p.name, p.location, (p.games||[]).join(' ')].join(' ').toLowerCase();
                     if (!searchable.includes(query)) return false;
@@ -191,11 +222,15 @@
             }
             noResults.style.display = 'none';
 
+            var starred = getStarred();
             var html = '';
             for (var i = 0; i < displayed.length; i++) {
                 var p = displayed[i];
-                var rowClass = p.has_games_bonus ? 'bonus' : '';
+                var isStarred = starred.has(p.url);
+                var rowClass = (p.has_games_bonus ? 'bonus' : '') + (isStarred ? ' starred' : '');
                 html += '<tr class="' + rowClass + '">';
+                // Star button
+                html += '<td style="text-align:center;padding:4px;"><button class="star-btn' + (isStarred ? ' starred' : '') + '" onclick="toggleStarAndRender(\'' + p.url + '\', this)">' + (isStarred ? '★' : '☆') + '</button></td>';
                 // Thumbnail with hover-to-enlarge
                 if (p.image) {
                     html += '<td style="padding:4px 8px;">'

@@ -26,6 +26,7 @@
         .legend-dot.red { background: #e74c3c; }
         .legend-dot.blue { background: #3498db; }
         .legend-dot.green { background: #27ae60; }
+        .legend-dot.gold { background: #f39c12; }
         .filter-controls {
             position: absolute;
             top: 12px;
@@ -52,6 +53,7 @@
     <div id="loading" class="loading-overlay">Loading properties...</div>
     <div class="legend">
         <h3>House Search - Sep 2026</h3>
+        <div class="legend-item"><span class="legend-dot gold"></span> Starred / interested</div>
         <div class="legend-item"><span class="legend-dot red"></span> Has snooker / table tennis</div>
         <div class="legend-item"><span class="legend-dot blue"></span> Kate & Tom's / Group Accom.</div>
         <div class="legend-item"><span class="legend-dot green"></span> Airbnb</div>
@@ -63,8 +65,21 @@
     </div>
 
     <script>
+        const STARRED_KEY = 'house-search-starred';
+        function getStarred() {
+            try { return new Set(JSON.parse(localStorage.getItem(STARRED_KEY) || '[]')); }
+            catch (e) { return new Set(); }
+        }
+        function toggleStar(url) {
+            var s = getStarred();
+            if (s.has(url)) s.delete(url); else s.add(url);
+            localStorage.setItem(STARRED_KEY, JSON.stringify([...s]));
+            return s.has(url);
+        }
+
         let leafletMap;
         const layerGroups = {};
+        const markersByUrl = {}; // url -> { marker, group, prop }
 
         function toggleLayer(source) {
             if (!leafletMap || !layerGroups[source]) return;
@@ -74,6 +89,7 @@
             } else {
                 leafletMap.removeLayer(layerGroups[source]);
             }
+            applyStarredFilter();
         }
 
         function createIcon(color, size) {
@@ -87,9 +103,35 @@
         }
 
         function getIcon(prop) {
+            if (getStarred().has(prop.url)) return createIcon('#f39c12', 32);
             if (prop.has_games_bonus) return createIcon('#e74c3c', 28);
             if (prop.source === 'airbnb') return createIcon('#27ae60', 24);
             return createIcon('#3498db', 24);
+        }
+
+        function toggleStarFromPopup(url, btn) {
+            var isNow = toggleStar(url);
+            btn.textContent = isNow ? '★ Starred' : '☆ Star this';
+            btn.style.background = isNow ? '#f39c12' : '#95a5a6';
+            var entry = markersByUrl[url];
+            if (entry) entry.marker.setIcon(getIcon(entry.prop));
+            applyStarredFilter();
+        }
+
+        function applyStarredFilter() {
+            var starred = getStarred();
+            var starredOnly = document.getElementById('show_starred_only') && document.getElementById('show_starred_only').checked;
+            Object.keys(markersByUrl).forEach(function(url) {
+                var entry = markersByUrl[url];
+                var sourceCb = document.getElementById('show_' + entry.prop.source);
+                var sourceOn = !sourceCb || sourceCb.checked;
+                var starOn = !starredOnly || starred.has(url);
+                if (sourceOn && starOn) {
+                    if (!entry.group.hasLayer(entry.marker)) entry.group.addLayer(entry.marker);
+                } else {
+                    if (entry.group.hasLayer(entry.marker)) entry.group.removeLayer(entry.marker);
+                }
+            });
         }
 
         function sourceLabel(source) {
@@ -140,9 +182,15 @@
 
             html += '<p style="margin:2px 0;font-size:11px;color:#888;">Source: ' + sourceLabel(prop.source) + '</p>';
 
+            var isStarred = getStarred().has(prop.url);
+            html += '<div style="margin-top:8px;display:flex;gap:8px;align-items:center;">';
             html += '<a href="' + esc(prop.url) + '" target="_blank" rel="noopener noreferrer"'
-                + ' style="display:inline-block;margin-top:8px;padding:6px 14px;' + sourceLinkStyle(prop.source) + ';color:white;text-decoration:none;border-radius:4px;font-size:13px;">'
+                + ' style="display:inline-block;padding:6px 14px;' + sourceLinkStyle(prop.source) + ';color:white;text-decoration:none;border-radius:4px;font-size:13px;flex:1;">'
                 + 'View Property &rarr;</a>';
+            html += '<button onclick="toggleStarFromPopup(' + JSON.stringify(prop.url) + ', this)"'
+                + ' style="padding:6px 10px;background:' + (isStarred ? '#f39c12' : '#95a5a6') + ';color:white;border:none;border-radius:4px;font-size:13px;cursor:pointer;white-space:nowrap;">'
+                + (isStarred ? '★ Starred' : '☆ Star this') + '</button>';
+            html += '</div>';
             html += '</div>';
             return html;
         }
@@ -203,6 +251,7 @@
                         marker.bindPopup(buildPopup(p), { maxWidth: 320 });
                         group.addLayer(marker);
                         allMarkers.push(marker);
+                        markersByUrl[p.url] = { marker: marker, group: group, prop: p };
                     }
 
                     group.addTo(leafletMap);
@@ -212,6 +261,13 @@
                     label.innerHTML = '<input type="checkbox" id="show_' + source + '" checked onchange="toggleLayer(\'' + source + '\')"> ' + sourceLabel(source) + ' (' + props.length + ')';
                     filtersEl.appendChild(label);
                 }
+
+                var starLabel = document.createElement('label');
+                starLabel.style.marginTop = '6px';
+                starLabel.style.borderTop = '1px solid #eee';
+                starLabel.style.paddingTop = '6px';
+                starLabel.innerHTML = '<input type="checkbox" id="show_starred_only" onchange="applyStarredFilter()"> ★ Starred only';
+                filtersEl.appendChild(starLabel);
 
                 if (allMarkers.length > 0) {
                     var featureGroup = L.featureGroup(allMarkers);
