@@ -45,7 +45,7 @@ export async function scrapeAirbnb() {
       try {
         await rateLimit();
         const details = await scrapeListingPage(context, prop.url);
-        if (details.maxGuests && details.maxGuests < 20) {
+        if (details.maxGuests !== null && details.maxGuests < 20) {
           console.log(`[Airbnb] Skipping ${details.name || prop.name} (max ${details.maxGuests} guests)`);
           continue;
         }
@@ -68,7 +68,8 @@ export async function scrapeAirbnb() {
 }
 
 async function searchDateRange(context, range) {
-  const baseUrl = `https://www.airbnb.co.uk/s/England/homes?adults=20&checkin=${range.checkin}&checkout=${range.checkout}&pets=1&price_max=6000&l2_property_type_ids%5B%5D=1`;
+  // adults=16 (Airbnb caps at 16), min_bedrooms=8 to force large properties, entire home only
+  const baseUrl = `https://www.airbnb.co.uk/s/England/homes?adults=16&checkin=${range.checkin}&checkout=${range.checkout}&pets=1&price_max=6000&min_bedrooms=8&room_types%5B%5D=Entire%20home%2Fapt`;
   const allProperties = [];
 
   for (let pageNum = 1; pageNum <= 3; pageNum++) {
@@ -195,16 +196,30 @@ async function scrapeListingPage(context, url) {
       const h1 = document.querySelector('h1');
       if (h1) result.name = h1.textContent.trim();
 
-      // Max guests — look for "X guests" text in the page
       const pageText = document.body?.textContent || '';
 
-      // Pattern: "X guests" in the highlights/details section
-      const guestMatch = pageText.match(/(\d+)\s+guests?/i);
-      if (guestMatch) result.maxGuests = parseInt(guestMatch[1], 10);
-
-      // Also check for "maximum of X guests"
+      // "maximum of X guests" is the most reliable
       const maxMatch = pageText.match(/maximum\s+of\s+(\d+)\s+guests?/i);
-      if (maxMatch) result.maxGuests = parseInt(maxMatch[1], 10);
+      if (maxMatch) {
+        result.maxGuests = parseInt(maxMatch[1], 10);
+      } else {
+        // Look for "X guests · Y bedrooms" pattern in the listing highlights
+        // This appears near the top of the listing as a summary
+        const summaryMatch = pageText.match(/(\d+)\s+guests?\s*[·•]\s*(\d+)\s+bedrooms?/i);
+        if (summaryMatch) {
+          result.maxGuests = parseInt(summaryMatch[1], 10);
+        } else {
+          // Fallback: "X guests" but only if X >= 8 (ignore "1 guest" per-room display)
+          const guestMatches = [...pageText.matchAll(/(\d+)\s+guests?/gi)];
+          for (const m of guestMatches) {
+            const n = parseInt(m[1], 10);
+            if (n >= 8) {
+              result.maxGuests = n;
+              break;
+            }
+          }
+        }
+      }
 
       // Location from breadcrumb or subtitle
       const locEl = document.querySelector('[data-testid="listing-card-subtitle"]')

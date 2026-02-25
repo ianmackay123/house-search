@@ -180,6 +180,14 @@ async function scrapeProperty(context, url, enrichmentData) {
 
     if (!details.name) return null;
 
+    // Skip hotels/hostels — we only want full rental properties
+    const nameLower = details.name.toLowerCase();
+    const hotelKeywords = ['hotel', 'hostel', 'b&b', 'bed and breakfast', 'motel'];
+    if (hotelKeywords.some(kw => nameLower.includes(kw))) {
+      console.log(`[GA] Skipping non-rental property: ${details.name}`);
+      return null;
+    }
+
     // Clean up breadcrumb location: "Europe, UK, England, South West England, Cornwall, Newquay"
     // → extract last 2-3 meaningful parts (skip Europe, UK, England, region)
     if (details.location) {
