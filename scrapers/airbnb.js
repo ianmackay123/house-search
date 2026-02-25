@@ -6,7 +6,7 @@ const DATE_RANGES = [
   { checkin: '2026-09-25', checkout: '2026-09-28', label: '25-28 Sep' },
 ];
 
-export async function scrapeAirbnb() {
+export async function scrapeAirbnb(options = {}) {
   console.log('[Airbnb] Starting Airbnb scraper...');
   const { browser, context } = await launchBrowser();
   const allProperties = new Map(); // key by URL for deduplication
@@ -39,7 +39,8 @@ export async function scrapeAirbnb() {
 
     // Visit each listing page to get real name and max guests
     const enriched = [];
-    const entries = [...allProperties.values()];
+    let entries = [...allProperties.values()];
+    if (options.limit) entries = entries.slice(0, options.limit);
     console.log(`[Airbnb] Enriching ${entries.length} listings with detail pages...`);
     for (const prop of entries) {
       try {
@@ -52,6 +53,8 @@ export async function scrapeAirbnb() {
         if (details.name) prop.name = details.name;
         if (details.maxGuests) prop.sleeps = details.maxGuests;
         if (details.location) prop.location = details.location;
+        if (details.image) prop.image = details.image;
+        if (details.games && details.games.length) prop.games = details.games;
         enriched.push(prop);
       } catch (err) {
         console.warn(`[Airbnb] Could not enrich ${prop.url}: ${err.message}`);
@@ -190,7 +193,7 @@ async function scrapeListingPage(context, url) {
     await sleep(2000);
 
     return await page.evaluate(() => {
-      const result = { name: null, maxGuests: null, location: null };
+      const result = { name: null, maxGuests: null, location: null, image: null, games: [] };
 
       // Real property name from the h1
       const h1 = document.querySelector('h1');
@@ -225,6 +228,58 @@ async function scrapeListingPage(context, url) {
       const locEl = document.querySelector('[data-testid="listing-card-subtitle"]')
         || document.querySelector('span[class*="location"]');
       if (locEl) result.location = locEl.textContent.trim();
+
+      // Amenities — Airbnb renders them as [data-testid="amenity-row"] items,
+      // or as text in a list under "What this place offers".
+      // We collect all amenity text nodes and filter for ones we care about.
+      const AMENITY_KEYWORDS = [
+        'pool', 'hot tub', 'jacuzzi', 'sauna', 'snooker', 'billiard', 'pool table',
+        'table tennis', 'ping pong', 'ping-pong', 'tennis court', 'games room',
+        'games barn', 'cinema', 'home cinema', 'gym', 'bbq', 'barbecue', 'fire pit',
+        'wood burner', 'open fire', 'fireplace',
+      ];
+      const amenityEls = document.querySelectorAll(
+        '[data-testid="amenity-row"], [data-section-id="AMENITIES"] li, [data-section-id="AMENITIES"] div[class]'
+      );
+      const seenAmenities = new Set();
+      for (const el of amenityEls) {
+        const text = el.textContent.trim().toLowerCase();
+        for (const kw of AMENITY_KEYWORDS) {
+          if (text.includes(kw) && !seenAmenities.has(kw)) {
+            // Store original case from the element text (first ~40 chars)
+            const display = el.textContent.trim().replace(/\s+/g, ' ').slice(0, 60);
+            result.games.push(display);
+            seenAmenities.add(kw);
+            break;
+          }
+        }
+      }
+      // Fallback: if no amenity elements found, scan full page text for keywords
+      if (result.games.length === 0) {
+        for (const kw of AMENITY_KEYWORDS) {
+          if (pageText.toLowerCase().includes(kw) && !seenAmenities.has(kw)) {
+            result.games.push(kw.charAt(0).toUpperCase() + kw.slice(1));
+            seenAmenities.add(kw);
+          }
+        }
+      }
+
+      // Main property photo — first real image in the gallery
+      // The gallery uses button > div > picture > img structure
+      // Filter out platform asset icons (contain 'airbnb-platform-assets' or 'AirbnbPlatformAssets')
+      const galleryImgs = document.querySelectorAll('picture img, div[data-testid*="photo"] img, main img');
+      for (const img of galleryImgs) {
+        const src = img.src || img.getAttribute('data-src') || '';
+        if (!src) continue;
+        // Skip platform asset icons and tiny icons
+        if (src.includes('airbnb-platform-assets') || src.includes('AirbnbPlatformAssets')) continue;
+        if (src.includes('icons/') || src.includes('favicon')) continue;
+        // Must be a muscache.com or similar property photo
+        if (src.includes('muscache.com') || src.includes('cloudfront') || src.includes('airbnb.com/im')) {
+          result.image = src;
+          break;
+        }
+      }
 
       return result;
     });

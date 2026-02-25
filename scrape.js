@@ -20,7 +20,11 @@ async function saveResults(results) {
 }
 
 async function main() {
+  const testMode = process.argv.includes('--test');
+  const scraperOptions = testMode ? { limit: 1 } : {};
+
   console.log('=== House Search Scraper ===\n');
+  if (testMode) console.log('*** TEST MODE: 1 property per source ***\n');
   console.log('Criteria: Sleeps 20+, dog-friendly, entire property, 24-27 or 25-28 Sep 2026');
   console.log('Sources: Kate & Tom\'s, groupaccommodation.com, Airbnb\n');
 
@@ -37,7 +41,7 @@ async function main() {
 
   const promises = scrapers.map(async ({ name, fn }) => {
     try {
-      const props = await fn();
+      const props = await fn(scraperOptions);
       results.push(...props);
       console.log(`\n✓ ${name}: ${props.length} properties`);
       await saveResults(results);

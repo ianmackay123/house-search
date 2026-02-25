@@ -8,7 +8,7 @@ import { dirname, join } from 'path';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const BASE = 'https://www.groupaccommodation.com';
 
-export async function scrapeGroupAccommodation() {
+export async function scrapeGroupAccommodation(options = {}) {
   console.log('[GA] Starting groupaccommodation.com scraper...');
   const { browser, context } = await launchBrowser();
 
@@ -23,8 +23,9 @@ export async function scrapeGroupAccommodation() {
 
   try {
     // Phase 1: Search for properties
-    const propertyUrls = await searchProperties(context);
+    let propertyUrls = await searchProperties(context);
     console.log(`[GA] Found ${propertyUrls.length} property URLs from search`);
+    if (options.limit) propertyUrls = propertyUrls.slice(0, options.limit);
 
     // Phase 2: Scrape each property
     const results = [];

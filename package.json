@@ -2,7 +2,8 @@
   "name": "house-search",
   "type": "module",
   "scripts": {
-    "scrape": "node scrape.js"
+    "scrape": "node scrape.js",
+    "test-scrape": "node scrape.js --test"
   },
   "dependencies": {
     "playwright": "^1.52.0"

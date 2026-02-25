@@ -6,7 +6,7 @@ const BASE = 'https://kateandtoms.com';
 const TARGET_DATES_SEP = [24, 25, 26, 27, 28]; // Sep 2026 days we care about
 const MIN_SLEEPS = 20;
 
-export async function scrapeKateAndToms() {
+export async function scrapeKateAndToms(options = {}) {
   console.log('[K&T] Starting Kate & Tom\'s scraper...');
   const { browser, context } = await launchBrowser();
 
@@ -24,8 +24,9 @@ export async function scrapeKateAndToms() {
     console.log(`[K&T] Found ${sleeps20Slugs.size} properties sleeping 20+`);
 
     // Intersect: must be both dog-friendly AND sleep 20+
-    const candidateSlugs = [...dogFriendlySlugs].filter(s => sleeps20Slugs.has(s));
+    let candidateSlugs = [...dogFriendlySlugs].filter(s => sleeps20Slugs.has(s));
     console.log(`[K&T] ${candidateSlugs.length} properties are dog-friendly AND sleep 20+`);
+    if (options.limit) candidateSlugs = candidateSlugs.slice(0, options.limit);
 
     // Phase 4: Scrape each property detail + availability
     const results = [];
