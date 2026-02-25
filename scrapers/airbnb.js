@@ -264,20 +264,28 @@ async function scrapeListingPage(context, url) {
         }
       }
 
-      // Main property photo — first real image in the gallery
-      // The gallery uses button > div > picture > img structure
-      // Filter out platform asset icons (contain 'airbnb-platform-assets' or 'AirbnbPlatformAssets')
-      const galleryImgs = document.querySelectorAll('picture img, div[data-testid*="photo"] img, main img');
-      for (const img of galleryImgs) {
-        const src = img.src || img.getAttribute('data-src') || '';
-        if (!src) continue;
-        // Skip platform asset icons and tiny icons
-        if (src.includes('airbnb-platform-assets') || src.includes('AirbnbPlatformAssets')) continue;
-        if (src.includes('icons/') || src.includes('favicon')) continue;
-        // Must be a muscache.com or similar property photo
-        if (src.includes('muscache.com') || src.includes('cloudfront') || src.includes('airbnb.com/im')) {
-          result.image = src;
-          break;
+      // Main property photo — prefer JSON-LD schema (present in initial HTML before JS renders)
+      // Airbnb embeds: <script type="application/ld+json"> { "@type":"LodgingBusiness", "image": [...] }
+      for (const script of document.querySelectorAll('script[type="application/ld+json"]')) {
+        try {
+          const data = JSON.parse(script.textContent);
+          const imgs = Array.isArray(data.image) ? data.image : (data.image ? [data.image] : []);
+          const first = imgs.find(u => typeof u === 'string' && u.includes('muscache.com'));
+          if (first) { result.image = first; break; }
+        } catch {}
+      }
+      // Fallback: scan DOM img elements if JSON-LD had nothing
+      if (!result.image) {
+        const galleryImgs = document.querySelectorAll('picture img, div[data-testid*="photo"] img, main img');
+        for (const img of galleryImgs) {
+          const src = img.src || img.getAttribute('data-src') || '';
+          if (!src) continue;
+          if (src.includes('airbnb-platform-assets') || src.includes('AirbnbPlatformAssets')) continue;
+          if (src.includes('icons/') || src.includes('favicon')) continue;
+          if (src.includes('muscache.com') || src.includes('cloudfront') || src.includes('airbnb.com/im')) {
+            result.image = src;
+            break;
+          }
         }
       }
 
