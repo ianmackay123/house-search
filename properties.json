@@ -42,8 +42,8 @@
     "source": "groupaccommodation",
     "sleeps": 2,
     "location": "Cumbria/Lake District, Sedbergh",
-    "lat": 54.3460068,
-    "lng": -2.483718,
+    "lat": 54.6143136,
+    "lng": -2.9420899,
     "games": [
       "Pool",
       "Hot tub"
@@ -93,8 +93,8 @@
     "source": "groupaccommodation",
     "sleeps": 2,
     "location": "Greater Glasgow and The Clyde Valley, Lanarkshire, Wanlockhead",
-    "lat": 55.3974666,
-    "lng": -3.779775,
+    "lat": 55.5752966,
+    "lng": -3.833333,
     "games": [
       "Snooker",
       "Pool",
@@ -112,8 +112,8 @@
     "source": "groupaccommodation",
     "sleeps": 2,
     "location": "Cumbria/Lake District, Coniston",
-    "lat": 54.3689253,
-    "lng": -3.0755427,
+    "lat": 54.6143136,
+    "lng": -2.9420899,
     "games": [
       "Hot tub"
     ],
@@ -122,24 +122,6 @@
     "rating": null,
     "url": "https://www.groupaccommodation.com/properties/dixon-ground-cottages-coniston-cumbria",
     "image": "https://www.groupaccommodation.com/wp-content/uploads/2026/02/dixon-ground-cottages-coniston-cumbria-2026-02-02-13-20-15.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Holifield Hostel, Gweek, Helston, Cornwall",
-    "source": "groupaccommodation",
-    "sleeps": 2,
-    "location": "Cornwall, Helston",
-    "lat": 50.106685,
-    "lng": -5.228341,
-    "games": [
-      "Table tennis",
-      "Pool"
-    ],
-    "has_games_bonus": true,
-    "price": null,
-    "rating": null,
-    "url": "https://www.groupaccommodation.com/properties/holifield-hostel-gweek-helston-cornwall",
-    "image": "https://www.groupaccommodation.com/wp-content/uploads/imported/fronthostel.jpg",
     "available_dates": []
   },
   {
@@ -239,8 +221,8 @@
     "source": "groupaccommodation",
     "sleeps": 2,
     "location": "North Wales Snowdonia, Anglesey, Rhosneigr",
-    "lat": 53.2262292,
-    "lng": -4.5203608,
+    "lat": 53.2782258,
+    "lng": -4.3319194,
     "games": [
       "Table tennis",
       "Pool",
@@ -272,286 +254,23 @@
     "available_dates": []
   },
   {
-    "name": "Luxury accommodation in stunning setting sleeps 16",
-    "source": "airbnb",
-    "sleeps": 20,
-    "location": "England",
-    "lat": 51.98338,
-    "lng": -2.48256,
-    "games": [],
-    "has_games_bonus": false,
+    "name": "Coach House Cottages",
+    "source": "kateandtoms",
+    "sleeps": 25,
+    "location": "Kemerton, Cotswolds",
+    "lat": 52.0347476,
+    "lng": -2.0777021,
+    "games": [
+      "Table tennis",
+      "Pool",
+      "Hot tub"
+    ],
+    "has_games_bonus": true,
     "price": null,
     "rating": null,
-    "url": "https://www.airbnb.co.uk/rooms/41263543",
-    "image": "https://a0.muscache.com/im/pictures/miso/Hosting-41263543/original/a9875568-158b-4a3a-b670-1c0819db08d1.jpeg?im_w=720",
-    "available_dates": [
-      "24-27 Sep",
-      "25-28 Sep"
-    ]
-  },
-  {
-    "name": "Picturesque Elizabethan Court",
-    "source": "airbnb",
-    "sleeps": 21,
-    "location": "England",
-    "lat": 51.9147,
-    "lng": -2.5995,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://www.airbnb.co.uk/rooms/1186139717242392033",
-    "image": "https://a0.muscache.com/pictures/airbnb-platform-assets/AirbnbPlatformAssets-email-dls-icons/original/c3c390ab-d1ab-4627-9cd7-608ac53b171e.png",
-    "available_dates": [
-      "24-27 Sep",
-      "25-28 Sep"
-    ]
-  },
-  {
-    "name": "Large Country Home, Indoor Hot Tub, Walled Garden",
-    "source": "airbnb",
-    "sleeps": 20,
-    "location": "England",
-    "lat": 51.0438,
-    "lng": 0.4459,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://www.airbnb.co.uk/rooms/4069057",
-    "image": "https://a0.muscache.com/pictures/airbnb-platform-assets/AirbnbPlatformAssets-email-dls-icons/original/c3c390ab-d1ab-4627-9cd7-608ac53b171e.png",
-    "available_dates": [
-      "24-27 Sep",
-      "25-28 Sep"
-    ]
-  },
-  {
-    "name": "Huge 11 Bed House in Buxton w/ Hot Tub/Parking/BBQ",
-    "source": "airbnb",
-    "sleeps": 28,
-    "location": "England",
-    "lat": 53.2587,
-    "lng": -1.922,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://www.airbnb.co.uk/rooms/1034526447246767893",
-    "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTAzNDUyNjQ0NzI0Njc2Nzg5Mw%3D%3D/original/5a9395c7-7bcf-4012-a82f-6cb6ba0ed35b.jpeg?im_w=720",
-    "available_dates": [
-      "24-27 Sep",
-      "25-28 Sep"
-    ]
-  },
-  {
-    "name": "Luxury Suffolk Mansion | Historic Countryside Stay",
-    "source": "airbnb",
-    "sleeps": 28,
-    "location": "England",
-    "lat": 52.4523,
-    "lng": 1.5492,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://www.airbnb.co.uk/rooms/17534965",
-    "image": "https://a0.muscache.com/im/pictures/miso/Hosting-17534965/original/3e8f9d3e-acbd-4218-ba51-6dd55718192a.jpeg?im_w=720",
-    "available_dates": [
-      "24-27 Sep",
-      "25-28 Sep"
-    ]
-  },
-  {
-    "name": "Margaretta House with additional Pool House suite",
-    "source": "airbnb",
-    "sleeps": 20,
-    "location": "England",
-    "lat": 52.7561,
-    "lng": 0.3621,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://www.airbnb.co.uk/rooms/1287182016077093498",
-    "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-1287182016077093498/original/6f183299-df1d-4bbf-b09c-82568701d8b8.jpeg?im_w=720",
-    "available_dates": [
-      "24-27 Sep",
-      "25-28 Sep"
-    ]
-  },
-  {
-    "name": "Alward House by Group Retreats",
-    "source": "airbnb",
-    "sleeps": 20,
-    "location": "England",
-    "lat": 51.04722,
-    "lng": -1.74893,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://www.airbnb.co.uk/rooms/1084701398483616777",
-    "image": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1084701398483616777/original/ad4903ce-4427-4832-bdd7-a551bbeda498.jpeg?im_w=720",
-    "available_dates": [
-      "24-27 Sep",
-      "25-28 Sep"
-    ]
-  },
-  {
-    "name": "Elegant Castle Retreat in Wiltshire Countryside",
-    "source": "airbnb",
-    "sleeps": 20,
-    "location": "England",
-    "lat": 51.3007,
-    "lng": -2.1784,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://www.airbnb.co.uk/rooms/30847041",
-    "image": "https://a0.muscache.com/im/pictures/9bf9bee9-be5c-47a3-bd25-f0b394961eed.jpg?im_w=720",
-    "available_dates": [
-      "24-27 Sep",
-      "25-28 Sep"
-    ]
-  },
-  {
-    "name": "Beautifully Large Restored Farmhouse in Bala",
-    "source": "airbnb",
-    "sleeps": 30,
-    "location": "England",
-    "lat": 52.9165,
-    "lng": -3.5794,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://www.airbnb.co.uk/rooms/1365239647164847041",
-    "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTM2NTIzOTY0NzE2NDg0NzA0MQ==/original/ba85f2f4-c242-4ea6-b5d7-aab6d5b4d1a6.jpeg?im_w=720",
-    "available_dates": [
-      "24-27 Sep",
-      "25-28 Sep"
-    ]
-  },
-  {
-    "name": "The Rectory | Stunning 9 Bedroom Cotswold Mansion",
-    "source": "airbnb",
-    "sleeps": 22,
-    "location": "England",
-    "lat": 51.8086,
-    "lng": -1.6383,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://www.airbnb.co.uk/rooms/1273669617837395158",
-    "image": "https://a0.muscache.com/pictures/airbnb-platform-assets/AirbnbPlatformAssets-email-dls-icons/original/c3c390ab-d1ab-4627-9cd7-608ac53b171e.png",
-    "available_dates": [
-      "24-27 Sep",
-      "25-28 Sep"
-    ]
-  },
-  {
-    "name": "The Farmhouse South Wing & Old Wine Cellar",
-    "source": "airbnb",
-    "sleeps": 20,
-    "location": "England",
-    "lat": 53.1079,
-    "lng": -1.4234,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://www.airbnb.co.uk/rooms/10821199",
-    "image": "https://a0.muscache.com/im/pictures/e1af7e5a-f0ec-4e5e-96b3-3c4b5af9ce9b.jpg?im_w=720",
-    "available_dates": [
-      "24-27 Sep"
-    ]
-  },
-  {
-    "name": "Cotswold Villa Retreat With Heated Pool",
-    "source": "airbnb",
-    "sleeps": 20,
-    "location": "England",
-    "lat": 51.3668,
-    "lng": -2.0381,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://www.airbnb.co.uk/rooms/1141324836560555695",
-    "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTE0MTMyNDgzNjU2MDU1NTY5NQ%3D%3D/original/6ec8733d-5ddc-4827-9d99-137721252eb8.jpeg?im_w=720",
-    "available_dates": [
-      "24-27 Sep"
-    ]
-  },
-  {
-    "name": "The Milking Parlour Grande with private hot tub",
-    "source": "airbnb",
-    "sleeps": 20,
-    "location": "England",
-    "lat": 53.108,
-    "lng": -1.4233,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://www.airbnb.co.uk/rooms/10818450",
-    "image": "https://a0.muscache.com/im/pictures/miso/Hosting-10818450/original/c1389b1d-af6b-4ddd-996b-7d372385ab80.jpeg?im_w=720",
-    "available_dates": [
-      "24-27 Sep"
-    ]
-  },
-  {
-    "name": "Viewpoint Lodge, Much Wenlock, Countryside Hot Tub",
-    "source": "airbnb",
-    "sleeps": 20,
-    "location": "England",
-    "lat": 52.58116832319171,
-    "lng": -2.595078585390969,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://www.airbnb.co.uk/rooms/1391476990754244064",
-    "image": "https://a0.muscache.com/pictures/airbnb-platform-assets/AirbnbPlatformAssets-email-dls-icons/original/c3c390ab-d1ab-4627-9cd7-608ac53b171e.png",
-    "available_dates": [
-      "24-27 Sep"
-    ]
-  },
-  {
-    "name": "Middle Stanley Cotswolds",
-    "source": "airbnb",
-    "sleeps": 20,
-    "location": "England",
-    "lat": 51.96992,
-    "lng": -2.00858,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://www.airbnb.co.uk/rooms/29120101",
-    "image": "https://a0.muscache.com/im/pictures/0ea90b97-5838-449f-92b4-cb4e7eb71e23.jpg?im_w=720",
-    "available_dates": [
-      "25-28 Sep"
-    ]
-  },
-  {
-    "name": "Denmark House - \n9 bed property with snooker room",
-    "source": "airbnb",
-    "sleeps": 20,
-    "location": "England",
-    "lat": 51.33376,
-    "lng": 0.49769,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://www.airbnb.co.uk/rooms/557907365284302444",
-    "image": "https://a0.muscache.com/im/pictures/miso/Hosting-557907365284302444/original/99620464-d38d-4c84-a61a-99e8ae907440.jpeg?im_w=720",
-    "available_dates": [
-      "25-28 Sep"
-    ]
+    "url": "https://kateandtoms.com/houses/coach-house-cottages/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2023/02/UpperCourt-67-scaled.jpeg",
+    "available_dates": []
   },
   {
     "name": "Stinchcombe Hill House",
@@ -574,9 +293,9 @@
     "name": "Severn Bank House",
     "source": "kateandtoms",
     "sleeps": 24,
-    "location": "Gloucestershire",
-    "lat": 51.7643786,
-    "lng": -2.1880662,
+    "location": "Dean, Gloucestershire",
+    "lat": 51.8239463,
+    "lng": -2.4981033,
     "games": [],
     "has_games_bonus": false,
     "price": null,
@@ -589,9 +308,9 @@
     "name": "Gladwin Hall",
     "source": "kateandtoms",
     "sleeps": 24,
-    "location": "Cheltenham",
-    "lat": 51.8995685,
-    "lng": -2.0711559,
+    "location": "Hall, Cheltenham",
+    "lat": 51.8971284,
+    "lng": -2.0777875,
     "games": [
       "Table football",
       "Air hockey",
@@ -609,9 +328,9 @@
     "name": "Cardynham House",
     "source": "kateandtoms",
     "sleeps": 24,
-    "location": "Cotswolds",
-    "lat": 51.7489426,
-    "lng": -0.2303335,
+    "location": "Painswick, Cotswolds",
+    "lat": 51.7857347,
+    "lng": -2.1947188,
     "games": [],
     "has_games_bonus": false,
     "price": null,
@@ -621,12 +340,27 @@
     "available_dates": []
   },
   {
+    "name": "The Hideout",
+    "source": "kateandtoms",
+    "sleeps": 20,
+    "location": "Gloucestershire, South Cotswolds",
+    "lat": 51.7643786,
+    "lng": -2.1880662,
+    "games": [],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/the-hideout/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/The-Hideout93.jpg",
+    "available_dates": []
+  },
+  {
     "name": "Cambrian Retreat",
     "source": "kateandtoms",
     "sleeps": 24,
-    "location": "Aberystwyth, Wales",
-    "lat": 52.4143113,
-    "lng": -4.0816846,
+    "location": "Aberystwyth, Aberystwyth, Wales",
+    "lat": 52.4138938,
+    "lng": -4.0815468,
     "games": [
       "Hot tub"
     ],
@@ -660,9 +394,9 @@
     "name": "Castle View Country House",
     "source": "kateandtoms",
     "sleeps": 26,
-    "location": "North Wales",
-    "lat": 52.9487856,
-    "lng": -3.7601273,
+    "location": "Egyptian, North Wales",
+    "lat": 51.5235814,
+    "lng": -0.1329767,
     "games": [
       "Pool",
       "Hot tub"
@@ -675,12 +409,30 @@
     "available_dates": []
   },
   {
+    "name": "River Hall",
+    "source": "kateandtoms",
+    "sleeps": 22,
+    "location": "North Devon, Bideford, North Devon",
+    "lat": 51.0488865,
+    "lng": -4.1793683,
+    "games": [
+      "Table tennis",
+      "Pool"
+    ],
+    "has_games_bonus": true,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/river-hall/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2013/05/River-Hall51.jpg",
+    "available_dates": []
+  },
+  {
     "name": "Taw Valley House",
     "source": "kateandtoms",
     "sleeps": 20,
-    "location": "North Devon",
-    "lat": 51.061456,
-    "lng": -3.9239233,
+    "location": "Barnstaple, North Devon",
+    "lat": 51.0804057,
+    "lng": -4.0600467,
     "games": [
       "Hot tub"
     ],
@@ -695,9 +447,9 @@
     "name": "The Grand Rectory",
     "source": "kateandtoms",
     "sleeps": 22,
-    "location": "Dorset",
-    "lat": 50.7968369,
-    "lng": -2.3447323,
+    "location": "Symondsbury, Dorset",
+    "lat": 50.7422598,
+    "lng": -2.7875554,
     "games": [
       "Pool"
     ],
@@ -709,12 +461,29 @@
     "available_dates": []
   },
   {
+    "name": "The Mendips",
+    "source": "kateandtoms",
+    "sleeps": 23,
+    "location": "Berrow, Somerset",
+    "lat": 51.2717518,
+    "lng": -3.0112161,
+    "games": [
+      "Hot tub"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/the-mendips/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/IMG_5469-scaled-e1760004834427.jpg",
+    "available_dates": []
+  },
+  {
     "name": "Eastwood Observatory",
     "source": "kateandtoms",
     "sleeps": 24,
-    "location": "East Sussex",
-    "lat": 50.9404266,
-    "lng": 0.3699978,
+    "location": "Greenwich, East Sussex",
+    "lat": 50.794747,
+    "lng": -0.0007928,
     "games": [
       "Cinema",
       "Hot tub"
@@ -730,9 +499,9 @@
     "name": "Polpier & Penpol",
     "source": "kateandtoms",
     "sleeps": 20,
-    "location": "Mevagissey, Cornwall",
-    "lat": 50.2696687,
-    "lng": -4.7872174,
+    "location": "Cornwall, Mevagissey, Cornwall",
+    "lat": 50.2695111,
+    "lng": -4.7871365,
     "games": [
       "Table tennis",
       "Snooker",
@@ -749,7 +518,7 @@
     "name": "Sussex Safari",
     "source": "kateandtoms",
     "sleeps": 20,
-    "location": "Sussex",
+    "location": "Sussex Safari, Sussex",
     "lat": 50.9445139,
     "lng": -0.0622673,
     "games": [
@@ -766,9 +535,9 @@
     "name": "Padstow Manor House",
     "source": "kateandtoms",
     "sleeps": 26,
-    "location": "Cornwall",
-    "lat": 50.4433489,
-    "lng": -4.6246566,
+    "location": "Insta, Cornwall",
+    "lat": 52.9208742,
+    "lng": -1.4736155,
     "games": [],
     "has_games_bonus": false,
     "price": null,
@@ -781,9 +550,9 @@
     "name": "Marlborough Manor",
     "source": "kateandtoms",
     "sleeps": 20,
-    "location": "Essex",
-    "lat": 51.7704679,
-    "lng": 0.4646698,
+    "location": "Essex, Essex",
+    "lat": 51.8773639,
+    "lng": 0.9498751,
     "games": [],
     "has_games_bonus": false,
     "price": null,
@@ -796,9 +565,9 @@
     "name": "Tregulland Cottage and Barn",
     "source": "kateandtoms",
     "sleeps": 22,
-    "location": "Cornwall",
-    "lat": 50.4433489,
-    "lng": -4.6246566,
+    "location": "Bodmin Moor, Cornwall",
+    "lat": 50.5952675,
+    "lng": -4.4767965,
     "games": [
       "Hot tub"
     ],
@@ -813,9 +582,9 @@
     "name": "The Curved House",
     "source": "kateandtoms",
     "sleeps": 24,
-    "location": "Lincolnshire",
-    "lat": 53.1823034,
-    "lng": -0.2031209,
+    "location": "Hollywood, Lincolnshire",
+    "lat": 52.6771581,
+    "lng": -0.1693392,
     "games": [
       "Table tennis",
       "Games console",
@@ -830,12 +599,29 @@
     "available_dates": []
   },
   {
+    "name": "The School of Fun",
+    "source": "kateandtoms",
+    "sleeps": 20,
+    "location": "Fun, Yelverton, Devon",
+    "lat": 55.2035285,
+    "lng": -6.6539514,
+    "games": [
+      "Hot tub"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/the-school-of-fun/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2022/12/The-Old-School-House-01242023_114902-scaled.jpg",
+    "available_dates": []
+  },
+  {
     "name": "Springham Manor",
     "source": "kateandtoms",
     "sleeps": 20,
-    "location": "Dorset",
-    "lat": 50.7968369,
-    "lng": -2.3447323,
+    "location": "Dorset, Dorset",
+    "lat": 50.7951198,
+    "lng": -2.5993665,
     "games": [],
     "has_games_bonus": false,
     "price": null,
@@ -848,9 +634,9 @@
     "name": "Captains House",
     "source": "kateandtoms",
     "sleeps": 22,
-    "location": "Essex",
-    "lat": 51.7704679,
-    "lng": 0.4646698,
+    "location": "London, Essex",
+    "lat": 51.8869652,
+    "lng": 0.2441929,
     "games": [],
     "has_games_bonus": false,
     "price": null,
@@ -863,7 +649,7 @@
     "name": "Waverunner",
     "source": "kateandtoms",
     "sleeps": 20,
-    "location": "West Sussex",
+    "location": "Waverunner, West Sussex",
     "lat": 50.9445845,
     "lng": -0.5278477,
     "games": [
@@ -880,9 +666,9 @@
     "name": "Deri Manor",
     "source": "kateandtoms",
     "sleeps": 21,
-    "location": "Pembrokeshire, Wales",
-    "lat": 51.8339209,
-    "lng": -4.916667,
+    "location": "Parliament, Pembrokeshire, Wales",
+    "lat": 51.4993871,
+    "lng": -0.1244812,
     "games": [],
     "has_games_bonus": false,
     "price": null,
@@ -895,7 +681,7 @@
     "name": "Torrs Park House",
     "source": "kateandtoms",
     "sleeps": 21,
-    "location": "Ilfracombe, Devon",
+    "location": "Seadog Catering, Ilfracombe, Devon",
     "lat": 51.2076674,
     "lng": -4.1254662,
     "games": [
@@ -914,9 +700,9 @@
     "name": "Linhay House",
     "source": "kateandtoms",
     "sleeps": 20,
-    "location": "Devon",
-    "lat": 50.7241405,
-    "lng": -3.6607788,
+    "location": "Instagram, Devon",
+    "lat": 51.8031205,
+    "lng": -4.9678793,
     "games": [],
     "has_games_bonus": false,
     "price": null,
@@ -929,7 +715,7 @@
     "name": "Cark Manor",
     "source": "kateandtoms",
     "sleeps": 20,
-    "location": "Lake District",
+    "location": "English, Lake District",
     "lat": 54.4785305,
     "lng": -3.0655331,
     "games": [
@@ -946,9 +732,9 @@
     "name": "Southshore Place",
     "source": "kateandtoms",
     "sleeps": 20,
-    "location": "Portsmouth, Hampshire",
-    "lat": 50.8221133,
-    "lng": -1.0677602,
+    "location": "Palmerston Road, Portsmouth, Hampshire",
+    "lat": 51.6080404,
+    "lng": -0.114504,
     "games": [
       "Hot tub"
     ],
@@ -963,7 +749,7 @@
     "name": "Osea Manor",
     "source": "kateandtoms",
     "sleeps": 20,
-    "location": "Essex",
+    "location": "Block Island, Essex",
     "lat": 51.7704679,
     "lng": 0.4646698,
     "games": [],
@@ -978,9 +764,9 @@
     "name": "Marine View",
     "source": "kateandtoms",
     "sleeps": 20,
-    "location": "Ilfracombe, Devon",
-    "lat": 51.2076674,
-    "lng": -4.1254662,
+    "location": "Lundy Island, Ilfracombe, Devon",
+    "lat": 51.1804917,
+    "lng": -4.6686878,
     "games": [
       "Darts"
     ],
@@ -995,9 +781,9 @@
     "name": "Bryn Bae Estate",
     "source": "kateandtoms",
     "sleeps": 20,
-    "location": "Anglesey, Wales",
-    "lat": 53.2782258,
-    "lng": -4.3319194,
+    "location": "North Wales, Anglesey, Wales",
+    "lat": 53.216514,
+    "lng": -4.1863832,
     "games": [
       "Hot tub"
     ],
@@ -1012,7 +798,7 @@
     "name": "Honeybridge Estate",
     "source": "kateandtoms",
     "sleeps": 25,
-    "location": "West Sussex",
+    "location": "Sussex, West Sussex",
     "lat": 50.9445845,
     "lng": -0.5278477,
     "games": [
@@ -1025,6 +811,21 @@
     "rating": null,
     "url": "https://kateandtoms.com/houses/honeybridge-estate/",
     "image": "https://kateandtoms.com/wp-content/uploads/2016/02/The-Art-House2.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Westmorland Lodge",
+    "source": "kateandtoms",
+    "sleeps": 20,
+    "location": "Cumbria",
+    "lat": 54.6143136,
+    "lng": -2.9420899,
+    "games": [],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/westmorland-lodge/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2024/04/Low-Barn-Farm-113-e1712916456930.jpg",
     "available_dates": []
   },
   {
@@ -1065,7 +866,7 @@
     "name": "Newcross Hall Estate",
     "source": "kateandtoms",
     "sleeps": 24,
-    "location": "Lake District",
+    "location": "The Lakes, Lake District",
     "lat": 54.4785305,
     "lng": -3.0655331,
     "games": [
@@ -1082,9 +883,9 @@
     "name": "The Farmstead",
     "source": "kateandtoms",
     "sleeps": 28,
-    "location": "Malton, Yorkshire",
-    "lat": 54.1392092,
-    "lng": -0.799531,
+    "location": "The Farmstead, Malton, Yorkshire",
+    "lat": 52.3962866,
+    "lng": -1.4725269,
     "games": [
       "Table tennis",
       "Darts"
@@ -1100,9 +901,9 @@
     "name": "Hilltop Hall",
     "source": "kateandtoms",
     "sleeps": 20,
-    "location": "North Wales",
-    "lat": 52.9487856,
-    "lng": -3.7601273,
+    "location": "North Wales, North Wales",
+    "lat": 53.2719012,
+    "lng": -3.3201219,
     "games": [],
     "has_games_bonus": false,
     "price": null,
@@ -1115,9 +916,9 @@
     "name": "Lady Rothschild Dairy",
     "source": "kateandtoms",
     "sleeps": 25,
-    "location": "Northamptonshire",
-    "lat": 52.3106138,
-    "lng": -0.865913,
+    "location": "Germany, Northamptonshire",
+    "lat": 52.4813269,
+    "lng": -1.9054517,
     "games": [
       "Table tennis"
     ],
@@ -1132,9 +933,9 @@
     "name": "Snowdonia House",
     "source": "kateandtoms",
     "sleeps": 24,
-    "location": "Wales",
-    "lat": 52.2928116,
-    "lng": -3.73893,
+    "location": "North Wales, Wales",
+    "lat": 52.9487856,
+    "lng": -3.7601273,
     "games": [
       "Table tennis",
       "Pool",
@@ -1153,9 +954,9 @@
     "name": "Limebrook Hall",
     "source": "kateandtoms",
     "sleeps": 26,
-    "location": "Herefordshire",
-    "lat": 52.083333,
-    "lng": -2.75,
+    "location": "Herefordshire, Herefordshire",
+    "lat": 52.1102984,
+    "lng": -2.7292211,
     "games": [
       "Pool",
       "Table football"
@@ -1189,9 +990,9 @@
     "name": "Pennine Hills Manor",
     "source": "kateandtoms",
     "sleeps": 25,
-    "location": "Teesdale, County Durham",
-    "lat": 54.6047254,
-    "lng": -2.0143941,
+    "location": "Barnard Castle, Teesdale, County Durham",
+    "lat": 54.5448091,
+    "lng": -1.924642,
     "games": [],
     "has_games_bonus": false,
     "price": null,
@@ -1204,7 +1005,7 @@
     "name": "Beachley House",
     "source": "kateandtoms",
     "sleeps": 22,
-    "location": "Chepstow",
+    "location": "Chepstow Racecourse, Chepstow",
     "lat": 51.6409342,
     "lng": -2.6766946,
     "games": [],
@@ -1239,9 +1040,9 @@
     "name": "Abbeyfield Hall",
     "source": "kateandtoms",
     "sleeps": 26,
-    "location": "Yorkshire",
-    "lat": 53.9825271,
-    "lng": -1.38525,
+    "location": "Forbidden Corner, Yorkshire",
+    "lat": 54.2751322,
+    "lng": -1.8579386,
     "games": [],
     "has_games_bonus": false,
     "price": null,
@@ -1254,9 +1055,9 @@
     "name": "Wisteria Farmhouse",
     "source": "kateandtoms",
     "sleeps": 21,
-    "location": "Bradford-on-Avon, Wiltshire",
-    "lat": 51.346715,
-    "lng": -2.2504329,
+    "location": "May, Bradford-on-Avon, Wiltshire",
+    "lat": 56.4690438,
+    "lng": -3.016993,
     "games": [
       "Pool"
     ],
@@ -1323,9 +1124,9 @@
     "name": "Whitelake Hall",
     "source": "kateandtoms",
     "sleeps": 24,
-    "location": "Lake District",
-    "lat": 54.4785305,
-    "lng": -3.0655331,
+    "location": "Windermere, Lake District",
+    "lat": 54.3477641,
+    "lng": -2.9365786,
     "games": [],
     "has_games_bonus": false,
     "price": null,
@@ -1338,9 +1139,9 @@
     "name": "Russet Hall",
     "source": "kateandtoms",
     "sleeps": 20,
-    "location": "Taunton",
-    "lat": 51.0149059,
-    "lng": -3.1029622,
+    "location": "April, Taunton",
+    "lat": 50.9970512,
+    "lng": -3.1244207,
     "games": [
       "Table tennis",
       "Pool",
@@ -1357,9 +1158,9 @@
     "name": "The Dales House",
     "source": "kateandtoms",
     "sleeps": 26,
-    "location": "Cumbria",
-    "lat": 54.6143136,
-    "lng": -2.9420899,
+    "location": "Ravenstonedale, Cumbria",
+    "lat": 54.4528773,
+    "lng": -2.4885941,
     "games": [],
     "has_games_bonus": false,
     "price": null,
@@ -1369,12 +1170,29 @@
     "available_dates": []
   },
   {
+    "name": "The Georgian House",
+    "source": "kateandtoms",
+    "sleeps": 23,
+    "location": "Georgian, Wantage, Oxfordshire",
+    "lat": 51.588783,
+    "lng": -2.9602152,
+    "games": [
+      "Swimming pool"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/the-georgian-house/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2014/03/Swimming-Pool-at-Ardington-House.jpg",
+    "available_dates": []
+  },
+  {
     "name": "Carmarthen Manor",
     "source": "kateandtoms",
     "sleeps": 24,
-    "location": "Wales",
-    "lat": 52.2928116,
-    "lng": -3.73893,
+    "location": "Kate, Wales",
+    "lat": 51.4594538,
+    "lng": -3.6366907,
     "games": [
       "Table tennis"
     ],
@@ -1404,9 +1222,9 @@
     "name": "Chalke Valley House",
     "source": "kateandtoms",
     "sleeps": 20,
-    "location": "Wiltshire",
-    "lat": 51.324162,
-    "lng": -1.9032487,
+    "location": "Cannes, Wiltshire",
+    "lat": 53.6014538,
+    "lng": -0.6777688,
     "games": [
       "Pool"
     ],
@@ -1421,9 +1239,9 @@
     "name": "Goodnestone Park",
     "source": "kateandtoms",
     "sleeps": 24,
-    "location": "Goodnestone, Kent",
-    "lat": 51.2467467,
-    "lng": 1.2305291,
+    "location": "Kent, Goodnestone, Kent",
+    "lat": 51.2070749,
+    "lng": 0.7210362,
     "games": [],
     "has_games_bonus": false,
     "price": null,
@@ -1436,9 +1254,9 @@
     "name": "The Flower Barn",
     "source": "kateandtoms",
     "sleeps": 22,
-    "location": "Worcestershire",
-    "lat": 52.2109495,
-    "lng": -2.1569555,
+    "location": "Anna, Worcestershire",
+    "lat": 51.4527322,
+    "lng": 0.0519912,
     "games": [],
     "has_games_bonus": false,
     "price": null,
@@ -1451,9 +1269,9 @@
     "name": "Avebury Barns",
     "source": "kateandtoms",
     "sleeps": 22,
-    "location": "Wiltshire",
-    "lat": 51.324162,
-    "lng": -1.9032487,
+    "location": "Devizes, Wiltshire",
+    "lat": 51.3525027,
+    "lng": -1.9958302,
     "games": [],
     "has_games_bonus": false,
     "price": null,
@@ -1481,9 +1299,9 @@
     "name": "Lady Rothschild Stables",
     "source": "kateandtoms",
     "sleeps": 24,
-    "location": "Northamptonshire",
-    "lat": 52.3106138,
-    "lng": -0.865913,
+    "location": "Trendall, Northamptonshire",
+    "lat": 52.6579818,
+    "lng": 1.3341453,
     "games": [
       "Table tennis"
     ],
@@ -1498,9 +1316,9 @@
     "name": "Station Barn",
     "source": "kateandtoms",
     "sleeps": 22,
-    "location": "Yorkshire",
-    "lat": 53.9825271,
-    "lng": -1.38525,
+    "location": "North Yorkshire, Yorkshire",
+    "lat": 54.0915928,
+    "lng": -1.5359113,
     "games": [],
     "has_games_bonus": false,
     "price": null,
@@ -1513,9 +1331,9 @@
     "name": "Borders Retreat",
     "source": "kateandtoms",
     "sleeps": 21,
-    "location": "Cumbria",
-    "lat": 54.6143136,
-    "lng": -2.9420899,
+    "location": "Edwardian, Cumbria",
+    "lat": 51.5240299,
+    "lng": -0.1380166,
     "games": [],
     "has_games_bonus": false,
     "price": null,
@@ -1528,9 +1346,9 @@
     "name": "The Wholehouse",
     "source": "kateandtoms",
     "sleeps": 20,
-    "location": "Brecon, Wales",
-    "lat": 51.9472048,
-    "lng": -3.391696,
+    "location": "The Granary, Brecon, Wales",
+    "lat": 51.4515286,
+    "lng": -2.5930383,
     "games": [],
     "has_games_bonus": false,
     "price": null,
@@ -1543,9 +1361,9 @@
     "name": "Minton Hall",
     "source": "kateandtoms",
     "sleeps": 20,
-    "location": "Cheshire",
-    "lat": 53.2141028,
-    "lng": -2.4717701,
+    "location": "Chester, Cheshire",
+    "lat": 53.1908873,
+    "lng": -2.8908955,
     "games": [
       "Pool",
       "Hot tub",
@@ -1562,9 +1380,9 @@
     "name": "The Grotto",
     "source": "kateandtoms",
     "sleeps": 20,
-    "location": "Penrith, Lake District",
-    "lat": 54.4785305,
-    "lng": -3.0655331,
+    "location": "Cumbria, Penrith, Lake District",
+    "lat": 54.6143136,
+    "lng": -2.9420899,
     "games": [],
     "has_games_bonus": false,
     "price": null,
@@ -1577,7 +1395,7 @@
     "name": "Lea Marston Farmhouse",
     "source": "kateandtoms",
     "sleeps": 20,
-    "location": "Warwickshire",
+    "location": "Cruft, Warwickshire",
     "lat": 52.3213064,
     "lng": -1.5536906,
     "games": [
@@ -1595,9 +1413,9 @@
     "name": "Rosemere Manor",
     "source": "kateandtoms",
     "sleeps": 20,
-    "location": "Devon",
-    "lat": 50.7241405,
-    "lng": -3.6607788,
+    "location": "Dartmoor, Devon",
+    "lat": 50.5657349,
+    "lng": -3.9009713,
     "games": [
       "Table tennis",
       "Snooker"
@@ -1607,6 +1425,23 @@
     "rating": null,
     "url": "https://kateandtoms.com/houses/rosemere-manor/",
     "image": "https://kateandtoms.com/wp-content/uploads/2025/01/home-photo.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Under The Vines",
+    "source": "kateandtoms",
+    "sleeps": 20,
+    "location": "Chippenham, Near Bath",
+    "lat": 51.4587621,
+    "lng": -2.1159032,
+    "games": [
+      "Hot tub"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/under-the-vines/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/Exterior_1-e1670412702327.jpg",
     "available_dates": []
   },
   {
@@ -1628,9 +1463,9 @@
     "name": "Boho Barnhouse",
     "source": "kateandtoms",
     "sleeps": 20,
-    "location": "Somerset",
-    "lat": 51.1617509,
-    "lng": -3.0753867,
+    "location": "London, Somerset",
+    "lat": 51.2240606,
+    "lng": -2.5342799,
     "games": [
       "Pool",
       "Swimming pool"
@@ -1646,9 +1481,9 @@
     "name": "Halula Halo",
     "source": "kateandtoms",
     "sleeps": 20,
-    "location": "Somerset",
-    "lat": 51.1617509,
-    "lng": -3.0753867,
+    "location": "Somerset, Somerset",
+    "lat": 50.9843053,
+    "lng": -2.7761562,
     "games": [
       "Pool",
       "Hot tub"
@@ -1659,5 +1494,415 @@
     "url": "https://kateandtoms.com/houses/halula-halo/",
     "image": "https://kateandtoms.com/wp-content/uploads/2024/09/Halula-Halo-scaled.jpg",
     "available_dates": []
+  },
+  {
+    "name": "Luxury accommodation in stunning setting sleeps 16",
+    "source": "airbnb",
+    "sleeps": 20,
+    "location": "England",
+    "lat": 51.98338,
+    "lng": -2.48256,
+    "games": [
+      "Hot tub",
+      "Jacuzzi",
+      "Gym",
+      "Bbq",
+      "Fire pit",
+      "Fireplace"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://www.airbnb.co.uk/rooms/41263543",
+    "image": "https://a0.muscache.com/im/pictures/miso/Hosting-41263543/original/bd1ee3ec-042f-4ed3-bf7f-ad4d8327ed20.jpeg",
+    "available_dates": [
+      "24-27 Sep",
+      "25-28 Sep"
+    ]
+  },
+  {
+    "name": "Picturesque Elizabethan Court",
+    "source": "airbnb",
+    "sleeps": 21,
+    "location": "England",
+    "lat": 51.9147,
+    "lng": -2.5995,
+    "games": [
+      "Pool",
+      "Pool table",
+      "Table tennis",
+      "Games room",
+      "Gym",
+      "Bbq",
+      "Fireplace"
+    ],
+    "has_games_bonus": true,
+    "price": null,
+    "rating": null,
+    "url": "https://www.airbnb.co.uk/rooms/1186139717242392033",
+    "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTE4NjEzOTcxNzI0MjM5MjAzMw%3D%3D/original/a75cbb81-0b28-417a-a263-e237de9114ce.jpeg",
+    "available_dates": [
+      "24-27 Sep",
+      "25-28 Sep"
+    ]
+  },
+  {
+    "name": "Large Country Home, Indoor Hot Tub, Walled Garden",
+    "source": "airbnb",
+    "sleeps": 20,
+    "location": "England",
+    "lat": 51.0438,
+    "lng": 0.4459,
+    "games": [
+      "Pool",
+      "Hot tub",
+      "Jacuzzi",
+      "Snooker",
+      "Pool table",
+      "Table tennis",
+      "Tennis court",
+      "Gym",
+      "Bbq",
+      "Barbecue",
+      "Fire pit"
+    ],
+    "has_games_bonus": true,
+    "price": null,
+    "rating": null,
+    "url": "https://www.airbnb.co.uk/rooms/4069057",
+    "image": "https://a0.muscache.com/im/pictures/52631803/89152045_original.jpg",
+    "available_dates": [
+      "24-27 Sep",
+      "25-28 Sep"
+    ]
+  },
+  {
+    "name": "Huge 11 Bed House in Buxton w/ Hot Tub/Parking/BBQ",
+    "source": "airbnb",
+    "sleeps": 28,
+    "location": "England",
+    "lat": 53.2587,
+    "lng": -1.922,
+    "games": [
+      "Hot tub",
+      "Jacuzzi",
+      "Bbq",
+      "Fire pit",
+      "Fireplace"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://www.airbnb.co.uk/rooms/1034526447246767893",
+    "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTAzNDUyNjQ0NzI0Njc2Nzg5Mw%3D%3D/original/5a9395c7-7bcf-4012-a82f-6cb6ba0ed35b.jpeg",
+    "available_dates": [
+      "24-27 Sep",
+      "25-28 Sep"
+    ]
+  },
+  {
+    "name": "Margaretta House with additional Pool House suite",
+    "source": "airbnb",
+    "sleeps": 20,
+    "location": "England",
+    "lat": 52.7561,
+    "lng": 0.3621,
+    "games": [
+      "Pool",
+      "Games room",
+      "Gym",
+      "Bbq",
+      "Barbecue",
+      "Fire pit",
+      "Fireplace"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://www.airbnb.co.uk/rooms/1287182016077093498",
+    "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTI4NzE4MjAxNjA3NzA5MzQ5OA%3D%3D/original/67cf50ca-704d-46b3-931d-903abbb747a0.jpeg",
+    "available_dates": [
+      "24-27 Sep",
+      "25-28 Sep"
+    ]
+  },
+  {
+    "name": "Luxury Suffolk Mansion | Historic Countryside Stay",
+    "source": "airbnb",
+    "sleeps": 28,
+    "location": "England",
+    "lat": 52.4523,
+    "lng": 1.5492,
+    "games": [
+      "Pool",
+      "Hot tub",
+      "Jacuzzi",
+      "Gym",
+      "Bbq",
+      "Barbecue",
+      "Fireplace"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://www.airbnb.co.uk/rooms/17534965",
+    "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTc1MzQ5NjU%3D/original/06acf081-a370-44fa-ba1f-e0fadae3cc9f.jpeg",
+    "available_dates": [
+      "24-27 Sep",
+      "25-28 Sep"
+    ]
+  },
+  {
+    "name": "Elegant Castle Retreat in Wiltshire Countryside",
+    "source": "airbnb",
+    "sleeps": 20,
+    "location": "England",
+    "lat": 51.3007,
+    "lng": -2.1784,
+    "games": [
+      "Pool",
+      "Pool table",
+      "Games room",
+      "Games barn",
+      "Gym",
+      "Bbq",
+      "Barbecue",
+      "Open fire"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://www.airbnb.co.uk/rooms/30847041",
+    "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MzA4NDcwNDE%3D/original/c8da9fd5-67e1-48cd-b20e-ba8e28b2e5ff.jpeg",
+    "available_dates": [
+      "24-27 Sep",
+      "25-28 Sep"
+    ]
+  },
+  {
+    "name": "Alward House by Group Retreats",
+    "source": "airbnb",
+    "sleeps": 20,
+    "location": "England",
+    "lat": 51.04722,
+    "lng": -1.74893,
+    "games": [
+      "Pool",
+      "Hot tub",
+      "Jacuzzi",
+      "Table tennis",
+      "Tennis court",
+      "Gym",
+      "Bbq",
+      "Barbecue",
+      "Fireplace"
+    ],
+    "has_games_bonus": true,
+    "price": null,
+    "rating": null,
+    "url": "https://www.airbnb.co.uk/rooms/1084701398483616777",
+    "image": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1084701398483616777/original/ad4903ce-4427-4832-bdd7-a551bbeda498.jpeg",
+    "available_dates": [
+      "24-27 Sep"
+    ]
+  },
+  {
+    "name": "The Rectory | Stunning 9 Bedroom Cotswold Mansion",
+    "source": "airbnb",
+    "sleeps": 22,
+    "location": "England",
+    "lat": 51.8086,
+    "lng": -1.6383,
+    "games": [
+      "Hot tub",
+      "Jacuzzi",
+      "Sauna",
+      "Table tennis",
+      "Cinema",
+      "Gym",
+      "Bbq",
+      "Barbecue",
+      "Open fire",
+      "Fireplace"
+    ],
+    "has_games_bonus": true,
+    "price": null,
+    "rating": null,
+    "url": "https://www.airbnb.co.uk/rooms/1273669617837395158",
+    "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-1273669617837395158/original/b7329c09-757a-4d88-aafe-022302ab0220.jpeg",
+    "available_dates": [
+      "24-27 Sep",
+      "25-28 Sep"
+    ]
+  },
+  {
+    "name": "Beautifully Large Restored Farmhouse in Bala",
+    "source": "airbnb",
+    "sleeps": 30,
+    "location": "England",
+    "lat": 52.9165,
+    "lng": -3.5794,
+    "games": [
+      "Hot tub",
+      "Jacuzzi",
+      "Sauna",
+      "Bbq",
+      "Barbecue",
+      "Wood burner",
+      "Fireplace"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://www.airbnb.co.uk/rooms/1365239647164847041",
+    "image": "https://a0.muscache.com/im/pictures/miso/Hosting-1365239647164847041/original/2d30aca4-32a9-4819-b5dc-855a10d9fe5a.jpeg",
+    "available_dates": [
+      "24-27 Sep",
+      "25-28 Sep"
+    ]
+  },
+  {
+    "name": "The Renard - 19-23 Guests",
+    "source": "airbnb",
+    "sleeps": 23,
+    "location": "England",
+    "lat": 50.8015,
+    "lng": -3.2932,
+    "games": [
+      "Hot tub",
+      "Jacuzzi",
+      "Gym",
+      "Bbq",
+      "Barbecue",
+      "Fire pit",
+      "Fireplace"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://www.airbnb.co.uk/rooms/51592320",
+    "image": "https://a0.muscache.com/im/pictures/miso/Hosting-51592320/original/747a52f0-afa7-4c82-971b-c2ebfc99fed6.jpeg",
+    "available_dates": [
+      "24-27 Sep",
+      "25-28 Sep"
+    ]
+  },
+  {
+    "name": "The Farmhouse South Wing & Old Wine Cellar",
+    "source": "airbnb",
+    "sleeps": 20,
+    "location": "England",
+    "lat": 53.1079,
+    "lng": -1.4234,
+    "games": [
+      "Pool",
+      "Hot tub",
+      "Pool table",
+      "Games room",
+      "Bbq",
+      "Barbecue"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://www.airbnb.co.uk/rooms/10821199",
+    "image": "https://a0.muscache.com/im/pictures/miso/Hosting-10821199/original/3d590c8d-85f0-424d-9452-4c424e1d20a7.jpeg",
+    "available_dates": [
+      "24-27 Sep"
+    ]
+  },
+  {
+    "name": "Sheldon Manor",
+    "source": "airbnb",
+    "sleeps": 20,
+    "location": "England",
+    "lat": 51.46721,
+    "lng": -2.16551,
+    "games": [
+      "Bbq",
+      "Barbecue",
+      "Open fire",
+      "Fireplace"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://www.airbnb.co.uk/rooms/22966811",
+    "image": "https://a0.muscache.com/im/pictures/airflow/Hosting-22966811/original/582e1813-bd9b-4fa6-adbd-4f49179ae72a.jpg",
+    "available_dates": [
+      "24-27 Sep"
+    ]
+  },
+  {
+    "name": "Viewpoint Lodge, Much Wenlock, Countryside Hot Tub",
+    "source": "airbnb",
+    "sleeps": 20,
+    "location": "England",
+    "lat": 52.58116832319171,
+    "lng": -2.595078585390969,
+    "games": [
+      "Pool",
+      "Hot tub",
+      "Jacuzzi",
+      "Pool table",
+      "Table tennis",
+      "Gym",
+      "Bbq",
+      "Fireplace"
+    ],
+    "has_games_bonus": true,
+    "price": null,
+    "rating": null,
+    "url": "https://www.airbnb.co.uk/rooms/1391476990754244064",
+    "image": "https://a0.muscache.com/im/pictures/miso/Hosting-1391476990754244064/original/755eb85d-b8df-462a-8165-e66b574509be.jpeg",
+    "available_dates": [
+      "24-27 Sep"
+    ]
+  },
+  {
+    "name": "Middle Stanley Cotswolds",
+    "source": "airbnb",
+    "sleeps": 20,
+    "location": "England",
+    "lat": 51.96992,
+    "lng": -2.00858,
+    "games": [
+      "Bbq",
+      "Fireplace"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://www.airbnb.co.uk/rooms/29120101",
+    "image": "https://a0.muscache.com/im/pictures/65f82792-67df-46ca-a0df-232b1290e41d.jpg",
+    "available_dates": [
+      "25-28 Sep"
+    ]
+  },
+  {
+    "name": "Denmark House - \n9 bed property with snooker room",
+    "source": "airbnb",
+    "sleeps": 20,
+    "location": "England",
+    "lat": 51.33376,
+    "lng": 0.49769,
+    "games": [
+      "Snooker",
+      "Games room",
+      "Cinema",
+      "Gym",
+      "Bbq",
+      "Barbecue",
+      "Open fire",
+      "Fireplace"
+    ],
+    "has_games_bonus": true,
+    "price": null,
+    "rating": null,
+    "url": "https://www.airbnb.co.uk/rooms/557907365284302444",
+    "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6NTU3OTA3MzY1Mjg0MzAyNDQ0/original/884ed746-b9c3-47eb-b6ec-6786eea707c3.png",
+    "available_dates": [
+      "25-28 Sep"
+    ]
   }
 ]
