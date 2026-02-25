@@ -52,6 +52,22 @@
         a.prop-link:hover { text-decoration: underline; }
         .dates { font-size: 12px; color: #27ae60; }
         .no-results { text-align: center; padding: 40px; color: #999; font-size: 16px; }
+        .thumb-wrap { position: relative; display: inline-block; }
+        .thumb { width: 60px; height: 45px; object-fit: cover; border-radius: 3px; display: block; cursor: zoom-in; transition: opacity 0.15s; }
+        .thumb:hover { opacity: 0.85; }
+        .thumb-wrap:hover .thumb-large { display: block; }
+        .thumb-large {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            width: 320px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 6px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            pointer-events: none;
+            transform: translate(-50%, calc(-100% - 10px));
+        }
     </style>
 </head>
 <body>
@@ -75,6 +91,7 @@
         <table>
             <thead>
                 <tr id="header-row">
+                    <th style="width:70px;cursor:default;">Photo</th>
                     <th data-col="name">Name <span class="arrow">&#9650;</span></th>
                     <th data-col="source">Source <span class="arrow">&#9650;</span></th>
                     <th data-col="sleeps">Sleeps <span class="arrow">&#9650;</span></th>
@@ -179,6 +196,16 @@
                 var p = displayed[i];
                 var rowClass = p.has_games_bonus ? 'bonus' : '';
                 html += '<tr class="' + rowClass + '">';
+                // Thumbnail with hover-to-enlarge
+                if (p.image) {
+                    html += '<td style="padding:4px 8px;">'
+                        + '<div class="thumb-wrap">'
+                        + '<a href="' + esc(p.url) + '" target="_blank"><img class="thumb" src="' + esc(p.image) + '" alt="" onerror="this.parentElement.parentElement.parentElement.style.display=\'none\'"></a>'
+                        + '<img class="thumb-large" src="' + esc(p.image) + '" alt="">'
+                        + '</div></td>';
+                } else {
+                    html += '<td></td>';
+                }
                 html += '<td><a class="prop-link" href="' + esc(p.url) + '" target="_blank">' + esc(p.name) + '</a>';
                 if (p.has_games_bonus) html += ' <span class="bonus-star">&#9733;</span>';
                 html += '</td>';
@@ -217,6 +244,15 @@
             th.querySelector('.arrow').innerHTML = sortAsc ? '&#9650;' : '&#9660;';
 
             sortAndRender();
+        });
+
+        // Track mouse position to place large preview near cursor
+        document.addEventListener('mousemove', function(e) {
+            var large = document.querySelector('.thumb-wrap:hover .thumb-large');
+            if (large) {
+                large.style.left = e.clientX + 'px';
+                large.style.top = e.clientY + 'px';
+            }
         });
 
         // Load data

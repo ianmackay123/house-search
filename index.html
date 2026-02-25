@@ -112,7 +112,17 @@
         }
 
         function buildPopup(prop) {
-            var html = '<div style="font-family:-apple-system,BlinkMacSystemFont,\'Segoe UI\',Roboto,sans-serif;min-width:220px;">';
+            var html = '<div style="font-family:-apple-system,BlinkMacSystemFont,\'Segoe UI\',Roboto,sans-serif;width:260px;">';
+
+            // Thumbnail image
+            if (prop.image) {
+                html += '<a href="' + esc(prop.url) + '" target="_blank" rel="noopener noreferrer">'
+                    + '<img src="' + esc(prop.image) + '" alt="' + esc(prop.name) + '"'
+                    + ' style="width:100%;height:150px;object-fit:cover;border-radius:4px;display:block;margin-bottom:8px;"'
+                    + ' onerror="this.style.display=\'none\'">'
+                    + '</a>';
+            }
+
             html += '<h3 style="margin:0 0 6px;font-size:15px;">' + esc(prop.name) + '</h3>';
 
             if (prop.sleeps) html += '<p style="margin:2px 0;font-size:13px;"><strong>Sleeps:</strong> ' + prop.sleeps + '</p>';
