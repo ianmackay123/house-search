@@ -141,11 +141,37 @@ async function scrapeProperty(context, slug) {
       if (widgetTexts.includes('hot tub')) games.push('Hot tub');
       if (widgetTexts.includes('indoor pool') || widgetTexts.includes('swimming pool')) games.push('Swimming pool');
 
+      // Try to extract a more specific location from the og:description or page text
+      // K&T pages often mention the village/town in the description
+      const ogDesc = document.querySelector('meta[property="og:description"]')?.content || '';
+      const pageTitle = document.title || '';
+      // Pattern: "in Devon", "in the Cotswolds", "near Painswick", "village of X"
+      const bodyText = document.body?.textContent || '';
+      // Extract place names mentioned in widget text (first few paragraphs)
+      const introText = [...document.querySelectorAll('.widget_text p, .house_page_content p')]
+        .slice(0, 6)
+        .map(el => el.textContent)
+        .join(' ');
+
+      // Look for place name patterns in intro text
+      const prepositions = 'in|near|outside|overlooking|of|to|from|around|between|towards';
+      const placeRegex = new RegExp('(?:streets|village|town|heart|edge|hills|coast|shores|borders|outskirts|countryside|lanes|roads)?\\s*(?:' + prepositions + ')\\s+([A-Z][a-z]{2,}(?:\\s+[A-Z][a-z]+)?)', 'g');
+      const skipWords = new Set(['England', 'Britain', 'The', 'This', 'Your', 'Our', 'Here', 'Maybe', 'But', 'And', 'With', 'From', 'Cook', 'Sleep', 'Watch', 'Explore', 'Discover', 'Book', 'Set']);
+      let specificLocation = '';
+      let match;
+      while ((match = placeRegex.exec(introText)) !== null) {
+        const place = match[1].trim();
+        if (place && !skipWords.has(place) && place.length > 2) {
+          specificLocation = place;
+          break;
+        }
+      }
+
       // Hero image
       const heroImg = document.querySelector('.cslider img')?.getAttribute('data-orig-file')
         || document.querySelector('.cslider img')?.src || null;
 
-      return { name, sleeps, location, games, image: heroImg };
+      return { name, sleeps, location, specificLocation, games, image: heroImg };
     });
   } finally {
     await page.close();
@@ -163,20 +189,28 @@ async function scrapeProperty(context, slug) {
     console.warn(`[K&T] Could not fetch availability for ${slug}: ${err.message}`);
   }
 
-  // Geocode location
+  // Geocode using specific location if available, otherwise fall back to region
   let lat = null, lng = null;
-  if (details.location) {
-    const coords = await geocode(details.location);
+  const geocodeQuery = details.specificLocation
+    ? `${details.specificLocation}, ${details.location}`
+    : details.location;
+  if (geocodeQuery) {
+    const coords = await geocode(geocodeQuery);
     if (coords) {
       lat = coords.lat;
       lng = coords.lng;
     }
   }
 
+  // Use specific location in display if we found one
+  const displayLocation = details.specificLocation
+    ? `${details.specificLocation}, ${details.location}`
+    : details.location;
+
   return {
     name: details.name,
     sleeps: details.sleeps,
-    location: details.location,
+    location: displayLocation,
     lat,
     lng,
     games: details.games,
