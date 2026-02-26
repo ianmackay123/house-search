@@ -26,17 +26,40 @@ export async function scrapeBigHouseExperience(options = {}) {
         await page.goto(searchUrl, { waitUntil: 'domcontentloaded', timeout: TIMEOUT });
         await page.waitForTimeout(1500);
 
-        const links = await page.evaluate((base) => {
-          const main = document.querySelector('main, #main, [role="main"]') || document.body;
-          return [...main.querySelectorAll('a[href]')]
-            .map(a => a.href.split('?')[0])
-            .filter(h => h.startsWith(base + '/large-houses-to-rent/') && h.length > (base + '/large-houses-to-rent/').length);
+        const cards = await page.evaluate((base) => {
+          // Each SearchResults-item contains a carousel of images and a link
+          const items = document.querySelectorAll('.SearchResults-item');
+          const results = [];
+          for (const item of items) {
+            // Get the property link
+            const link = item.querySelector('a[href*="/large-houses-to-rent/"]');
+            if (!link) continue;
+            const url = link.href.split('?')[0];
+            if (!url.startsWith(base + '/large-houses-to-rent/') || url === base + '/large-houses-to-rent/') continue;
+            // Get first carousel image (the exterior shot, no width=140 in src)
+            const img = [...item.querySelectorAll('.SearchResults-carouselSlide img, img')]
+              .find(i => {
+                const s = i.getAttribute('src') || i.src || '';
+                return s.includes('/media/') && !s.includes('width=140');
+              });
+            const rawSrc = img ? (img.getAttribute('src') || img.src) : null;
+            const image = rawSrc ? (rawSrc.startsWith('http') ? rawSrc.split('?')[0] : base + rawSrc.split('?')[0]) : null;
+            results.push({ url, image });
+          }
+          // Fallback: if no SearchResults-item structure, collect links without images
+          if (results.length === 0) {
+            const links = [...document.querySelectorAll('a[href*="/large-houses-to-rent/"]')]
+              .map(a => a.href.split('?')[0])
+              .filter(h => h.startsWith(base + '/large-houses-to-rent/') && h.length > (base + '/large-houses-to-rent/').length);
+            return [...new Set(links)].map(url => ({ url, image: null }));
+          }
+          return results;
         }, BASE);
 
-        const unique = [...new Set(links)];
-        console.log(`[BHE] ${range.label}: found ${unique.length} properties`);
-        for (const url of unique) {
-          if (!propertyMap.has(url)) propertyMap.set(url, { url, dates: [] });
+        console.log(`[BHE] ${range.label}: found ${cards.length} properties`);
+        for (const { url, image } of cards) {
+          if (!propertyMap.has(url)) propertyMap.set(url, { url, image, dates: [] });
+          else if (image && !propertyMap.get(url).image) propertyMap.get(url).image = image;
           propertyMap.get(url).dates.push(range.label);
         }
       } catch (err) {
@@ -97,9 +120,8 @@ async function scrapeProperty(context, entry) {
       const priceMatch = allText.match(/from\s*£([\d,]+)\s*per\s*night/i) || allText.match(/£([\d,]+)\s*per\s*night/i);
       const price = priceMatch ? '£' + priceMatch[1] + ' per night' : null;
 
-      // Image - relative URLs, build absolute
-      const imgEl = document.querySelector('[class*="hero"] img, [class*="banner"] img, [class*="gallery"] img, img[src*="/media/"]');
-      const imgSrc = imgEl?.getAttribute('src') || null;
+      // Image is provided from search results (detail pages don't have property-specific images)
+      const imgSrc = null;
 
       // Amenities from page text
       const text = allText.toLowerCase();
@@ -125,9 +147,10 @@ async function scrapeProperty(context, entry) {
     if (!details.name) return null;
     if (details.sleeps && details.sleeps < 20) return null;
 
-    const image = details.imgSrc
+    // Use image from search results; fall back to detail page if somehow set
+    const image = entry.image || (details.imgSrc
       ? (details.imgSrc.startsWith('http') ? details.imgSrc : BASE + details.imgSrc.split('?')[0])
-      : null;
+      : null);
 
     return {
       name: details.name,
