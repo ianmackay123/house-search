@@ -194,20 +194,27 @@ async function scrapeProperty(context, slug) {
     console.warn(`[K&T] Could not fetch availability for ${slug}: ${err.message}`);
   }
 
-  // Geocode using specific location if available, otherwise fall back to region
+  // Fetch coordinates from facts page (has google.maps.LatLng with exact pin location)
+  await rateLimit();
   let lat = null, lng = null;
-  const geocodeQuery = details.specificLocation
-    ? `${details.specificLocation}, ${details.location}`
-    : details.location;
-  if (geocodeQuery) {
-    const coords = await geocode(geocodeQuery);
-    if (coords) {
-      lat = coords.lat;
-      lng = coords.lng;
+  try {
+    const coords = await scrapeFactsCoords(context, slug);
+    if (coords) { lat = coords.lat; lng = coords.lng; }
+  } catch (err) {
+    console.warn(`[K&T] Could not fetch coords for ${slug}: ${err.message}`);
+  }
+
+  // Fall back to geocoding if facts page had no coords
+  if (!lat || !lng) {
+    const geocodeQuery = details.specificLocation
+      ? `${details.specificLocation}, ${details.location}`
+      : details.location;
+    if (geocodeQuery) {
+      const coords = await geocode(geocodeQuery);
+      if (coords) { lat = coords.lat; lng = coords.lng; }
     }
   }
 
-  // Use specific location in display if we found one
   const displayLocation = details.specificLocation
     ? `${details.specificLocation}, ${details.location}`
     : details.location;
@@ -224,6 +231,21 @@ async function scrapeProperty(context, slug) {
     price: availability.price,
     available_dates: availability.dates,
   };
+}
+
+async function scrapeFactsCoords(context, slug) {
+  const page = await fetchPage(context, `${BASE}/houses/${slug}/facts/`);
+  try {
+    return await page.evaluate(() => {
+      for (const script of document.querySelectorAll('script')) {
+        const m = script.textContent.match(/google\.maps\.LatLng\(\s*(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)\s*\)/);
+        if (m) return { lat: parseFloat(m[1]), lng: parseFloat(m[2]) };
+      }
+      return null;
+    });
+  } finally {
+    await page.close();
+  }
 }
 
 async function scrapeAvailability(context, slug) {
