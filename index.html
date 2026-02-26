@@ -207,14 +207,16 @@
         function applyStarredFilter() {
             var starredOnly = document.getElementById('show_starred_only') && document.getElementById('show_starred_only').checked;
             var waterOnly = document.getElementById('show_water_only') && document.getElementById('show_water_only').checked;
+            var noNotesOnly = document.getElementById('show_no_notes_only') && document.getElementById('show_no_notes_only').checked;
             Object.keys(markersByUrl).forEach(function(url) {
                 var entry = markersByUrl[url];
                 var sourceCb = document.getElementById('show_' + entry.prop.source);
                 var sourceOn = !sourceCb || sourceCb.checked;
                 var starOn = !starredOnly || isStarred(url);
                 var waterOn = !waterOnly || hasWaterFeature(entry.prop);
+                var noNoteOn = !noNotesOnly || !getNote(url);
                 entry.marker.setIcon(getIcon(entry.prop));
-                if (sourceOn && starOn && waterOn) {
+                if (sourceOn && starOn && waterOn && noNoteOn) {
                     if (!entry.group.hasLayer(entry.marker)) entry.group.addLayer(entry.marker);
                 } else {
                     if (entry.group.hasLayer(entry.marker)) entry.group.removeLayer(entry.marker);
@@ -386,6 +388,11 @@
             waterLabel.style.marginTop = '3px';
             waterLabel.innerHTML = '<input type="checkbox" id="show_water_only" ' + (getSavedFilter('show_water_only', false) ? 'checked' : '') + ' onchange="saveFilterState();applyStarredFilter()"> Hot tub / pool / sauna only';
             filtersEl.appendChild(waterLabel);
+
+            var noNotesLabel = document.createElement('label');
+            noNotesLabel.style.marginTop = '3px';
+            noNotesLabel.innerHTML = '<input type="checkbox" id="show_no_notes_only" ' + (getSavedFilter('show_no_notes_only', false) ? 'checked' : '') + ' onchange="saveFilterState();applyStarredFilter()"> No notes yet';
+            filtersEl.appendChild(noNotesLabel);
 
             applyStarredFilter();
 
