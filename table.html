@@ -391,7 +391,7 @@
                     logEl.textContent += '\n[Done: exit ' + code + ']';
                     logEl.scrollTop = logEl.scrollHeight;
                     if (code === '0') {
-                        fetch('./properties.json').then(function(r) { return r.json(); }).then(function(data) {
+                        loadProperties().then(function(data) {
                             allProperties = data;
                             displayed = allProperties.slice();
                             sortAndRender();
@@ -420,9 +420,22 @@
             document.getElementById('scrape-log-wrap').textContent += '\n[Killed]';
         }
 
+        var PROPS_BIN = 'https://api.jsonbin.io/v3/b/69a013e2ae596e708f4b8024/latest';
+        var PROPS_KEY = '$2a$10$GM2DacykC6URSakJENStXORhYWLBkBdhNtQdDHtOw.7FoSOpfpcrS';
+
+        function loadProperties() {
+            return fetch(PROPS_BIN, { headers: { 'X-Access-Key': PROPS_KEY } })
+                .then(function(r) { return r.ok ? r.json() : Promise.reject('HTTP ' + r.status); })
+                .then(function(d) { return d.record || []; })
+                .catch(function(err) {
+                    console.warn('JSONbin load failed, trying local:', err);
+                    return fetch('./properties.json').then(function(r) { return r.ok ? r.json() : []; }).catch(function() { return []; });
+                });
+        }
+
         // Load data and state in parallel
         Promise.all([
-            fetch('./properties.json').then(function(r) { return r.ok ? r.json() : []; }).catch(function() { return []; }),
+            loadProperties(),
             loadState()
         ]).then(function(results) {
             allProperties = results[0];

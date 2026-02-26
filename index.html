@@ -269,14 +269,25 @@
             return html;
         }
 
+        var PROPS_BIN = 'https://api.jsonbin.io/v3/b/69a013e2ae596e708f4b8024/latest';
+        var PROPS_KEY = '$2a$10$GM2DacykC6URSakJENStXORhYWLBkBdhNtQdDHtOw.7FoSOpfpcrS';
+
         async function loadProperties() {
             try {
-                var resp = await fetch('./properties.json');
+                var resp = await fetch(PROPS_BIN, { headers: { 'X-Access-Key': PROPS_KEY } });
                 if (!resp.ok) throw new Error('HTTP ' + resp.status);
-                return await resp.json();
+                var data = await resp.json();
+                return data.record || [];
             } catch (err) {
-                console.warn('Could not load properties.json:', err.message);
-                return [];
+                console.warn('JSONbin load failed, trying local:', err.message);
+                try {
+                    var resp2 = await fetch('./properties.json');
+                    if (!resp2.ok) throw new Error('HTTP ' + resp2.status);
+                    return await resp2.json();
+                } catch (err2) {
+                    console.warn('Could not load properties.json:', err2.message);
+                    return [];
+                }
             }
         }
 

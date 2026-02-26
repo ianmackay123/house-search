@@ -4,6 +4,8 @@ import { scrapeGroupAccommodation } from './scrapers/groupaccommodation.js';
 import { scrapeAirbnb } from './scrapers/airbnb.js';
 
 const OUTPUT = 'properties.json';
+const JSONBIN_URL = 'https://api.jsonbin.io/v3/b/69a013e2ae596e708f4b8024';
+const JSONBIN_KEY = '$2a$10$GM2DacykC6URSakJENStXORhYWLBkBdhNtQdDHtOw.7FoSOpfpcrS';
 
 // Load existing properties.json, keeping entries from sources not being re-scraped
 async function loadExisting(excludeSources) {
@@ -28,6 +30,17 @@ async function saveResults(results) {
   const filtered = filterUK(results);
   await writeFile(OUTPUT, JSON.stringify(filtered, null, 2));
   console.log(`[Save] Wrote ${filtered.length} mappable properties to ${OUTPUT}`);
+  try {
+    const res = await fetch(JSONBIN_URL, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', 'X-Access-Key': JSONBIN_KEY },
+      body: JSON.stringify(filtered),
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    console.log(`[Save] Synced ${filtered.length} properties to JSONbin`);
+  } catch (err) {
+    console.warn(`[Save] JSONbin sync failed: ${err.message}`);
+  }
 }
 
 async function main() {
