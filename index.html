@@ -128,6 +128,23 @@
         const layerGroups = {};
         const markersByUrl = {}; // url -> { marker, group, prop }
 
+        var LS_KEY = 'house-search-map-filters';
+
+        function saveFilterState() {
+            var state = {};
+            document.querySelectorAll('#filters input[type="checkbox"]').forEach(function(cb) {
+                state[cb.id] = cb.checked;
+            });
+            try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch(e) {}
+        }
+
+        function getSavedFilter(id, defaultVal) {
+            try {
+                var state = JSON.parse(localStorage.getItem(LS_KEY) || '{}');
+                return id in state ? state[id] : defaultVal;
+            } catch(e) { return defaultVal; }
+        }
+
         function toggleLayer(source) {
             if (!leafletMap || !layerGroups[source]) return;
             const cb = document.getElementById('show_' + source);
@@ -136,6 +153,7 @@
             } else {
                 leafletMap.removeLayer(layerGroups[source]);
             }
+            saveFilterState();
             applyStarredFilter();
         }
 
@@ -300,9 +318,8 @@
             });
             Object.keys(markersByUrl).forEach(function(k) { delete markersByUrl[k]; });
 
-            // Rebuild filter checkboxes (preserve starred-only checkbox)
+            // Rebuild filter checkboxes
             var filtersEl = document.getElementById('filters');
-            var starredOnlyChecked = document.getElementById('show_starred_only') ? document.getElementById('show_starred_only').checked : false;
             filtersEl.innerHTML = '<strong>Show:</strong>';
 
             var bySource = {};
@@ -321,8 +338,7 @@
             for (var s = 0; s < allSources.length; s++) {
                 var source = allSources[s];
                 var props = bySource[source] || [];
-                var wasChecked = document.getElementById('show_' + source);
-                var keepChecked = !wasChecked || wasChecked.checked;
+                var keepChecked = getSavedFilter('show_' + source, true);
                 var group = layerGroups[source] || L.layerGroup();
 
                 for (var j = 0; j < props.length; j++) {
@@ -340,7 +356,7 @@
                 var count = props.length ? ' (' + props.length + ')' : '';
                 var label = document.createElement('label');
                 label.style.color = props.length ? '' : '#aaa';
-                label.innerHTML = '<input type="checkbox" id="show_' + source + '" ' + (keepChecked ? 'checked' : '') + ' onchange="toggleLayer(\'' + source + '\')"> ' + sourceLabel(source) + count;
+                label.innerHTML = '<input type="checkbox" id="show_' + source + '" ' + (keepChecked ? 'checked' : '') + ' onchange="toggleLayer(\'' + source + '\');saveFilterState()"> ' + sourceLabel(source) + count;
                 filtersEl.appendChild(label);
             }
 
@@ -348,7 +364,7 @@
             starLabel.style.marginTop = '6px';
             starLabel.style.borderTop = '1px solid #eee';
             starLabel.style.paddingTop = '6px';
-            starLabel.innerHTML = '<input type="checkbox" id="show_starred_only" ' + (starredOnlyChecked ? 'checked' : '') + ' onchange="applyStarredFilter()"> ★ Starred only';
+            starLabel.innerHTML = '<input type="checkbox" id="show_starred_only" ' + (getSavedFilter('show_starred_only', false) ? 'checked' : '') + ' onchange="saveFilterState();applyStarredFilter()"> ★ Starred only';
             filtersEl.appendChild(starLabel);
 
             applyStarredFilter();
@@ -440,7 +456,6 @@
                 });
                 // Rebuild filter checkboxes to reflect cleared sources
                 var filtersEl = document.getElementById('filters');
-                var starredOnlyChecked = document.getElementById('show_starred_only') ? document.getElementById('show_starred_only').checked : false;
                 filtersEl.innerHTML = '<strong>Show:</strong>';
                 Object.keys(layerGroups).forEach(function(src) {
                     var count = Object.values(markersByUrl).filter(function(e) { return e.prop.source === src; }).length;
@@ -450,7 +465,7 @@
                 });
                 var starLabel = document.createElement('label');
                 starLabel.style.marginTop = '6px'; starLabel.style.borderTop = '1px solid #eee'; starLabel.style.paddingTop = '6px';
-                starLabel.innerHTML = '<input type="checkbox" id="show_starred_only" ' + (starredOnlyChecked ? 'checked' : '') + ' onchange="applyStarredFilter()"> ★ Starred only';
+                starLabel.innerHTML = '<input type="checkbox" id="show_starred_only" ' + (getSavedFilter('show_starred_only', false) ? 'checked' : '') + ' onchange="saveFilterState();applyStarredFilter()"> ★ Starred only';
                 filtersEl.appendChild(starLabel);
             }
 

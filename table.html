@@ -120,15 +120,15 @@
     </div>
     <div class="controls" id="controls">
         <strong style="font-size:13px;">Source:</strong>
-        <label><input type="checkbox" data-source="kateandtoms" checked onchange="applyFilters()"> Kate & Tom's</label>
-        <label><input type="checkbox" data-source="airbnb" checked onchange="applyFilters()"> Airbnb</label>
-        <label><input type="checkbox" data-source="groupaccommodation" checked onchange="applyFilters()"> Group Accom.</label>
-        <label><input type="checkbox" data-source="thebigdomain" checked onchange="applyFilters()"> Big Domain</label>
-        <label><input type="checkbox" data-source="bighouseexperience" checked onchange="applyFilters()"> Big House Exp.</label>
-        <label><input type="checkbox" data-source="snaptrip" checked onchange="applyFilters()"> Snaptrip</label>
+        <label><input type="checkbox" data-source="kateandtoms" checked onchange="saveFilterState();applyFilters()"> Kate & Tom's</label>
+        <label><input type="checkbox" data-source="airbnb" checked onchange="saveFilterState();applyFilters()"> Airbnb</label>
+        <label><input type="checkbox" data-source="groupaccommodation" checked onchange="saveFilterState();applyFilters()"> Group Accom.</label>
+        <label><input type="checkbox" data-source="thebigdomain" checked onchange="saveFilterState();applyFilters()"> Big Domain</label>
+        <label><input type="checkbox" data-source="bighouseexperience" checked onchange="saveFilterState();applyFilters()"> Big House Exp.</label>
+        <label><input type="checkbox" data-source="snaptrip" checked onchange="saveFilterState();applyFilters()"> Snaptrip</label>
         <strong style="font-size:13px;margin-left:8px;">Filter:</strong>
-        <label><input type="checkbox" id="bonusOnly" onchange="applyFilters()"> Snooker/table tennis only</label>
-        <label><input type="checkbox" id="starredOnly" onchange="applyFilters()"> ★ Starred only</label>
+        <label><input type="checkbox" id="bonusOnly" onchange="saveFilterState();applyFilters()"> Snooker/table tennis only</label>
+        <label><input type="checkbox" id="starredOnly" onchange="saveFilterState();applyFilters()"> ★ Starred only</label>
         <label><input type="checkbox" id="hideDismissed" onchange="applyFilters()" checked> Hide dismissed</label>
         <input type="text" id="search" placeholder="Search name, location..." oninput="applyFilters()">
         <span class="count" id="count"></span>
@@ -192,6 +192,26 @@
         var displayed = [];
         var sortCol = 'name';
         var sortAsc = true;
+
+        var LS_KEY = 'house-search-table-filters';
+
+        function saveFilterState() {
+            var state = {};
+            document.querySelectorAll('.controls input[type="checkbox"]').forEach(function(cb) {
+                state[cb.id || cb.dataset.source] = cb.checked;
+            });
+            try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch(e) {}
+        }
+
+        function restoreFilterState() {
+            try {
+                var state = JSON.parse(localStorage.getItem(LS_KEY) || '{}');
+                document.querySelectorAll('.controls input[type="checkbox"]').forEach(function(cb) {
+                    var key = cb.id || cb.dataset.source;
+                    if (key in state) cb.checked = state[key];
+                });
+            } catch(e) {}
+        }
 
         function sourceLabel(s) {
             return { kateandtoms: "Kate & Tom's", groupaccommodation: 'Group Accom.', airbnb: 'Airbnb', thebigdomain: 'Big Domain' }[s] || s;
@@ -443,13 +463,13 @@
         }
 
         // Load data and state in parallel
+        restoreFilterState();
         Promise.all([
             loadProperties(),
             loadState()
         ]).then(function(results) {
             allProperties = results[0];
-            displayed = allProperties.slice();
-            sortAndRender();
+            applyFilters();
         }).catch(function() {
             document.getElementById('no-results').style.display = 'block';
             document.getElementById('no-results').textContent = 'Could not load properties.json. Run npm run scrape first.';
