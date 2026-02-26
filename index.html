@@ -280,11 +280,19 @@
             }
         }
 
-        async function init() {
-            var results = await Promise.all([loadProperties(), loadState()]);
-            var properties = results[0];
+        function renderProperties(properties) {
+            // Clear existing layers and markers
+            Object.keys(layerGroups).forEach(function(src) {
+                leafletMap.removeLayer(layerGroups[src]);
+                delete layerGroups[src];
+            });
+            Object.keys(markersByUrl).forEach(function(k) { delete markersByUrl[k]; });
 
-            // Group by source
+            // Rebuild filter checkboxes (preserve starred-only checkbox)
+            var filtersEl = document.getElementById('filters');
+            var starredOnlyChecked = document.getElementById('show_starred_only') ? document.getElementById('show_starred_only').checked : false;
+            filtersEl.innerHTML = '<strong>Show:</strong>';
+
             var bySource = {};
             for (var i = 0; i < properties.length; i++) {
                 var prop = properties[i];
@@ -294,75 +302,80 @@
                 bySource[src].push(prop);
             }
 
-            // Load Leaflet
-            var leafletCSS = document.createElement('link');
-            leafletCSS.rel = 'stylesheet';
-            leafletCSS.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
-            document.head.appendChild(leafletCSS);
+            var allMarkers = [];
+            var sources = Object.keys(bySource);
+            for (var s = 0; s < sources.length; s++) {
+                var source = sources[s];
+                var props = bySource[source];
+                var group = L.layerGroup();
 
-            var leafletJS = document.createElement('script');
-            leafletJS.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-            leafletJS.onload = function() {
-                document.getElementById('loading').style.display = 'none';
+                for (var j = 0; j < props.length; j++) {
+                    var p = props[j];
+                    var marker = L.marker([p.lat, p.lng], { icon: getIcon(p) });
+                    marker.bindPopup(buildPopup(p), { maxWidth: 320 });
+                    group.addLayer(marker);
+                    allMarkers.push(marker);
+                    markersByUrl[p.url] = { marker: marker, group: group, prop: p };
+                }
 
-                leafletMap = L.map('map').setView([52.0, -1.8], 6);
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; OpenStreetMap contributors',
-                    maxZoom: 18
-                }).addTo(leafletMap);
+                group.addTo(leafletMap);
+                layerGroups[source] = group;
 
-                var filtersEl = document.getElementById('filters');
-                var allMarkers = [];
+                var label = document.createElement('label');
+                label.innerHTML = '<input type="checkbox" id="show_' + source + '" checked onchange="toggleLayer(\'' + source + '\')"> ' + sourceLabel(source) + ' (' + props.length + ')';
+                filtersEl.appendChild(label);
+            }
 
-                var sources = Object.keys(bySource);
-                for (var s = 0; s < sources.length; s++) {
-                    var source = sources[s];
-                    var props = bySource[source];
-                    var group = L.layerGroup();
+            var starLabel = document.createElement('label');
+            starLabel.style.marginTop = '6px';
+            starLabel.style.borderTop = '1px solid #eee';
+            starLabel.style.paddingTop = '6px';
+            starLabel.innerHTML = '<input type="checkbox" id="show_starred_only" ' + (starredOnlyChecked ? 'checked' : '') + ' onchange="applyStarredFilter()"> ★ Starred only';
+            filtersEl.appendChild(starLabel);
 
-                    for (var j = 0; j < props.length; j++) {
-                        var p = props[j];
-                        var marker = L.marker([p.lat, p.lng], { icon: getIcon(p) });
-                        marker.bindPopup(buildPopup(p), { maxWidth: 320 });
-                        group.addLayer(marker);
-                        allMarkers.push(marker);
-                        markersByUrl[p.url] = { marker: marker, group: group, prop: p };
+            applyStarredFilter();
+
+            if (properties.length === 0) {
+                document.getElementById('loading').style.display = 'flex';
+                document.getElementById('loading').textContent = 'No properties found. Run npm run scrape to generate properties.json';
+            }
+        }
+
+        async function init() {
+            await Promise.all([loadProperties(), loadState()]).then(function(results) {
+                var properties = results[0];
+
+                // Load Leaflet
+                var leafletCSS = document.createElement('link');
+                leafletCSS.rel = 'stylesheet';
+                leafletCSS.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+                document.head.appendChild(leafletCSS);
+
+                var leafletJS = document.createElement('script');
+                leafletJS.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+                leafletJS.onload = function() {
+                    document.getElementById('loading').style.display = 'none';
+                    leafletMap = L.map('map').setView([52.0, -1.8], 6);
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; OpenStreetMap contributors',
+                        maxZoom: 18
+                    }).addTo(leafletMap);
+                    renderProperties(properties);
+                    if (Object.keys(markersByUrl).length > 0) {
+                        var fg = L.featureGroup(Object.values(markersByUrl).map(function(e) { return e.marker; }));
+                        leafletMap.fitBounds(fg.getBounds().pad(0.1));
                     }
-
-                    group.addTo(leafletMap);
-                    layerGroups[source] = group;
-
-                    var label = document.createElement('label');
-                    label.innerHTML = '<input type="checkbox" id="show_' + source + '" checked onchange="toggleLayer(\'' + source + '\')"> ' + sourceLabel(source) + ' (' + props.length + ')';
-                    filtersEl.appendChild(label);
-                }
-
-                var starLabel = document.createElement('label');
-                starLabel.style.marginTop = '6px';
-                starLabel.style.borderTop = '1px solid #eee';
-                starLabel.style.paddingTop = '6px';
-                starLabel.innerHTML = '<input type="checkbox" id="show_starred_only" onchange="applyStarredFilter()"> ★ Starred only';
-                filtersEl.appendChild(starLabel);
-
-                if (allMarkers.length > 0) {
-                    var featureGroup = L.featureGroup(allMarkers);
-                    leafletMap.fitBounds(featureGroup.getBounds().pad(0.1));
-                }
-                applyStarredFilter(); // apply initial dismissed opacity
-
-                if (properties.length === 0) {
-                    document.getElementById('loading').style.display = 'flex';
-                    document.getElementById('loading').textContent = 'No properties found. Run npm run scrape to generate properties.json';
-                }
-            };
-            document.head.appendChild(leafletJS);
+                };
+                document.head.appendChild(leafletJS);
+            });
         }
 
         init();
 
         // ── Scrape panel (localhost only) ──
         (function() {
-            var isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+            var h = location.hostname;
+            var isLocal = h === 'localhost' || h === '127.0.0.1' || h === '::1' || h === '[::1]';
             if (!isLocal) return;
             document.getElementById('scrape-panel').style.display = 'block';
         })();
@@ -398,11 +411,20 @@
             _scrapeSource = source;
             _scrapeEs = new EventSource('/scrape?source=' + source);
 
+            var _refreshTimer = null;
+            function scheduleMapRefresh() {
+                if (_refreshTimer) clearTimeout(_refreshTimer);
+                _refreshTimer = setTimeout(function() {
+                    loadProperties().then(function(props) { if (leafletMap) renderProperties(props); });
+                }, 2000);
+            }
+
             _scrapeEs.onmessage = function(e) {
                 var line = JSON.parse(e.data);
                 if (line.startsWith('__done__:')) {
                     var code = line.split(':')[1];
                     _scrapeEs.close(); _scrapeEs = null;
+                    if (_refreshTimer) clearTimeout(_refreshTimer);
                     btns.forEach(function(b) { b.disabled = false; b.classList.remove('running'); });
                     document.getElementById('btn-kill').style.display = 'none';
                     if (clickedBtn) {
@@ -412,9 +434,13 @@
                     }
                     logEl.textContent += '\n[Done: exit ' + code + ']';
                     logEl.scrollTop = logEl.scrollHeight;
+                    // Final reload of map with fresh data
+                    loadProperties().then(function(props) { if (leafletMap) renderProperties(props); });
                 } else {
                     logEl.textContent += line + '\n';
                     logEl.scrollTop = logEl.scrollHeight;
+                    // Refresh map whenever properties.json is updated during scrape
+                    if (line.indexOf('[Save] Wrote') !== -1) scheduleMapRefresh();
                 }
             };
 
