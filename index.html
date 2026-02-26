@@ -408,6 +408,34 @@
             });
             if (clickedBtn) { clickedBtn.classList.add('running'); clickedBtn.textContent = '⏳ ' + clickedBtn.textContent.replace('⏳ ',''); }
 
+            // Clear markers for sources being re-scraped
+            if (leafletMap) {
+                var toClear = source === 'all' ? Object.keys(layerGroups) : [source];
+                toClear.forEach(function(src) {
+                    if (layerGroups[src]) {
+                        leafletMap.removeLayer(layerGroups[src]);
+                        delete layerGroups[src];
+                    }
+                    Object.keys(markersByUrl).forEach(function(url) {
+                        if (markersByUrl[url].prop.source === src) delete markersByUrl[url];
+                    });
+                });
+                // Rebuild filter checkboxes to reflect cleared sources
+                var filtersEl = document.getElementById('filters');
+                var starredOnlyChecked = document.getElementById('show_starred_only') ? document.getElementById('show_starred_only').checked : false;
+                filtersEl.innerHTML = '<strong>Show:</strong>';
+                Object.keys(layerGroups).forEach(function(src) {
+                    var count = Object.values(markersByUrl).filter(function(e) { return e.prop.source === src; }).length;
+                    var label = document.createElement('label');
+                    label.innerHTML = '<input type="checkbox" id="show_' + src + '" checked onchange="toggleLayer(\'' + src + '\')"> ' + sourceLabel(src) + ' (' + count + ')';
+                    filtersEl.appendChild(label);
+                });
+                var starLabel = document.createElement('label');
+                starLabel.style.marginTop = '6px'; starLabel.style.borderTop = '1px solid #eee'; starLabel.style.paddingTop = '6px';
+                starLabel.innerHTML = '<input type="checkbox" id="show_starred_only" ' + (starredOnlyChecked ? 'checked' : '') + ' onchange="applyStarredFilter()"> ★ Starred only';
+                filtersEl.appendChild(starLabel);
+            }
+
             _scrapeSource = source;
             _scrapeEs = new EventSource('/scrape?source=' + source);
 
