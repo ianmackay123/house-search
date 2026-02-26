@@ -5,8 +5,8 @@ const BASE = 'https://www.sykescottages.co.uk';
 const TIMEOUT = 20000;
 
 const DATE_RANGES = [
-  { start: '24-09-2026', label: '24-27 Sep' },
-  { start: '25-09-2026', label: '25-28 Sep' },
+  { start: '24%2F09%2F2026', label: '24-27 Sep' },
+  { start: '25%2F09%2F2026', label: '25-28 Sep' },
 ];
 
 export async function scrapeSykesCottages(options = {}) {
