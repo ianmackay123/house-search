@@ -302,17 +302,17 @@
 
         async function loadProperties() {
             try {
-                var resp = await fetch('./properties.json');
+                var resp = await fetch(GIST_URL + '?t=' + Date.now());
                 if (!resp.ok) throw new Error('HTTP ' + resp.status);
                 return await resp.json();
             } catch (err) {
-                console.warn('Local properties.json failed, trying Gist:', err.message);
+                console.warn('Gist failed, trying local:', err.message);
                 try {
-                    var resp2 = await fetch(GIST_URL + '?t=' + Date.now());
+                    var resp2 = await fetch('./properties.json');
                     if (!resp2.ok) throw new Error('HTTP ' + resp2.status);
                     return await resp2.json();
                 } catch (err2) {
-                    console.warn('JSONbin also failed:', err2.message);
+                    console.warn('Local also failed:', err2.message);
                     return [];
                 }
             }

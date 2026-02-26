@@ -454,11 +454,11 @@
         var GIST_URL = 'https://gist.githubusercontent.com/ianmackay123/8632e6db6e5aa9967676fd50edd99e39/raw/properties.json';
 
         function loadProperties() {
-            return fetch('./properties.json')
+            return fetch(GIST_URL + '?t=' + Date.now())
                 .then(function(r) { return r.ok ? r.json() : Promise.reject('HTTP ' + r.status); })
                 .catch(function(err) {
-                    console.warn('Local properties.json failed, trying Gist:', err);
-                    return fetch(GIST_URL + '?t=' + Date.now())
+                    console.warn('Gist failed, trying local:', err);
+                    return fetch('./properties.json')
                         .then(function(r) { return r.ok ? r.json() : Promise.reject('HTTP ' + r.status); })
                         .catch(function() { return []; });
                 });
