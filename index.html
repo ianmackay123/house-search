@@ -115,6 +115,7 @@
             <button class="scrape-btn" onclick="startScrape('kateandtoms')">K&amp;T</button>
             <button class="scrape-btn" onclick="startScrape('airbnb')">Airbnb</button>
             <button class="scrape-btn" onclick="startScrape('groupaccommodation')">Group Accom.</button>
+            <button class="scrape-btn" onclick="startScrape('thebigdomain')">Big Domain</button>
             <button class="scrape-btn" id="btn-kill" style="background:#c0392b;display:none;" onclick="killScrape()">Stop</button>
         </div>
         <div id="scrape-log"></div>
@@ -150,6 +151,7 @@
             if (isStarred(prop.url)) return createIcon('#f39c12', 32);
             if (prop.has_games_bonus) return createIcon('#e74c3c', 28);
             if (prop.source === 'airbnb') return createIcon('#27ae60', 24);
+            if (prop.source === 'thebigdomain') return createIcon('#8e44ad', 24);
             return createIcon('#3498db', 24);
         }
 
@@ -196,13 +198,15 @@
             var labels = {
                 kateandtoms: "Kate & Tom's",
                 groupaccommodation: 'Group Accom.',
-                airbnb: 'Airbnb'
+                airbnb: 'Airbnb',
+                thebigdomain: 'Big Domain'
             };
             return labels[source] || source;
         }
 
         function sourceLinkStyle(source) {
             if (source === 'airbnb') return 'background:#FF5A5F';
+            if (source === 'thebigdomain') return 'background:#8e44ad';
             return 'background:#2c3e50';
         }
 

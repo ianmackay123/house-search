@@ -2,6 +2,7 @@ import { writeFile, readFile } from 'fs/promises';
 import { scrapeKateAndToms } from './scrapers/kateandtoms.js';
 import { scrapeGroupAccommodation } from './scrapers/groupaccommodation.js';
 import { scrapeAirbnb } from './scrapers/airbnb.js';
+import { scrapeTheBigDomain } from './scrapers/thebigdomain.js';
 
 const OUTPUT = 'properties.json';
 const JSONBIN_URL = 'https://api.jsonbin.io/v3/b/69a013e2ae596e708f4b8024';
@@ -62,6 +63,7 @@ async function main() {
     { name: "Kate & Tom's", key: 'kateandtoms', fn: scrapeKateAndToms },
     { name: 'groupaccommodation.com', key: 'groupaccommodation', fn: scrapeGroupAccommodation },
     { name: 'Airbnb', key: 'airbnb', fn: scrapeAirbnb },
+    { name: 'The Big Domain', key: 'thebigdomain', fn: scrapeTheBigDomain },
   ];
 
   const scrapers = onlySource

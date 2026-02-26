@@ -7,6 +7,7 @@
     "scrape:airbnb": "node scrape.js --only=airbnb",
     "scrape:kateandtoms": "node scrape.js --only=kateandtoms",
     "scrape:ga": "node scrape.js --only=groupaccommodation",
+    "scrape:tbd": "node scrape.js --only=thebigdomain",
     "serve": "node server.js"
   },
   "dependencies": {
