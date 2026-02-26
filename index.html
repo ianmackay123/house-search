@@ -382,10 +382,6 @@
 
             applyStarredFilter();
 
-            if (properties.length === 0) {
-                document.getElementById('loading').style.display = 'flex';
-                document.getElementById('loading').textContent = 'No properties found. Run npm run scrape to generate properties.json';
-            }
         }
 
         async function init() {
