@@ -60,6 +60,10 @@
         <div class="legend-item"><span class="legend-dot" style="background:#3498db;width:8px;height:8px;"></span> No hot tub / pool / sauna (smaller)</div>
         <p style="margin-top:8px;font-size:11px;color:#666;">Click pins for details & links. Dogs | Sleeps 20+ | 24-27 or 25-28 Sep</p>
         <a href="./table.html" style="display:inline-block;margin-top:8px;font-size:12px;color:#2980b9;">View as table &rarr;</a>
+        <div id="sync-setup" style="margin-top:8px;display:none;">
+            <span style="font-size:11px;color:#e74c3c;">&#9888; Sync not set up</span>
+            <button onclick="showTokenPrompt()" style="margin-left:6px;font-size:11px;padding:2px 7px;cursor:pointer;border:1px solid #ccc;border-radius:3px;background:white;">Set up &rarr;</button>
+        </div>
     </div>
     <div class="filter-controls" id="filters">
         <strong>Show:</strong>
@@ -404,6 +408,7 @@
                         maxZoom: 18
                     }).addTo(leafletMap);
                     renderProperties(properties);
+                    checkSyncSetup();
                     if (Object.keys(markersByUrl).length > 0) {
                         var fg = L.featureGroup(Object.values(markersByUrl).map(function(e) { return e.marker; }));
                         leafletMap.fitBounds(fg.getBounds().pad(0.1));
@@ -411,6 +416,21 @@
                 };
                 document.head.appendChild(leafletJS);
             });
+        }
+
+        function showTokenPrompt() {
+            var t = prompt('Enter your GitHub personal access token (gist scope):\n\nThis is stored only in your browser localStorage and never sent anywhere except GitHub.');
+            if (t && t.trim()) {
+                saveGistToken(t.trim());
+                document.getElementById('sync-setup').style.display = 'none';
+                alert('Token saved. Your changes will now sync.');
+            }
+        }
+
+        function checkSyncSetup() {
+            if (!hasWriteAccess()) {
+                document.getElementById('sync-setup').style.display = 'block';
+            }
         }
 
         init();

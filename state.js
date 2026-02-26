@@ -1,10 +1,15 @@
 // state.js — per-property state: starred, dismissed, notes
-// Synced via GitHub Gist. Credentials loaded from config.js (gitignored).
+// Synced via GitHub Gist.
+// Token priority: config.js (local dev) → localStorage (remote devices)
 
-const _GIST_ID    = '26ae83db293db97835e7dcda4871d83a';
-const _GIST_TOKEN = (typeof GIST_TOKEN !== 'undefined') ? GIST_TOKEN : '';
-const _GIST_RAW   = 'https://gist.githubusercontent.com/ianmackay123/' + _GIST_ID + '/raw/state.json';
-const _GIST_API   = 'https://api.github.com/gists/' + _GIST_ID;
+const _GIST_ID  = '26ae83db293db97835e7dcda4871d83a';
+const _GIST_RAW = 'https://gist.githubusercontent.com/ianmackay123/' + _GIST_ID + '/raw/state.json';
+const _GIST_API = 'https://api.github.com/gists/' + _GIST_ID;
+
+function _getToken() {
+    if (typeof GIST_TOKEN !== 'undefined' && GIST_TOKEN) return GIST_TOKEN;
+    return localStorage.getItem('gist_token') || '';
+}
 
 let _state = { starred: [], dismissed: [], notes: {} };
 let _noteTimers = {};
@@ -52,15 +57,29 @@ function scheduleNoteSave(url, text) {
     _noteTimers[url] = setTimeout(_save, 1500);
 }
 
+// Token setup — call from UI
+function hasWriteAccess() { return !!_getToken(); }
+function saveGistToken(token) {
+    localStorage.setItem('gist_token', token.trim());
+}
+function clearGistToken() {
+    localStorage.removeItem('gist_token');
+}
+
 // ── Internal ─────────────────────────────────────────────────────────────────
 
 async function _save() {
+    var token = _getToken();
+    if (!token) {
+        console.warn('[State] No token — changes not saved. Use the sync setup to add your GitHub token.');
+        return;
+    }
     try {
         var resp = await fetch(_GIST_API, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'token ' + _GIST_TOKEN,
+                'Authorization': 'token ' + token,
             },
             body: JSON.stringify({ files: { 'state.json': { content: JSON.stringify(_state) } } }),
         });
