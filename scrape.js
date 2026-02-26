@@ -67,9 +67,16 @@ async function main() {
   }
   const results = [...existingOtherSources];
 
-  const promises = scrapers.map(async ({ name, fn }) => {
+  const promises = scrapers.map(async ({ name, key, fn }) => {
     try {
-      const props = await fn(scraperOptions);
+      const opts = { ...scraperOptions };
+      if (key === 'kateandtoms') {
+        opts.onBatch = async (ktResults) => {
+          const others = results.filter(p => p.source !== 'kateandtoms');
+          await saveResults([...others, ...ktResults]);
+        };
+      }
+      const props = await fn(opts);
       results.push(...props);
       console.log(`\n✓ ${name}: ${props.length} properties`);
       await saveResults(results);

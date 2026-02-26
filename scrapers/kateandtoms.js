@@ -36,6 +36,9 @@ export async function scrapeKateAndToms(options = {}) {
         const prop = await scrapeProperty(context, slug);
         if (prop) {
           results.push(normalise(prop, 'kateandtoms'));
+          if (options.onBatch && results.length % 5 === 0) {
+            await options.onBatch(results);
+          }
         }
       } catch (err) {
         console.error(`[K&T] Error scraping ${slug}: ${err.message}`);
