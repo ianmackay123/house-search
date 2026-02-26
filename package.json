@@ -8,6 +8,7 @@
     "scrape:kateandtoms": "node scrape.js --only=kateandtoms",
     "scrape:ga": "node scrape.js --only=groupaccommodation",
     "scrape:tbd": "node scrape.js --only=thebigdomain",
+    "scrape:bhe": "node scrape.js --only=bighouseexperience",
     "serve": "node server.js"
   },
   "dependencies": {

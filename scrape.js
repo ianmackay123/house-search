@@ -3,6 +3,7 @@ import { scrapeKateAndToms } from './scrapers/kateandtoms.js';
 import { scrapeGroupAccommodation } from './scrapers/groupaccommodation.js';
 import { scrapeAirbnb } from './scrapers/airbnb.js';
 import { scrapeTheBigDomain } from './scrapers/thebigdomain.js';
+import { scrapeBigHouseExperience } from './scrapers/bighouseexperience.js';
 
 const OUTPUT = 'properties.json';
 const JSONBIN_URL = 'https://api.jsonbin.io/v3/b/69a013e2ae596e708f4b8024';
@@ -64,6 +65,7 @@ async function main() {
     { name: 'groupaccommodation.com', key: 'groupaccommodation', fn: scrapeGroupAccommodation },
     { name: 'Airbnb', key: 'airbnb', fn: scrapeAirbnb },
     { name: 'The Big Domain', key: 'thebigdomain', fn: scrapeTheBigDomain },
+    { name: 'Big House Experience', key: 'bighouseexperience', fn: scrapeBigHouseExperience },
   ];
 
   const scrapers = onlySource

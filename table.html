@@ -47,6 +47,7 @@
         .source-badge.kateandtoms { background: #3498db; }
         .source-badge.groupaccommodation { background: #8e44ad; }
         .source-badge.airbnb { background: #FF5A5F; }
+        .source-badge.bighouseexperience { background: #e67e22; }
         .source-badge.thebigdomain { background: #8e44ad; }
         .bonus-star { color: #e74c3c; font-weight: bold; }
         .games-list { font-size: 12px; color: #555; }
@@ -122,6 +123,7 @@
         <label><input type="checkbox" data-source="airbnb" checked onchange="applyFilters()"> Airbnb</label>
         <label><input type="checkbox" data-source="groupaccommodation" checked onchange="applyFilters()"> Group Accom.</label>
         <label><input type="checkbox" data-source="thebigdomain" checked onchange="applyFilters()"> Big Domain</label>
+        <label><input type="checkbox" data-source="bighouseexperience" checked onchange="applyFilters()"> Big House Exp.</label>
         <strong style="font-size:13px;margin-left:8px;">Filter:</strong>
         <label><input type="checkbox" id="bonusOnly" onchange="applyFilters()"> Snooker/table tennis only</label>
         <label><input type="checkbox" id="starredOnly" onchange="applyFilters()"> ★ Starred only</label>
@@ -136,6 +138,7 @@
         <button class="scrape-btn" onclick="startScrape('airbnb')">Airbnb</button>
         <button class="scrape-btn" onclick="startScrape('groupaccommodation')">Group Accom.</button>
         <button class="scrape-btn" onclick="startScrape('thebigdomain')">Big Domain</button>
+        <button class="scrape-btn" onclick="startScrape('bighouseexperience')">Big House Exp.</button>
         <button class="scrape-btn" id="btn-kill" style="background:#c0392b;display:none;" onclick="killScrape()">Stop</button>
         <div id="scrape-log-wrap"></div>
     </div>
