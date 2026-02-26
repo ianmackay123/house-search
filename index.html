@@ -64,6 +64,61 @@
         <strong>Show:</strong>
     </div>
 
+    <style>
+        #scrape-panel {
+            position: absolute;
+            bottom: 20px;
+            right: 12px;
+            background: white;
+            padding: 10px 14px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            z-index: 1000;
+            font-size: 13px;
+            width: 280px;
+            display: none;
+        }
+        #scrape-panel strong { display: block; margin-bottom: 6px; }
+        .scrape-btn {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 2px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            background: #2c3e50;
+            color: white;
+        }
+        .scrape-btn:disabled { opacity: 0.6; cursor: default; }
+        .scrape-btn.running { background: #e67e22; }
+        .scrape-btn.done { background: #27ae60; }
+        .scrape-btn.error { background: #e74c3c; }
+        #scrape-log {
+            margin-top: 8px;
+            max-height: 120px;
+            overflow-y: auto;
+            font-size: 11px;
+            font-family: monospace;
+            background: #f4f4f4;
+            padding: 5px;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            word-break: break-all;
+            display: none;
+        }
+    </style>
+    <div id="scrape-panel">
+        <strong>Scrape data</strong>
+        <div>
+            <button class="scrape-btn" onclick="startScrape('all')">All</button>
+            <button class="scrape-btn" onclick="startScrape('kateandtoms')">K&amp;T</button>
+            <button class="scrape-btn" onclick="startScrape('airbnb')">Airbnb</button>
+            <button class="scrape-btn" onclick="startScrape('groupaccommodation')">Group Accom.</button>
+            <button class="scrape-btn" id="btn-kill" style="background:#c0392b;display:none;" onclick="killScrape()">Stop</button>
+        </div>
+        <div id="scrape-log"></div>
+    </div>
     <script src="./state.js"></script>
     <script>
         let leafletMap;
@@ -304,6 +359,84 @@
         }
 
         init();
+
+        // ── Scrape panel (localhost only) ──
+        (function() {
+            var isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+            if (!isLocal) return;
+            document.getElementById('scrape-panel').style.display = 'block';
+        })();
+
+        var _scrapeSource = null;
+        var _scrapeEs = null;
+        var _scrapeButtons = {};
+
+        function startScrape(source) {
+            if (_scrapeEs) return; // already running
+            var btns = document.querySelectorAll('.scrape-btn');
+            btns.forEach(function(b) { b.disabled = true; b.classList.remove('running','done','error'); });
+            document.getElementById('btn-kill').style.display = 'inline-block';
+
+            var logEl = document.getElementById('scrape-log');
+            logEl.style.display = 'block';
+            logEl.textContent = '';
+
+            // find the clicked button
+            var clickedBtn = null;
+            btns.forEach(function(b) {
+                if (b.textContent.trim().toLowerCase().replace('&','').replace(';','') ===
+                    (source === 'all' ? 'all' : source === 'kateandtoms' ? 'k&t' : source === 'airbnb' ? 'airbnb' : 'group accom.')) {
+                    clickedBtn = b;
+                }
+            });
+            // simpler: find by onclick attribute
+            btns.forEach(function(b) {
+                if (b.getAttribute('onclick') === "startScrape('" + source + "')") clickedBtn = b;
+            });
+            if (clickedBtn) { clickedBtn.classList.add('running'); clickedBtn.textContent = '⏳ ' + clickedBtn.textContent.replace('⏳ ',''); }
+
+            _scrapeSource = source;
+            _scrapeEs = new EventSource('/scrape?source=' + source);
+
+            _scrapeEs.onmessage = function(e) {
+                var line = JSON.parse(e.data);
+                if (line.startsWith('__done__:')) {
+                    var code = line.split(':')[1];
+                    _scrapeEs.close(); _scrapeEs = null;
+                    btns.forEach(function(b) { b.disabled = false; b.classList.remove('running'); });
+                    document.getElementById('btn-kill').style.display = 'none';
+                    if (clickedBtn) {
+                        var label = clickedBtn.textContent.replace('⏳ ','').replace('✓ ','').replace('✗ ','');
+                        if (code === '0') { clickedBtn.classList.add('done'); clickedBtn.textContent = '✓ ' + label; }
+                        else { clickedBtn.classList.add('error'); clickedBtn.textContent = '✗ ' + label; }
+                    }
+                    logEl.textContent += '\n[Done: exit ' + code + ']';
+                    logEl.scrollTop = logEl.scrollHeight;
+                } else {
+                    logEl.textContent += line + '\n';
+                    logEl.scrollTop = logEl.scrollHeight;
+                }
+            };
+
+            _scrapeEs.onerror = function() {
+                if (_scrapeEs) { _scrapeEs.close(); _scrapeEs = null; }
+                btns.forEach(function(b) { b.disabled = false; b.classList.remove('running'); });
+                document.getElementById('btn-kill').style.display = 'none';
+                if (clickedBtn) {
+                    var label = clickedBtn.textContent.replace('⏳ ','');
+                    clickedBtn.classList.add('error'); clickedBtn.textContent = '✗ ' + label;
+                }
+                logEl.textContent += '\n[Connection error]';
+            };
+        }
+
+        function killScrape() {
+            if (_scrapeEs) { _scrapeEs.close(); _scrapeEs = null; }
+            fetch('/scrape/kill', { method: 'POST' });
+            document.querySelectorAll('.scrape-btn').forEach(function(b) { b.disabled = false; b.classList.remove('running'); });
+            document.getElementById('btn-kill').style.display = 'none';
+            document.getElementById('scrape-log').textContent += '\n[Killed]';
+        }
     </script>
 </body>
 </html>

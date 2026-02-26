@@ -87,6 +87,25 @@
         .note-ta:focus { border-color: #3498db; background: white; outline: none; }
         .note-ta::placeholder { color: #bbb; }
         .saving-indicator { font-size: 10px; color: #27ae60; margin-left: 4px; display: none; }
+        #scrape-panel {
+            padding: 10px 24px; background: #fafafa; border-bottom: 1px solid #ddd;
+            display: none; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 13px;
+        }
+        .scrape-btn {
+            padding: 5px 12px; border: none; border-radius: 4px;
+            cursor: pointer; font-size: 12px; background: #2c3e50; color: white;
+        }
+        .scrape-btn:disabled { opacity: 0.6; cursor: default; }
+        .scrape-btn.running { background: #e67e22; }
+        .scrape-btn.done { background: #27ae60; }
+        .scrape-btn.error { background: #e74c3c; }
+        #scrape-log-wrap {
+            width: 100%; margin-top: 6px;
+            max-height: 120px; overflow-y: auto;
+            font-size: 11px; font-family: monospace;
+            background: #f4f4f4; padding: 5px; border-radius: 4px;
+            white-space: pre-wrap; word-break: break-all; display: none;
+        }
     </style>
 </head>
 <body>
@@ -107,6 +126,15 @@
         <label><input type="checkbox" id="hideDismissed" onchange="applyFilters()" checked> Hide dismissed</label>
         <input type="text" id="search" placeholder="Search name, location..." oninput="applyFilters()">
         <span class="count" id="count"></span>
+    </div>
+    <div id="scrape-panel">
+        <strong>Scrape:</strong>
+        <button class="scrape-btn" onclick="startScrape('all')">All</button>
+        <button class="scrape-btn" onclick="startScrape('kateandtoms')">K&amp;T</button>
+        <button class="scrape-btn" onclick="startScrape('airbnb')">Airbnb</button>
+        <button class="scrape-btn" onclick="startScrape('groupaccommodation')">Group Accom.</button>
+        <button class="scrape-btn" id="btn-kill" style="background:#c0392b;display:none;" onclick="killScrape()">Stop</button>
+        <div id="scrape-log-wrap"></div>
     </div>
     <div class="table-wrap">
         <table>
@@ -319,6 +347,77 @@
                 large.style.top = e.clientY + 'px';
             }
         });
+
+        // ── Scrape panel (localhost only) ──
+        (function() {
+            var isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+            if (!isLocal) return;
+            var panel = document.getElementById('scrape-panel');
+            panel.style.display = 'flex';
+        })();
+
+        var _scrapeEs = null;
+
+        function startScrape(source) {
+            if (_scrapeEs) return;
+            var btns = document.querySelectorAll('.scrape-btn');
+            btns.forEach(function(b) { b.disabled = true; b.classList.remove('running','done','error'); });
+            document.getElementById('btn-kill').style.display = 'inline-block';
+
+            var logEl = document.getElementById('scrape-log-wrap');
+            logEl.style.display = 'block';
+            logEl.textContent = '';
+
+            var clickedBtn = null;
+            btns.forEach(function(b) {
+                if (b.getAttribute('onclick') === "startScrape('" + source + "')") clickedBtn = b;
+            });
+            if (clickedBtn) clickedBtn.classList.add('running');
+
+            _scrapeEs = new EventSource('/scrape?source=' + source);
+
+            _scrapeEs.onmessage = function(e) {
+                var line = JSON.parse(e.data);
+                if (line.startsWith('__done__:')) {
+                    var code = line.split(':')[1];
+                    _scrapeEs.close(); _scrapeEs = null;
+                    btns.forEach(function(b) { b.disabled = false; b.classList.remove('running'); });
+                    document.getElementById('btn-kill').style.display = 'none';
+                    if (clickedBtn) {
+                        if (code === '0') clickedBtn.classList.add('done');
+                        else clickedBtn.classList.add('error');
+                    }
+                    logEl.textContent += '\n[Done: exit ' + code + ']';
+                    logEl.scrollTop = logEl.scrollHeight;
+                    if (code === '0') {
+                        fetch('./properties.json').then(function(r) { return r.json(); }).then(function(data) {
+                            allProperties = data;
+                            displayed = allProperties.slice();
+                            sortAndRender();
+                        });
+                    }
+                } else {
+                    logEl.textContent += line + '\n';
+                    logEl.scrollTop = logEl.scrollHeight;
+                }
+            };
+
+            _scrapeEs.onerror = function() {
+                if (_scrapeEs) { _scrapeEs.close(); _scrapeEs = null; }
+                btns.forEach(function(b) { b.disabled = false; b.classList.remove('running'); });
+                document.getElementById('btn-kill').style.display = 'none';
+                if (clickedBtn) clickedBtn.classList.add('error');
+                logEl.textContent += '\n[Connection error]';
+            };
+        }
+
+        function killScrape() {
+            if (_scrapeEs) { _scrapeEs.close(); _scrapeEs = null; }
+            fetch('/scrape/kill', { method: 'POST' });
+            document.querySelectorAll('.scrape-btn').forEach(function(b) { b.disabled = false; b.classList.remove('running'); });
+            document.getElementById('btn-kill').style.display = 'none';
+            document.getElementById('scrape-log-wrap').textContent += '\n[Killed]';
+        }
 
         // Load data and state in parallel
         Promise.all([

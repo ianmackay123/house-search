@@ -6,7 +6,8 @@
     "test-scrape": "node scrape.js --test",
     "scrape:airbnb": "node scrape.js --only=airbnb",
     "scrape:kateandtoms": "node scrape.js --only=kateandtoms",
-    "scrape:ga": "node scrape.js --only=groupaccommodation"
+    "scrape:ga": "node scrape.js --only=groupaccommodation",
+    "serve": "node server.js"
   },
   "dependencies": {
     "playwright": "^1.52.0"
