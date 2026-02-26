@@ -52,7 +52,7 @@ export async function scrapeSnaptrip(options = {}) {
           games,
           image: entry.images?.[0]?.url || null,
           url: BASE + entry.link,
-          price: null,
+          price: await fetchPrice(entry.id),
           rating: entry.total_reviews > 0 ? `${entry.total_reviews} reviews` : null,
           available_dates: entry.dates,
         };
@@ -141,6 +141,20 @@ async function fetchAllPages(searchId, label, limit) {
   return allProps;
 }
 
+async function fetchPrice(id) {
+  try {
+    const url = `${BASE}/api/v2/properties/${id}/liveprice?checkinDate=2026-09-24&nights=3`;
+    const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
+    if (!res.ok) return null;
+    const data = await res.json();
+    const d = data._data || data;
+    const p = d.discount_price || d.original_price;
+    return p ? `£${Number(p).toLocaleString('en-GB')}` : null;
+  } catch {
+    return null;
+  }
+}
+
 async function fetchGames(link) {
   const games = [];
   try {
@@ -182,6 +196,7 @@ async function fetchGames(link) {
     if (fullText.includes('sauna')) games.push('Sauna');
     if (fullText.includes('tennis court')) games.push('Tennis court');
     if (fullText.includes('games room') || fullText.includes('games/play')) games.push('Games room');
+    if (fullText.includes('fire pit') || fullText.includes('fire-pit') || fullText.includes('firepit')) games.push('Fire pit');
   } catch (err) {
     // Non-fatal: return empty games
   }

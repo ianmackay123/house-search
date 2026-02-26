@@ -140,6 +140,7 @@ async function scrapeProperty(context, entry) {
       if (text.includes('tennis court')) games.push('Tennis court');
       if (text.includes('sauna')) games.push('Sauna');
       if (text.includes('games room')) games.push('Games room');
+      if (text.includes('fire pit') || text.includes('fire-pit') || text.includes('firepit')) games.push('Fire pit');
 
       return { name, lat, lng, location, sleeps, price, imgSrc, games };
     });

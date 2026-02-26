@@ -167,6 +167,7 @@ async function scrapeProperty(context, entry) {
       if (amenText.includes('sauna')) games.push('Sauna');
       if (amenText.includes('tennis court')) games.push('Tennis court');
       if (amenText.includes('games room') || amenText.includes('games/play')) games.push('Games room');
+      if (amenText.includes('fire pit') || amenText.includes('fire-pit') || amenText.includes('firepit')) games.push('Fire pit');
 
       // Main image from page
       const img = document.querySelector('.owl-carousel img, [class*="gallery"] img, [class*="photo"] img, [class*="hero"] img')?.src || null;

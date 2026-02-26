@@ -105,6 +105,7 @@ async function extractListings(page) {
     // Parent objects have base64-encoded IDs like "RGVtYW5kU3RheUxpc3Rpbmc6NDk5ODMwMjY="
     // which decode to "DemandStayListing:49983026" — the number is the room ID.
     const coordsById = {};
+    const priceById = {};
 
     function extractIdFromBase64(b64) {
       try {
@@ -122,6 +123,20 @@ async function extractListings(page) {
         if (coord.latitude && coord.longitude) {
           const numericId = extractIdFromBase64(String(obj.id)) || String(obj.id);
           coordsById[numericId] = { lat: coord.latitude, lng: coord.longitude };
+        }
+      }
+      // Match objects with id + price data
+      if (obj.id) {
+        const numericId = extractIdFromBase64(String(obj.id)) || String(obj.id);
+        if (!priceById[numericId]) {
+          const priceStr = obj.avgPriceFormatted
+            || obj.displayPrice
+            || obj.price?.localizedAmount
+            || obj.pricingQuote?.structuredStayDisplayPrice?.primaryLine?.accessibilityLabel
+            || obj.pricingQuote?.price?.total?.amount;
+          if (priceStr && typeof priceStr === 'string' && /[£$€\d]/.test(priceStr)) {
+            priceById[numericId] = priceStr.trim();
+          }
         }
       }
       if (Array.isArray(obj)) {
@@ -163,7 +178,10 @@ async function extractListings(page) {
       const nameEl = item.querySelector('[id^="title_"]')
         || item.querySelector('div[data-testid="listing-card-title"]')
         || item.querySelector('span[style*="font-weight"]');
-      const priceEl = item.querySelector('span._1y74zjx, ._tyxjp1, [class*="price"]');
+      const priceEl = item.querySelector('[data-testid="price-availability-row"] span')
+        || item.querySelector('span[aria-label*="per night"]')
+        || item.querySelector('span._1y74zjx, ._tyxjp1')
+        || item.querySelector('[class*="price"] span, [class*="Price"] span');
       const imgEl = item.querySelector('img');
 
       const coord = coordsById[listingId];
@@ -171,7 +189,7 @@ async function extractListings(page) {
       results.push({
         name: nameEl?.textContent?.trim() || 'Airbnb Property',
         url,
-        price: priceEl?.textContent?.trim() || null,
+        price: priceById[listingId] || priceEl?.textContent?.trim() || null,
         image: imgEl?.src || null,
         location: 'England',
         lat: coord ? coord.lat : null,

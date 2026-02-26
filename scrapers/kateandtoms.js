@@ -145,6 +145,7 @@ async function scrapeProperty(context, slug) {
       if (widgetTexts.includes('piano') || widgetTexts.includes('grand piano') || widgetTexts.includes('upright piano')) games.push('Piano');
       if (widgetTexts.includes('hot tub')) games.push('Hot tub');
       if (widgetTexts.includes('indoor pool') || widgetTexts.includes('swimming pool')) games.push('Swimming pool');
+      if (widgetTexts.includes('fire pit') || widgetTexts.includes('fire-pit') || widgetTexts.includes('firepit')) games.push('Fire pit');
 
       // Try to extract a more specific location from the og:description or page text
       // K&T pages often mention the village/town in the description
@@ -301,26 +302,15 @@ async function scrapeAvailability(context, slug) {
       if (hasRange1) dates.push('24-27 Sep');
       if (hasRange2) dates.push('25-28 Sep');
 
-      // Try to extract price from the row containing day 24 or 25
+      // Extract any available price from the September table
       let price = null;
-      const rows = sepTable.querySelectorAll('tr');
-      for (const row of rows) {
-        const dayCells = row.querySelectorAll('td');
-        for (const cell of dayCells) {
-          const day = parseInt(cell.textContent.trim(), 10);
-          if (day === 24 || day === 25) {
-            const priceCells = row.querySelectorAll('td.table_price');
-            for (const pc of priceCells) {
-              const text = pc.textContent.trim();
-              if (text && !text.toLowerCase().includes('booked')) {
-                price = text;
-                break;
-              }
-            }
-            break;
-          }
+      const priceCells = sepTable.querySelectorAll('td.table_price');
+      for (const pc of priceCells) {
+        const text = pc.textContent.trim();
+        if (text && !text.toLowerCase().includes('booked') && /£/.test(text)) {
+          price = text;
+          break;
         }
-        if (price) break;
       }
 
       return { available: dates.length > 0, dates, price };

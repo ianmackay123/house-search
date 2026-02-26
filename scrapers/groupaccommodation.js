@@ -179,6 +179,7 @@ async function scrapeProperty(context, url, enrichmentData) {
       if (textLower.includes('darts')) games.push('Darts');
       if (textLower.includes('hot tub')) games.push('Hot tub');
       if (textLower.includes('piano')) games.push('Piano');
+      if (textLower.includes('fire pit') || textLower.includes('fire-pit') || textLower.includes('firepit')) games.push('Fire pit');
 
       // Image
       const image = document.querySelector('meta[property="og:image"]')?.content
