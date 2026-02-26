@@ -134,8 +134,15 @@ async function scrapeProperty(context, url, enrichmentData) {
       // Sleeps from page text
       let sleeps = null;
       const pageText = document.body?.textContent || '';
-      const sleepsMatch = pageText.match(/sleeps?\s*(?:up\s*to\s*)?(\d+)/i);
-      if (sleepsMatch) sleeps = parseInt(sleepsMatch[1], 10);
+      // Try range first (e.g. "sleeps 20-30" or "20 - 30 guests") — take upper bound
+      const sleepsRangeMatch = pageText.match(/sleeps?\s*(\d+)\s*[-–]\s*(\d+)/i)
+        || pageText.match(/(\d+)\s*[-–]\s*(\d+)\s*guests?/i);
+      if (sleepsRangeMatch) {
+        sleeps = Math.max(parseInt(sleepsRangeMatch[1], 10), parseInt(sleepsRangeMatch[2], 10));
+      } else {
+        const sleepsMatch = pageText.match(/sleeps?\s*(?:up\s*to\s*)?(\d+)/i);
+        if (sleepsMatch) sleeps = parseInt(sleepsMatch[1], 10);
+      }
 
       // Location
       let location = '';

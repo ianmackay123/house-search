@@ -24,7 +24,9 @@ export function normalise(raw, source) {
 function parseSleeps(val) {
   if (typeof val === 'number') return val;
   if (typeof val === 'string') {
-    // Handle "22-26" → take lower bound
+    // Handle "22-26" → take upper bound (max capacity)
+    const rangeMatch = val.match(/(\d+)\s*[-–]\s*(\d+)/);
+    if (rangeMatch) return Math.max(parseInt(rangeMatch[1], 10), parseInt(rangeMatch[2], 10));
     const match = val.match(/(\d+)/);
     return match ? parseInt(match[1], 10) : null;
   }
