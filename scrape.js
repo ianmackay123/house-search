@@ -7,13 +7,11 @@ import { scrapeBigHouseExperience } from './scrapers/bighouseexperience.js';
 import { scrapeSnaptrip } from './scrapers/snaptrip.js';
 import { scrapeSykesCottages } from './scrapers/sykescottages.js';
 
-import { readFile as readFileEnv } from 'fs/promises';
-
 const OUTPUT = 'properties.json';
 
 async function loadEnv() {
   try {
-    const raw = await readFileEnv('.env', 'utf-8');
+    const raw = await readFile('.env', 'utf-8');
     return Object.fromEntries(raw.split('\n').filter(l => l.includes('=')).map(l => l.split('=')));
   } catch { return {}; }
 }
