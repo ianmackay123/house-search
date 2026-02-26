@@ -129,7 +129,7 @@
         <strong style="font-size:13px;margin-left:8px;">Filter:</strong>
         <label><input type="checkbox" id="bonusOnly" onchange="saveFilterState();applyFilters()"> Snooker/table tennis only</label>
         <label><input type="checkbox" id="starredOnly" onchange="saveFilterState();applyFilters()"> ★ Starred only</label>
-        <label><input type="checkbox" id="hideDismissed" onchange="applyFilters()" checked> Hide dismissed</label>
+        <label><input type="checkbox" id="hideDismissed" onchange="saveFilterState();applyFilters()" checked> Hide dismissed</label>
         <input type="text" id="search" placeholder="Search name, location..." oninput="applyFilters()">
         <span class="count" id="count"></span>
     </div>
