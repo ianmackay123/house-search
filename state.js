@@ -1,8 +1,8 @@
 // state.js — per-property state: starred, dismissed, notes
 // Synced via GitHub Gist. Credentials loaded from config.js (gitignored).
 
-const _GIST_ID    = (typeof GIST_STATE_ID !== 'undefined') ? GIST_STATE_ID : '';
-const _GIST_TOKEN = (typeof GIST_TOKEN    !== 'undefined') ? GIST_TOKEN    : '';
+const _GIST_ID    = '26ae83db293db97835e7dcda4871d83a';
+const _GIST_TOKEN = (typeof GIST_TOKEN !== 'undefined') ? GIST_TOKEN : '';
 const _GIST_RAW   = 'https://gist.githubusercontent.com/ianmackay123/' + _GIST_ID + '/raw/state.json';
 const _GIST_API   = 'https://api.github.com/gists/' + _GIST_ID;
 
