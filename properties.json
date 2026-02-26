@@ -2,7 +2,7 @@
   {
     "name": "Salen Pier Holidays, Isle of Mull, Scotland",
     "source": "groupaccommodation",
-    "sleeps": 2,
+    "sleeps": 20,
     "location": "Argyll and The Isles Region, Isle Of Mull",
     "lat": 56.4596987,
     "lng": -5.8620604,
@@ -18,35 +18,16 @@
     "available_dates": []
   },
   {
-    "name": "SeaSpace, Porth, Newquay, Cornwall",
-    "source": "groupaccommodation",
-    "sleeps": 2,
-    "location": "Cornwall, Newquay",
-    "lat": 50.4141362,
-    "lng": -5.0805877,
-    "games": [
-      "Pool",
-      "Table football",
-      "Darts",
-      "Hot tub"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://www.groupaccommodation.com/properties/seaspace-porth-newquay-cornwall",
-    "image": "https://www.groupaccommodation.com/wp-content/uploads/2025/01/seaspace-porth-newquay-cornwall-2025-01-20-14-30-15.jpeg",
-    "available_dates": []
-  },
-  {
     "name": "Moss Foot, Sedbergh, Yorkshire Dales",
     "source": "groupaccommodation",
-    "sleeps": 2,
+    "sleeps": 20,
     "location": "Cumbria/Lake District, Sedbergh",
     "lat": 54.6143136,
     "lng": -2.9420899,
     "games": [
       "Pool",
-      "Hot tub"
+      "Hot tub",
+      "Piano"
     ],
     "has_games_bonus": false,
     "price": null,
@@ -58,10 +39,10 @@
   {
     "name": "Willow Tree Farm, Mark, Highbridge, Somerset",
     "source": "groupaccommodation",
-    "sleeps": 2,
+    "sleeps": 20,
     "location": "Somerset, Highbridge",
-    "lat": 51.2400368,
-    "lng": -2.9367093,
+    "lat": 51.2196375,
+    "lng": -2.9760594,
     "games": [
       "Pool",
       "Hot tub"
@@ -74,24 +55,9 @@
     "available_dates": []
   },
   {
-    "name": "The Windsor Townhouse, Bath, Somerset",
-    "source": "groupaccommodation",
-    "sleeps": 2,
-    "location": "Somerset, Bath",
-    "lat": 51.380071,
-    "lng": -2.3847908,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://www.groupaccommodation.com/properties/windsor-townhouse-bath-somerset",
-    "image": "https://www.groupaccommodation.com/wp-content/uploads/imported/Windsor%20-%20Bath-002314Exterior.jpg",
-    "available_dates": []
-  },
-  {
     "name": "Belton House, Wanlockhead, South Lanarkshire, Scotland",
     "source": "groupaccommodation",
-    "sleeps": 2,
+    "sleeps": 20,
     "location": "Greater Glasgow and The Clyde Valley, Lanarkshire, Wanlockhead",
     "lat": 55.5752966,
     "lng": -3.833333,
@@ -110,7 +76,7 @@
   {
     "name": "Dixon Ground Cottages, Coniston, Cumbria",
     "source": "groupaccommodation",
-    "sleeps": 2,
+    "sleeps": 20,
     "location": "Cumbria/Lake District, Coniston",
     "lat": 54.6143136,
     "lng": -2.9420899,
@@ -127,7 +93,7 @@
   {
     "name": "The Green House, Cromer, Norfolk",
     "source": "groupaccommodation",
-    "sleeps": 2,
+    "sleeps": 20,
     "location": "East Anglia, Norfolk, Cromer",
     "lat": 52.9317142,
     "lng": 1.300873,
@@ -145,7 +111,7 @@
   {
     "name": "Coverack Cottages, Helston, Cornwall",
     "source": "groupaccommodation",
-    "sleeps": 2,
+    "sleeps": 20,
     "location": "Cornwall, Helston",
     "lat": 50.106685,
     "lng": -5.228341,
@@ -162,7 +128,7 @@
   {
     "name": "East Trenean Farm Holiday Cottages, Looe, Cornwall",
     "source": "groupaccommodation",
-    "sleeps": 2,
+    "sleeps": 20,
     "location": "Cornwall, Looe",
     "lat": 50.3559478,
     "lng": -4.4548879,
@@ -180,7 +146,7 @@
   {
     "name": "Crag Hall, Wildboarclough, Cheshire, Peak District",
     "source": "groupaccommodation",
-    "sleeps": 2,
+    "sleeps": 20,
     "location": "Cheshire, Macclesfield",
     "lat": 53.2656478,
     "lng": -2.1535029,
@@ -199,7 +165,7 @@
   {
     "name": "Highcliffe Manor, Flamborough, Bridlington, Yorkshire",
     "source": "groupaccommodation",
-    "sleeps": 2,
+    "sleeps": 20,
     "location": "Flamborough",
     "lat": 54.1218991,
     "lng": -0.1139836,
@@ -207,7 +173,8 @@
       "Snooker",
       "Pool",
       "Table football",
-      "Hot tub"
+      "Hot tub",
+      "Piano"
     ],
     "has_games_bonus": true,
     "price": null,
@@ -219,7 +186,7 @@
   {
     "name": "Plas Gwylan, Rhosneigr, Isle of Anglesey",
     "source": "groupaccommodation",
-    "sleeps": 2,
+    "sleeps": 20,
     "location": "North Wales Snowdonia, Anglesey, Rhosneigr",
     "lat": 53.2782258,
     "lng": -4.3319194,
@@ -239,7 +206,7 @@
   {
     "name": "No. 30, Whitby, North Yorkshire",
     "source": "groupaccommodation",
-    "sleeps": 2,
+    "sleeps": 20,
     "location": "Whitby",
     "lat": 54.4874141,
     "lng": -0.6155111,
@@ -251,1248 +218,6 @@
     "rating": null,
     "url": "https://www.groupaccommodation.com/properties/no-30-whitby-north-yorkshire",
     "image": "https://www.groupaccommodation.com/wp-content/uploads/imported/08BF7493-D7FF-4158-B217-99E18C8C278D.jpeg",
-    "available_dates": []
-  },
-  {
-    "name": "Coach House Cottages",
-    "source": "kateandtoms",
-    "sleeps": 25,
-    "location": "Kemerton, Cotswolds",
-    "lat": 52.0347476,
-    "lng": -2.0777021,
-    "games": [
-      "Table tennis",
-      "Pool",
-      "Hot tub"
-    ],
-    "has_games_bonus": true,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/coach-house-cottages/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2023/02/UpperCourt-67-scaled.jpeg",
-    "available_dates": []
-  },
-  {
-    "name": "Stinchcombe Hill House",
-    "source": "kateandtoms",
-    "sleeps": 22,
-    "location": "Cotswolds",
-    "lat": 51.7489426,
-    "lng": -0.2303335,
-    "games": [
-      "Cinema"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/stinchcombe-hill-house/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2023/05/NJY_DSC4016-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Severn Bank House",
-    "source": "kateandtoms",
-    "sleeps": 24,
-    "location": "Dean, Gloucestershire",
-    "lat": 51.8239463,
-    "lng": -2.4981033,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/severn-bank-house/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2015/07/Severn-Bank-House1-1.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Gladwin Hall",
-    "source": "kateandtoms",
-    "sleeps": 24,
-    "location": "Hall, Cheltenham",
-    "lat": 51.8971284,
-    "lng": -2.0777875,
-    "games": [
-      "Table football",
-      "Air hockey",
-      "Cinema",
-      "Hot tub"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/gladwin-hall/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/Gladwin-Hall1.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Cardynham House",
-    "source": "kateandtoms",
-    "sleeps": 24,
-    "location": "Painswick, Cotswolds",
-    "lat": 51.7857347,
-    "lng": -2.1947188,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/cardynham-house/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2022/08/Painswick-House-6-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "The Hideout",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "Gloucestershire, South Cotswolds",
-    "lat": 51.7643786,
-    "lng": -2.1880662,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/the-hideout/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/The-Hideout93.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Cambrian Retreat",
-    "source": "kateandtoms",
-    "sleeps": 24,
-    "location": "Aberystwyth, Aberystwyth, Wales",
-    "lat": 52.4138938,
-    "lng": -4.0815468,
-    "games": [
-      "Hot tub"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/cambrian-retreat/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/DSC_0424-copy-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Courtyard Barns",
-    "source": "kateandtoms",
-    "sleeps": 24,
-    "location": "Ferryside, Wales",
-    "lat": 51.7671929,
-    "lng": -4.3685183,
-    "games": [
-      "Darts",
-      "Hot tub",
-      "Swimming pool"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/courtyard-barns/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2021/07/Courtyard-Barn-External-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Castle View Country House",
-    "source": "kateandtoms",
-    "sleeps": 26,
-    "location": "Egyptian, North Wales",
-    "lat": 51.5235814,
-    "lng": -0.1329767,
-    "games": [
-      "Pool",
-      "Hot tub"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/castle-view-country-house/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2023/11/IMG_4686-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "River Hall",
-    "source": "kateandtoms",
-    "sleeps": 22,
-    "location": "North Devon, Bideford, North Devon",
-    "lat": 51.0488865,
-    "lng": -4.1793683,
-    "games": [
-      "Table tennis",
-      "Pool"
-    ],
-    "has_games_bonus": true,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/river-hall/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2013/05/River-Hall51.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Taw Valley House",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "Barnstaple, North Devon",
-    "lat": 51.0804057,
-    "lng": -4.0600467,
-    "games": [
-      "Hot tub"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/taw-valley-house/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2015/10/Taw-Valley-House36.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "The Grand Rectory",
-    "source": "kateandtoms",
-    "sleeps": 22,
-    "location": "Symondsbury, Dorset",
-    "lat": 50.7422598,
-    "lng": -2.7875554,
-    "games": [
-      "Pool"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/the-grand-rectory/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2022/07/NJY_DSC8877-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "The Mendips",
-    "source": "kateandtoms",
-    "sleeps": 23,
-    "location": "Berrow, Somerset",
-    "lat": 51.2717518,
-    "lng": -3.0112161,
-    "games": [
-      "Hot tub"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/the-mendips/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/IMG_5469-scaled-e1760004834427.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Eastwood Observatory",
-    "source": "kateandtoms",
-    "sleeps": 24,
-    "location": "Greenwich, East Sussex",
-    "lat": 50.794747,
-    "lng": -0.0007928,
-    "games": [
-      "Cinema",
-      "Hot tub"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/eastwood-observatory/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/2022-06-11-Eastwood-House-Ed-Ovenden-111-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Polpier & Penpol",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "Cornwall, Mevagissey, Cornwall",
-    "lat": 50.2695111,
-    "lng": -4.7871365,
-    "games": [
-      "Table tennis",
-      "Snooker",
-      "Pool"
-    ],
-    "has_games_bonus": true,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/polpier-and-penpol/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2015/04/Polpier.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Sussex Safari",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "Sussex Safari, Sussex",
-    "lat": 50.9445139,
-    "lng": -0.0622673,
-    "games": [
-      "Hot tub"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/sussex-safari/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2023/05/Silhouette-1.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Padstow Manor House",
-    "source": "kateandtoms",
-    "sleeps": 26,
-    "location": "St Issey, Cornwall",
-    "lat": 50.5095487,
-    "lng": -4.9214167,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/padstow-manor-house/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/ARC-Padstow-63-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Marlborough Manor",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "Essex, Essex",
-    "lat": 51.8773639,
-    "lng": 0.9498751,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/marlborough-manor/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2022/12/IMG_1336-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Tregulland Cottage and Barn",
-    "source": "kateandtoms",
-    "sleeps": 22,
-    "location": "Bodmin Moor, Cornwall",
-    "lat": 50.5952675,
-    "lng": -4.4767965,
-    "games": [
-      "Hot tub"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/tregulland-cottage-barn/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2012/10/Treg-drone-Cott-barn-Bsymes24-scaled-e1733401252751.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "The Curved House",
-    "source": "kateandtoms",
-    "sleeps": 24,
-    "location": "Hollywood, Lincolnshire",
-    "lat": 52.6771581,
-    "lng": -0.1693392,
-    "games": [
-      "Table tennis",
-      "Games console",
-      "Cinema",
-      "Hot tub"
-    ],
-    "has_games_bonus": true,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/the-curved-house/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2015/05/Curved-House37.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "The School of Fun",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "Fun, Yelverton, Devon",
-    "lat": 55.2035285,
-    "lng": -6.6539514,
-    "games": [
-      "Hot tub"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/the-school-of-fun/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2022/12/The-Old-School-House-01242023_114902-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Springham Manor",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "Dorset, Dorset",
-    "lat": 50.7951198,
-    "lng": -2.5993665,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/springham-manor/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2025/02/DSC1720-scaled-e1739792394336.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Captains House",
-    "source": "kateandtoms",
-    "sleeps": 22,
-    "location": "London, Essex",
-    "lat": 51.8869652,
-    "lng": 0.2441929,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/captains-house/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2019/11/Captains-House22.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Waverunner",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "Waverunner, West Sussex",
-    "lat": 50.9445845,
-    "lng": -0.5278477,
-    "games": [
-      "Cinema"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/waverunner/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2025/12/Sea-Winds-190-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Deri Manor",
-    "source": "kateandtoms",
-    "sleeps": 21,
-    "location": "Parliament, Pembrokeshire, Wales",
-    "lat": 51.4993871,
-    "lng": -0.1244812,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/deri-manor/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2020/12/Deri-Manor-Lake-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Torrs Park House",
-    "source": "kateandtoms",
-    "sleeps": 21,
-    "location": "Seadog Catering, Ilfracombe, Devon",
-    "lat": 51.2076674,
-    "lng": -4.1254662,
-    "games": [
-      "Pool",
-      "Table football",
-      "Swimming pool"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/torrs-park-house/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2024/05/NJY_DSC0450-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Linhay House",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "Instagram, Devon",
-    "lat": 51.8031205,
-    "lng": -4.9678793,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/linhay-house/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2024/05/house-copy-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Cark Manor",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "English, Lake District",
-    "lat": 54.4785305,
-    "lng": -3.0655331,
-    "games": [
-      "Cinema"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/cark-manor/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2021/06/Cark-Manor-at-Night-1-1-copy.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Southshore Place",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "Palmerston Road, Portsmouth, Hampshire",
-    "lat": 51.6080404,
-    "lng": -0.114504,
-    "games": [
-      "Hot tub"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/southshore-place/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/Camelia-House3732_3_4_5_6-Edit.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Osea Manor",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "Block Island, Essex",
-    "lat": 51.7704679,
-    "lng": 0.4646698,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/osea-manor/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/Osea-Island28.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Marine View",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "Lundy Island, Ilfracombe, Devon",
-    "lat": 51.1804917,
-    "lng": -4.6686878,
-    "games": [
-      "Darts"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/marine-view/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2022/03/DJI_0340-HDR-copy-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Bryn Bae Estate",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "North Wales, Anglesey, Wales",
-    "lat": 53.216514,
-    "lng": -4.1863832,
-    "games": [
-      "Hot tub"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/bryn-bae-estate/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2025/10/House-View-5-Landscape-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Honeybridge Estate",
-    "source": "kateandtoms",
-    "sleeps": 25,
-    "location": "Sussex, West Sussex",
-    "lat": 50.9445845,
-    "lng": -0.5278477,
-    "games": [
-      "Snooker",
-      "Pool",
-      "Table football"
-    ],
-    "has_games_bonus": true,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/honeybridge-estate/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/The-Art-House2.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Westmorland Lodge",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "Cumbria",
-    "lat": 54.6143136,
-    "lng": -2.9420899,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/westmorland-lodge/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2024/04/Low-Barn-Farm-113-e1712916456930.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Winchester Manor House",
-    "source": "kateandtoms",
-    "sleeps": 26,
-    "location": "Winchester",
-    "lat": 51.0612766,
-    "lng": -1.3131692,
-    "games": [
-      "Table tennis",
-      "Pool",
-      "Swimming pool"
-    ],
-    "has_games_bonus": true,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/winchester-manor-house/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2023/08/Lead-image-final.jpeg",
-    "available_dates": []
-  },
-  {
-    "name": "Bright Hall",
-    "source": "kateandtoms",
-    "sleeps": 22,
-    "location": "Herefordshire",
-    "lat": 52.083333,
-    "lng": -2.75,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/bright-hall/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2023/04/Barton-Court_5503-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Newcross Hall Estate",
-    "source": "kateandtoms",
-    "sleeps": 24,
-    "location": "The Lakes, Lake District",
-    "lat": 54.4785305,
-    "lng": -3.0655331,
-    "games": [
-      "Snooker"
-    ],
-    "has_games_bonus": true,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/newcross-hall-estate/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2014/05/Melmerby-Hall-18.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "The Farmstead",
-    "source": "kateandtoms",
-    "sleeps": 28,
-    "location": "The Farmstead, Malton, Yorkshire",
-    "lat": 52.3962866,
-    "lng": -1.4725269,
-    "games": [
-      "Table tennis",
-      "Darts"
-    ],
-    "has_games_bonus": true,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/the-farmstead/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2024/04/img0001High_Res-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Hilltop Hall",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "North Wales, North Wales",
-    "lat": 53.2719012,
-    "lng": -3.3201219,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/hilltop-hall/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2015/08/Hilltop-Hall-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Lady Rothschild Dairy",
-    "source": "kateandtoms",
-    "sleeps": 25,
-    "location": "Germany, Northamptonshire",
-    "lat": 52.4813269,
-    "lng": -1.9054517,
-    "games": [
-      "Table tennis"
-    ],
-    "has_games_bonus": true,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/lady-rothschild-dairy/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2024/03/Lady-Rothschild-Dairy-KT-7-scaled-e1709646693884.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Snowdonia House",
-    "source": "kateandtoms",
-    "sleeps": 24,
-    "location": "North Wales, Wales",
-    "lat": 52.9487856,
-    "lng": -3.7601273,
-    "games": [
-      "Table tennis",
-      "Pool",
-      "Table football",
-      "Games console",
-      "Cinema"
-    ],
-    "has_games_bonus": true,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/snowdonia-house/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2025/03/Bryn_Tyrch_Drone_2024_007-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Limebrook Hall",
-    "source": "kateandtoms",
-    "sleeps": 26,
-    "location": "Herefordshire, Herefordshire",
-    "lat": 52.1102984,
-    "lng": -2.7292211,
-    "games": [
-      "Pool",
-      "Table football"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/limebrook-hall/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2024/08/NJY_DSC2193-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "The Old Mill, Hayloft and Byre",
-    "source": "kateandtoms",
-    "sleeps": 24,
-    "location": "Herefordshire",
-    "lat": 52.083333,
-    "lng": -2.75,
-    "games": [
-      "Cinema",
-      "Hot tub"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/the-old-mill/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2014/08/LR_21.05.24_157.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Pennine Hills Manor",
-    "source": "kateandtoms",
-    "sleeps": 25,
-    "location": "Barnard Castle, Teesdale, County Durham",
-    "lat": 54.5448091,
-    "lng": -1.924642,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/pennine-hills-manor/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/Pennine-Hills-Manor38-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Beachley House",
-    "source": "kateandtoms",
-    "sleeps": 22,
-    "location": "Chepstow Racecourse, Chepstow",
-    "lat": 51.6409342,
-    "lng": -2.6766946,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/beachley-house/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/Drone_1.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "High Peak Manor",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "Peak District",
-    "lat": 53.3158274,
-    "lng": -1.727034,
-    "games": [
-      "Table tennis",
-      "Pool",
-      "Table football",
-      "Swimming pool"
-    ],
-    "has_games_bonus": true,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/high-peak-manor/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2024/11/Z7B_04611582024-copy-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Abbeyfield Hall",
-    "source": "kateandtoms",
-    "sleeps": 26,
-    "location": "Forbidden Corner, Yorkshire",
-    "lat": 54.2751322,
-    "lng": -1.8579386,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/abbeyfield-hall/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2026/01/Abbeyfield-Hall.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Wisteria Farmhouse",
-    "source": "kateandtoms",
-    "sleeps": 21,
-    "location": "May, Bradford-on-Avon, Wiltshire",
-    "lat": 56.4690438,
-    "lng": -3.016993,
-    "games": [
-      "Pool"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/wisteria-farmhouse/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2023/07/Farmhouse-Pool-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Howard Hall",
-    "source": "kateandtoms",
-    "sleeps": 26,
-    "location": "Yorkshire",
-    "lat": 53.9825271,
-    "lng": -1.38525,
-    "games": [
-      "Snooker",
-      "Pool"
-    ],
-    "has_games_bonus": true,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/howard-hall/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/Langton-Hall-08_Fake-windows-removed-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Lambourn House",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "Berkshire",
-    "lat": 51.4534889,
-    "lng": -1.031873,
-    "games": [
-      "Hot tub"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/lambourn-house/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2012/12/Big-House-Retreat-4.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Yellowstone",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "Wales",
-    "lat": 52.2928116,
-    "lng": -3.73893,
-    "games": [
-      "Hot tub"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/yellowstone/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2025/09/Z7A_6313-copy-scaled-e1757336896885.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Whitelake Hall",
-    "source": "kateandtoms",
-    "sleeps": 24,
-    "location": "Windermere, Lake District",
-    "lat": 54.3477641,
-    "lng": -2.9365786,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/whitelake-hall/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/LGH-LL-Aerial-Front-House-F-copy-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Russet Hall",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "April, Taunton",
-    "lat": 50.9970512,
-    "lng": -3.1244207,
-    "games": [
-      "Table tennis",
-      "Pool",
-      "Darts"
-    ],
-    "has_games_bonus": true,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/russet-hall/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2024/12/HH_1023-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "The Dales House",
-    "source": "kateandtoms",
-    "sleeps": 26,
-    "location": "Ravenstonedale, Cumbria",
-    "lat": 54.4528773,
-    "lng": -2.4885941,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/the-dales-house/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2024/04/2022-09-13-Elm-Lodge-38-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "The Georgian House",
-    "source": "kateandtoms",
-    "sleeps": 23,
-    "location": "Georgian, Wantage, Oxfordshire",
-    "lat": 51.588783,
-    "lng": -2.9602152,
-    "games": [
-      "Swimming pool"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/the-georgian-house/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2014/03/Swimming-Pool-at-Ardington-House.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Carmarthen Manor",
-    "source": "kateandtoms",
-    "sleeps": 24,
-    "location": "Kate, Wales",
-    "lat": 51.4594538,
-    "lng": -3.6366907,
-    "games": [
-      "Table tennis"
-    ],
-    "has_games_bonus": true,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/carmarthen-manor/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2024/12/EditedTy-Penbryn-drone_tinmanphotography_4.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Birkmere Hall",
-    "source": "kateandtoms",
-    "sleeps": 24,
-    "location": "Lake District",
-    "lat": 54.4785305,
-    "lng": -3.0655331,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/birkmere-hall/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2014/07/blencowe-hall-night-shot-parties-weddings-available-holiday-rental-large-groups-lake-district-cumbria-1.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Chalke Valley House",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "Cannes, Wiltshire",
-    "lat": 53.6014538,
-    "lng": -0.6777688,
-    "games": [
-      "Pool"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/chalke-valley-house/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/Chalke-Valley2-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Goodnestone Park",
-    "source": "kateandtoms",
-    "sleeps": 24,
-    "location": "Kent, Goodnestone, Kent",
-    "lat": 51.2070749,
-    "lng": 0.7210362,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/goodnestone-park/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/Goodnestone-Exterior.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "The Flower Barn",
-    "source": "kateandtoms",
-    "sleeps": 22,
-    "location": "Anna, Worcestershire",
-    "lat": 51.4527322,
-    "lng": 0.0519912,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/the-flower-barn/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2021/11/Sandal-Lodge76259The-Flower-Barn-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Avebury Barns",
-    "source": "kateandtoms",
-    "sleeps": 22,
-    "location": "Devizes, Wiltshire",
-    "lat": 51.3525027,
-    "lng": -1.9958302,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/avebury-barns/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2022/04/Silbury-Hill-244.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Beacon Hall",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "Herefordshire",
-    "lat": 52.083333,
-    "lng": -2.75,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/beacon-hall/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/WG_4743-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Lady Rothschild Stables",
-    "source": "kateandtoms",
-    "sleeps": 24,
-    "location": "Trendall, Northamptonshire",
-    "lat": 52.6579818,
-    "lng": 1.3341453,
-    "games": [
-      "Table tennis"
-    ],
-    "has_games_bonus": true,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/lady-rothschild-stables/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2024/03/Lady-Rothschild-Stables-4-e1709297812320.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Station Barn",
-    "source": "kateandtoms",
-    "sleeps": 22,
-    "location": "North Yorkshire, Yorkshire",
-    "lat": 54.0915928,
-    "lng": -1.5359113,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/station-barn/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/Bog-Hall-Barn_72-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Borders Retreat",
-    "source": "kateandtoms",
-    "sleeps": 21,
-    "location": "Edwardian, Cumbria",
-    "lat": 51.5240299,
-    "lng": -0.1380166,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/borders-retreat/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2024/10/Clift_Hill_2022_076-copy-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "The Wholehouse",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "The Granary, Brecon, Wales",
-    "lat": 51.4515286,
-    "lng": -2.5930383,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/the-whole-house/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2021/03/Wholehouse6.3.21-1-2.png",
-    "available_dates": []
-  },
-  {
-    "name": "Minton Hall",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "Chester, Cheshire",
-    "lat": 53.1908873,
-    "lng": -2.8908955,
-    "games": [
-      "Pool",
-      "Hot tub",
-      "Swimming pool"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/minton-hall/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2021/05/Windle-Hill84603-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "The Grotto",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "Cumbria, Penrith, Lake District",
-    "lat": 54.6143136,
-    "lng": -2.9420899,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/the-grotto/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2016/03/grotto.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Lea Marston Farmhouse",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "Cruft, Warwickshire",
-    "lat": 52.3213064,
-    "lng": -1.5536906,
-    "games": [
-      "Pool",
-      "Hot tub"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/lea-marston-farmhouse/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/BF_1138-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Rosemere Manor",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "Dartmoor, Devon",
-    "lat": 50.5657349,
-    "lng": -3.9009713,
-    "games": [
-      "Table tennis",
-      "Snooker"
-    ],
-    "has_games_bonus": true,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/rosemere-manor/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2025/01/home-photo.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Under The Vines",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "Chippenham, Near Bath",
-    "lat": 51.4587621,
-    "lng": -2.1159032,
-    "games": [
-      "Hot tub"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/under-the-vines/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/Exterior_1-e1670412702327.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Rokeby Hall",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "Yorkshire",
-    "lat": 53.9825271,
-    "lng": -1.38525,
-    "games": [],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/rokeby-hall/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2026/01/wildswimming-scaled-e1769012945286.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Boho Barnhouse",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "London, Somerset",
-    "lat": 51.2240606,
-    "lng": -2.5342799,
-    "games": [
-      "Pool",
-      "Swimming pool"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/boho-barnhouse/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2024/07/IMG_1956-1-scaled.jpg",
-    "available_dates": []
-  },
-  {
-    "name": "Halula Halo",
-    "source": "kateandtoms",
-    "sleeps": 20,
-    "location": "Somerset, Somerset",
-    "lat": 50.9843053,
-    "lng": -2.7761562,
-    "games": [
-      "Pool",
-      "Hot tub"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://kateandtoms.com/houses/halula-halo/",
-    "image": "https://kateandtoms.com/wp-content/uploads/2024/09/Halula-Halo-scaled.jpg",
     "available_dates": []
   },
   {
@@ -1532,9 +257,9 @@
       "Pool table",
       "Table tennis",
       "Games room",
-      "Gym",
       "Bbq",
-      "Fireplace"
+      "Fireplace",
+      "Piano"
     ],
     "has_games_bonus": true,
     "price": null,
@@ -1586,9 +311,11 @@
     "games": [
       "Hot tub",
       "Jacuzzi",
+      "Gym",
       "Bbq",
       "Fire pit",
-      "Fireplace"
+      "Fireplace",
+      "Piano"
     ],
     "has_games_bonus": false,
     "price": null,
@@ -1610,11 +337,11 @@
     "games": [
       "Pool",
       "Games room",
-      "Gym",
       "Bbq",
       "Barbecue",
       "Fire pit",
-      "Fireplace"
+      "Fireplace",
+      "Piano"
     ],
     "has_games_bonus": false,
     "price": null,
@@ -1640,7 +367,8 @@
       "Gym",
       "Bbq",
       "Barbecue",
-      "Fireplace"
+      "Fireplace",
+      "Piano"
     ],
     "has_games_bonus": false,
     "price": null,
@@ -1650,6 +378,33 @@
     "available_dates": [
       "24-27 Sep",
       "25-28 Sep"
+    ]
+  },
+  {
+    "name": "Alward House by Group Retreats",
+    "source": "airbnb",
+    "sleeps": 20,
+    "location": "England",
+    "lat": 51.04722,
+    "lng": -1.74893,
+    "games": [
+      "Pool",
+      "Hot tub",
+      "Jacuzzi",
+      "Table tennis",
+      "Tennis court",
+      "Bbq",
+      "Barbecue",
+      "Fireplace",
+      "Piano"
+    ],
+    "has_games_bonus": true,
+    "price": null,
+    "rating": null,
+    "url": "https://www.airbnb.co.uk/rooms/1084701398483616777",
+    "image": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1084701398483616777/original/ad4903ce-4427-4832-bdd7-a551bbeda498.jpeg",
+    "available_dates": [
+      "24-27 Sep"
     ]
   },
   {
@@ -1680,33 +435,6 @@
     ]
   },
   {
-    "name": "Alward House by Group Retreats",
-    "source": "airbnb",
-    "sleeps": 20,
-    "location": "England",
-    "lat": 51.04722,
-    "lng": -1.74893,
-    "games": [
-      "Pool",
-      "Hot tub",
-      "Jacuzzi",
-      "Table tennis",
-      "Tennis court",
-      "Gym",
-      "Bbq",
-      "Barbecue",
-      "Fireplace"
-    ],
-    "has_games_bonus": true,
-    "price": null,
-    "rating": null,
-    "url": "https://www.airbnb.co.uk/rooms/1084701398483616777",
-    "image": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1084701398483616777/original/ad4903ce-4427-4832-bdd7-a551bbeda498.jpeg",
-    "available_dates": [
-      "24-27 Sep"
-    ]
-  },
-  {
     "name": "The Rectory | Stunning 9 Bedroom Cotswold Mansion",
     "source": "airbnb",
     "sleeps": 22,
@@ -1718,6 +446,7 @@
       "Jacuzzi",
       "Sauna",
       "Table tennis",
+      "Tennis court",
       "Cinema",
       "Gym",
       "Bbq",
@@ -1775,7 +504,8 @@
       "Bbq",
       "Barbecue",
       "Fire pit",
-      "Fireplace"
+      "Fireplace",
+      "Piano"
     ],
     "has_games_bonus": false,
     "price": null,
@@ -1785,6 +515,56 @@
     "available_dates": [
       "24-27 Sep",
       "25-28 Sep"
+    ]
+  },
+  {
+    "name": "Sheldon Manor",
+    "source": "airbnb",
+    "sleeps": 20,
+    "location": "England",
+    "lat": 51.46721,
+    "lng": -2.16551,
+    "games": [
+      "Gym",
+      "Bbq",
+      "Barbecue",
+      "Open fire",
+      "Fireplace"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://www.airbnb.co.uk/rooms/22966811",
+    "image": "https://a0.muscache.com/im/pictures/airflow/Hosting-22966811/original/582e1813-bd9b-4fa6-adbd-4f49179ae72a.jpg",
+    "available_dates": [
+      "24-27 Sep"
+    ]
+  },
+  {
+    "name": "Cotswold Villa Retreat With Heated Pool",
+    "source": "airbnb",
+    "sleeps": 20,
+    "location": "England",
+    "lat": 51.3668,
+    "lng": -2.0381,
+    "games": [
+      "Pool",
+      "Jacuzzi",
+      "Sauna",
+      "Table tennis",
+      "Games room",
+      "Gym",
+      "Bbq",
+      "Barbecue",
+      "Fireplace"
+    ],
+    "has_games_bonus": true,
+    "price": null,
+    "rating": null,
+    "url": "https://www.airbnb.co.uk/rooms/1141324836560555695",
+    "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTE0MTMyNDgzNjU2MDU1NTY5NQ%3D%3D/original/529523a2-7263-499c-94b5-0cd528eb4b13.jpeg",
+    "available_dates": [
+      "24-27 Sep"
     ]
   },
   {
@@ -1807,54 +587,6 @@
     "rating": null,
     "url": "https://www.airbnb.co.uk/rooms/10821199",
     "image": "https://a0.muscache.com/im/pictures/miso/Hosting-10821199/original/3d590c8d-85f0-424d-9452-4c424e1d20a7.jpeg",
-    "available_dates": [
-      "24-27 Sep"
-    ]
-  },
-  {
-    "name": "Sheldon Manor",
-    "source": "airbnb",
-    "sleeps": 20,
-    "location": "England",
-    "lat": 51.46721,
-    "lng": -2.16551,
-    "games": [
-      "Bbq",
-      "Barbecue",
-      "Open fire",
-      "Fireplace"
-    ],
-    "has_games_bonus": false,
-    "price": null,
-    "rating": null,
-    "url": "https://www.airbnb.co.uk/rooms/22966811",
-    "image": "https://a0.muscache.com/im/pictures/airflow/Hosting-22966811/original/582e1813-bd9b-4fa6-adbd-4f49179ae72a.jpg",
-    "available_dates": [
-      "24-27 Sep"
-    ]
-  },
-  {
-    "name": "Viewpoint Lodge, Much Wenlock, Countryside Hot Tub",
-    "source": "airbnb",
-    "sleeps": 20,
-    "location": "England",
-    "lat": 52.58116832319171,
-    "lng": -2.595078585390969,
-    "games": [
-      "Pool",
-      "Hot tub",
-      "Jacuzzi",
-      "Pool table",
-      "Table tennis",
-      "Gym",
-      "Bbq",
-      "Fireplace"
-    ],
-    "has_games_bonus": true,
-    "price": null,
-    "rating": null,
-    "url": "https://www.airbnb.co.uk/rooms/1391476990754244064",
-    "image": "https://a0.muscache.com/im/pictures/miso/Hosting-1391476990754244064/original/755eb85d-b8df-462a-8165-e66b574509be.jpeg",
     "available_dates": [
       "24-27 Sep"
     ]
@@ -1890,11 +622,11 @@
       "Snooker",
       "Games room",
       "Cinema",
-      "Gym",
       "Bbq",
       "Barbecue",
       "Open fire",
-      "Fireplace"
+      "Fireplace",
+      "Piano"
     ],
     "has_games_bonus": true,
     "price": null,
@@ -1904,5 +636,940 @@
     "available_dates": [
       "25-28 Sep"
     ]
+  },
+  {
+    "name": "Coach House Cottages",
+    "source": "kateandtoms",
+    "sleeps": 25,
+    "location": "Kemerton, Cotswolds",
+    "lat": 52.0284587,
+    "lng": -2.0815758,
+    "games": [
+      "Table tennis",
+      "Pool",
+      "Hot tub"
+    ],
+    "has_games_bonus": true,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/coach-house-cottages/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2023/02/UpperCourt-67-scaled.jpeg",
+    "available_dates": []
+  },
+  {
+    "name": "Stinchcombe Hill House",
+    "source": "kateandtoms",
+    "sleeps": 22,
+    "location": "Cotswolds",
+    "lat": 51.681277,
+    "lng": -2.3670681,
+    "games": [
+      "Cinema"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/stinchcombe-hill-house/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2023/05/NJY_DSC4016-scaled.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Severn Bank House",
+    "source": "kateandtoms",
+    "sleeps": 24,
+    "location": "Dean, Gloucestershire",
+    "lat": 51.8377169,
+    "lng": -2.357178699999963,
+    "games": [],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/severn-bank-house/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2015/07/Severn-Bank-House1-1.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Gladwin Hall",
+    "source": "kateandtoms",
+    "sleeps": 24,
+    "location": "Hall, Cheltenham",
+    "lat": 51.8515767,
+    "lng": -2.0529300000000603,
+    "games": [
+      "Table football",
+      "Air hockey",
+      "Cinema",
+      "Hot tub"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/gladwin-hall/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/Gladwin-Hall1.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Cardynham House",
+    "source": "kateandtoms",
+    "sleeps": 24,
+    "location": "Painswick, Cotswolds",
+    "lat": 51.7855001,
+    "lng": -2.193265,
+    "games": [],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/cardynham-house/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2022/08/Painswick-House-6-scaled.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "The Hideout",
+    "source": "kateandtoms",
+    "sleeps": 20,
+    "location": "Gloucestershire, South Cotswolds",
+    "lat": 51.5883481,
+    "lng": -2.4396516,
+    "games": [],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/the-hideout/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/The-Hideout93.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Cambrian Retreat",
+    "source": "kateandtoms",
+    "sleeps": 24,
+    "location": "Aberystwyth, Aberystwyth, Wales",
+    "lat": 52.3726289,
+    "lng": -3.8677683999999317,
+    "games": [
+      "Hot tub"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/cambrian-retreat/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/DSC_0424-copy-scaled.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Courtyard Barns",
+    "source": "kateandtoms",
+    "sleeps": 24,
+    "location": "Ferryside, Wales",
+    "lat": 51.7515779,
+    "lng": -4.3586057,
+    "games": [
+      "Darts",
+      "Hot tub",
+      "Swimming pool"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/courtyard-barns/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2021/07/Courtyard-Barn-External-scaled.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Castle View Country House",
+    "source": "kateandtoms",
+    "sleeps": 26,
+    "location": "Egyptian, North Wales",
+    "lat": 53.2779237,
+    "lng": -3.8693836,
+    "games": [
+      "Pool",
+      "Hot tub"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/castle-view-country-house/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2023/11/IMG_4686-scaled.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "River Hall",
+    "source": "kateandtoms",
+    "sleeps": 22,
+    "location": "North Devon, Bideford, North Devon",
+    "lat": 50.99869589999999,
+    "lng": -4.201843100000019,
+    "games": [
+      "Table tennis",
+      "Pool"
+    ],
+    "has_games_bonus": true,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/river-hall/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2013/05/River-Hall51.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Taw Valley House",
+    "source": "kateandtoms",
+    "sleeps": 20,
+    "location": "Barnstaple, North Devon",
+    "lat": 51.06488700000001,
+    "lng": -4.031156099999976,
+    "games": [
+      "Hot tub"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/taw-valley-house/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2015/10/Taw-Valley-House36.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "The Grand Rectory",
+    "source": "kateandtoms",
+    "sleeps": 22,
+    "location": "Symondsbury, Dorset",
+    "lat": 50.7400308,
+    "lng": -2.7898433,
+    "games": [
+      "Pool"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/the-grand-rectory/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2022/07/NJY_DSC8877-scaled.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "The Mendips",
+    "source": "kateandtoms",
+    "sleeps": 23,
+    "location": "Berrow, Somerset",
+    "lat": 51.2425185,
+    "lng": -2.9302277,
+    "games": [
+      "Hot tub"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/the-mendips/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/IMG_5469-scaled-e1760004834427.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Eastwood Observatory",
+    "source": "kateandtoms",
+    "sleeps": 24,
+    "location": "Greenwich, East Sussex",
+    "lat": 50.9011793,
+    "lng": 0.3280914,
+    "games": [
+      "Cinema",
+      "Hot tub"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/eastwood-observatory/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/2022-06-11-Eastwood-House-Ed-Ovenden-111-scaled.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Polpier & Penpol",
+    "source": "kateandtoms",
+    "sleeps": 20,
+    "location": "Cornwall, Mevagissey, Cornwall",
+    "lat": 50.2701349,
+    "lng": -4.788977299999942,
+    "games": [
+      "Table tennis",
+      "Snooker",
+      "Pool"
+    ],
+    "has_games_bonus": true,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/polpier-and-penpol/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2015/04/Polpier.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Sussex Safari",
+    "source": "kateandtoms",
+    "sleeps": 20,
+    "location": "Sussex Safari, Sussex",
+    "lat": 50.8515058,
+    "lng": -0.8448002,
+    "games": [
+      "Hot tub"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/sussex-safari/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2023/05/Silhouette-1.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Padstow Manor House",
+    "source": "kateandtoms",
+    "sleeps": 26,
+    "location": "Cornwall",
+    "lat": 50.5091938,
+    "lng": -4.923695,
+    "games": [],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/padstow-manor-house/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/ARC-Padstow-63-scaled.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Marlborough Manor",
+    "source": "kateandtoms",
+    "sleeps": 20,
+    "location": "Essex, Essex",
+    "lat": 51.8430795,
+    "lng": 0.9972191,
+    "games": [],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/marlborough-manor/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2022/12/IMG_1336-scaled.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Tregulland Cottage and Barn",
+    "source": "kateandtoms",
+    "sleeps": 22,
+    "location": "Bodmin Moor, Cornwall",
+    "lat": 50.640059,
+    "lng": -4.554530200000045,
+    "games": [
+      "Hot tub"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/tregulland-cottage-barn/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2012/10/Treg-drone-Cott-barn-Bsymes24-scaled-e1733401252751.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "The Curved House",
+    "source": "kateandtoms",
+    "sleeps": 24,
+    "location": "Hollywood, Lincolnshire",
+    "lat": 53.2719114,
+    "lng": 0.09931959999994433,
+    "games": [
+      "Table tennis",
+      "Games console",
+      "Cinema",
+      "Hot tub"
+    ],
+    "has_games_bonus": true,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/the-curved-house/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2015/05/Curved-House37.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "The School of Fun",
+    "source": "kateandtoms",
+    "sleeps": 20,
+    "location": "Fun, Yelverton, Devon",
+    "lat": 50.5117424,
+    "lng": -4.099858,
+    "games": [
+      "Hot tub"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/the-school-of-fun/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2022/12/The-Old-School-House-01242023_114902-scaled.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Springham Manor",
+    "source": "kateandtoms",
+    "sleeps": 20,
+    "location": "Dorset, Dorset",
+    "lat": 50.6722163,
+    "lng": -2.350869,
+    "games": [],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/springham-manor/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2025/02/DSC1720-scaled-e1739792394336.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Captains House",
+    "source": "kateandtoms",
+    "sleeps": 22,
+    "location": "London, Essex",
+    "lat": 51.7217663,
+    "lng": 0.7697432999999592,
+    "games": [],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/captains-house/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2019/11/Captains-House22.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Waverunner",
+    "source": "kateandtoms",
+    "sleeps": 20,
+    "location": "Waverunner, West Sussex",
+    "lat": 50.7792651,
+    "lng": -0.697845,
+    "games": [
+      "Cinema"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/waverunner/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2025/12/Sea-Winds-190-scaled.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Deri Manor",
+    "source": "kateandtoms",
+    "sleeps": 21,
+    "location": "Parliament, Pembrokeshire, Wales",
+    "lat": 51.9993018,
+    "lng": -4.6713256,
+    "games": [],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/deri-manor/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2020/12/Deri-Manor-Lake-scaled.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Torrs Park House",
+    "source": "kateandtoms",
+    "sleeps": 21,
+    "location": "Seadog Catering, Ilfracombe, Devon",
+    "lat": 51.205407,
+    "lng": -4.1326456,
+    "games": [
+      "Pool",
+      "Table football",
+      "Swimming pool"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/torrs-park-house/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2024/05/NJY_DSC0450-scaled.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Linhay House",
+    "source": "kateandtoms",
+    "sleeps": 20,
+    "location": "Devon",
+    "lat": 51.0420487,
+    "lng": -3.708693,
+    "games": [],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/linhay-house/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2024/05/house-copy-scaled.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Cark Manor",
+    "source": "kateandtoms",
+    "sleeps": 20,
+    "location": "English, Lake District",
+    "lat": 54.1819473,
+    "lng": -2.9814507,
+    "games": [
+      "Cinema"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/cark-manor/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2021/06/Cark-Manor-at-Night-1-1-copy.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Southshore Place",
+    "source": "kateandtoms",
+    "sleeps": 20,
+    "location": "Palmerston Road, Portsmouth, Hampshire",
+    "lat": 50.7809852,
+    "lng": -1.0826383,
+    "games": [
+      "Hot tub"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/southshore-place/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/Camelia-House3732_3_4_5_6-Edit.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Osea Manor",
+    "source": "kateandtoms",
+    "sleeps": 20,
+    "location": "Block Island, Essex",
+    "lat": 51.7217663,
+    "lng": 0.7697432999999592,
+    "games": [],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/osea-manor/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/Osea-Island28.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Marine View",
+    "source": "kateandtoms",
+    "sleeps": 20,
+    "location": "Lundy Island, Ilfracombe, Devon",
+    "lat": 51.2066626,
+    "lng": -4.1090376,
+    "games": [
+      "Darts"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/marine-view/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2022/03/DJI_0340-HDR-copy-scaled.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Bryn Bae Estate",
+    "source": "kateandtoms",
+    "sleeps": 20,
+    "location": "North Wales, Anglesey, Wales",
+    "lat": 53.2370516,
+    "lng": -4.1459364,
+    "games": [
+      "Hot tub"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/bryn-bae-estate/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2025/10/House-View-5-Landscape-scaled.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Honeybridge Estate",
+    "source": "kateandtoms",
+    "sleeps": 25,
+    "location": "Sussex, West Sussex",
+    "lat": 50.90697,
+    "lng": -0.3318708,
+    "games": [
+      "Snooker",
+      "Pool",
+      "Table football"
+    ],
+    "has_games_bonus": true,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/honeybridge-estate/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/The-Art-House2.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Westmorland Lodge",
+    "source": "kateandtoms",
+    "sleeps": 20,
+    "location": "Cumbria",
+    "lat": 54.5924381,
+    "lng": -2.4596965,
+    "games": [],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/westmorland-lodge/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2024/04/Low-Barn-Farm-113-e1712916456930.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Winchester Manor House",
+    "source": "kateandtoms",
+    "sleeps": 26,
+    "location": "Winchester",
+    "lat": 51.1662282,
+    "lng": -1.3279985,
+    "games": [
+      "Table tennis",
+      "Pool",
+      "Swimming pool"
+    ],
+    "has_games_bonus": true,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/winchester-manor-house/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2023/08/Lead-image-final.jpeg",
+    "available_dates": []
+  },
+  {
+    "name": "Bright Hall",
+    "source": "kateandtoms",
+    "sleeps": 22,
+    "location": "Herefordshire",
+    "lat": 52.0669126,
+    "lng": -2.3767008,
+    "games": [],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/bright-hall/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2023/04/Barton-Court_5503-scaled.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Newcross Hall Estate",
+    "source": "kateandtoms",
+    "sleeps": 24,
+    "location": "The Lakes, Lake District",
+    "lat": 54.7429435,
+    "lng": -2.6577987000000576,
+    "games": [
+      "Snooker"
+    ],
+    "has_games_bonus": true,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/newcross-hall-estate/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2014/05/Melmerby-Hall-18.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "The Farmstead",
+    "source": "kateandtoms",
+    "sleeps": 28,
+    "location": "The Farmstead, Malton, Yorkshire",
+    "lat": 54.1775881,
+    "lng": -0.5334541,
+    "games": [
+      "Table tennis",
+      "Darts"
+    ],
+    "has_games_bonus": true,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/the-farmstead/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2024/04/img0001High_Res-scaled.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Hilltop Hall",
+    "source": "kateandtoms",
+    "sleeps": 20,
+    "location": "North Wales, North Wales",
+    "lat": 52.9744606,
+    "lng": -3.1064532000000327,
+    "games": [],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/hilltop-hall/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2015/08/Hilltop-Hall-scaled.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Lady Rothschild Dairy",
+    "source": "kateandtoms",
+    "sleeps": 25,
+    "location": "Germany, Northamptonshire",
+    "lat": 52.4774878,
+    "lng": -0.3919882,
+    "games": [
+      "Table tennis"
+    ],
+    "has_games_bonus": true,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/lady-rothschild-dairy/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2024/03/Lady-Rothschild-Dairy-KT-7-scaled-e1709646693884.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Snowdonia House",
+    "source": "kateandtoms",
+    "sleeps": 24,
+    "location": "North Wales, Wales",
+    "lat": 53.1028231,
+    "lng": -3.9070915,
+    "games": [
+      "Table tennis",
+      "Pool",
+      "Table football",
+      "Games console",
+      "Cinema"
+    ],
+    "has_games_bonus": true,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/snowdonia-house/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2025/03/Bryn_Tyrch_Drone_2024_007-scaled.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Limebrook Hall",
+    "source": "kateandtoms",
+    "sleeps": 26,
+    "location": "Herefordshire, Herefordshire",
+    "lat": 52.2900954,
+    "lng": -2.9246526,
+    "games": [
+      "Pool",
+      "Table football"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/limebrook-hall/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2024/08/NJY_DSC2193-scaled.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "The Old Mill, Hayloft and Byre",
+    "source": "kateandtoms",
+    "sleeps": 24,
+    "location": "Herefordshire",
+    "lat": 52.1940102,
+    "lng": -2.9716088000000127,
+    "games": [
+      "Cinema",
+      "Hot tub"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/the-old-mill/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2014/08/LR_21.05.24_157.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Pennine Hills Manor",
+    "source": "kateandtoms",
+    "sleeps": 25,
+    "location": "Barnard Castle, Teesdale, County Durham",
+    "lat": 54.638582,
+    "lng": -2.0741724,
+    "games": [],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/pennine-hills-manor/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/Pennine-Hills-Manor38-scaled.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Beachley House",
+    "source": "kateandtoms",
+    "sleeps": 22,
+    "location": "Chepstow Racecourse, Chepstow",
+    "lat": 51.62507610000001,
+    "lng": -2.6520499000000655,
+    "games": [],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/beachley-house/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/Drone_1.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "High Peak Manor",
+    "source": "kateandtoms",
+    "sleeps": 20,
+    "location": "Peak District",
+    "lat": 53.2322474,
+    "lng": -1.8039939,
+    "games": [
+      "Table tennis",
+      "Pool",
+      "Table football",
+      "Swimming pool"
+    ],
+    "has_games_bonus": true,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/high-peak-manor/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2024/11/Z7B_04611582024-copy-scaled.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Abbeyfield Hall",
+    "source": "kateandtoms",
+    "sleeps": 26,
+    "location": "Forbidden Corner, Yorkshire",
+    "lat": 54.2857394,
+    "lng": -1.8060998,
+    "games": [
+      "Piano"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/abbeyfield-hall/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2026/01/Abbeyfield-Hall.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Wisteria Farmhouse",
+    "source": "kateandtoms",
+    "sleeps": 21,
+    "location": "May, Bradford-on-Avon, Wiltshire",
+    "lat": 51.3657171,
+    "lng": -2.2361091,
+    "games": [
+      "Pool"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/wisteria-farmhouse/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2023/07/Farmhouse-Pool-scaled.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Howard Hall",
+    "source": "kateandtoms",
+    "sleeps": 26,
+    "location": "Yorkshire",
+    "lat": 54.0950264,
+    "lng": -0.7759648,
+    "games": [
+      "Snooker",
+      "Pool"
+    ],
+    "has_games_bonus": true,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/howard-hall/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/Langton-Hall-08_Fake-windows-removed-scaled.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Lambourn House",
+    "source": "kateandtoms",
+    "sleeps": 20,
+    "location": "Berkshire",
+    "lat": 51.5240134,
+    "lng": -1.5125067000000172,
+    "games": [
+      "Hot tub"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/lambourn-house/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2012/12/Big-House-Retreat-4.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Yellowstone",
+    "source": "kateandtoms",
+    "sleeps": 20,
+    "location": "Wales",
+    "lat": 52.3050696,
+    "lng": -3.1219224,
+    "games": [
+      "Hot tub"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/yellowstone/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2025/09/Z7A_6313-copy-scaled-e1757336896885.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Whitelake Hall",
+    "source": "kateandtoms",
+    "sleeps": 24,
+    "location": "Windermere, Lake District",
+    "lat": 54.3097976,
+    "lng": -2.9623891999999614,
+    "games": [],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/whitelake-hall/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2016/02/LGH-LL-Aerial-Front-House-F-copy-scaled.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "Russet Hall",
+    "source": "kateandtoms",
+    "sleeps": 20,
+    "location": "April, Taunton",
+    "lat": 50.9908434,
+    "lng": -3.0938738,
+    "games": [
+      "Table tennis",
+      "Pool",
+      "Darts"
+    ],
+    "has_games_bonus": true,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/russet-hall/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2024/12/HH_1023-scaled.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "The Dales House",
+    "source": "kateandtoms",
+    "sleeps": 26,
+    "location": "Ravenstonedale, Cumbria",
+    "lat": 54.4301148,
+    "lng": -2.4284032,
+    "games": [],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/the-dales-house/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2024/04/2022-09-13-Elm-Lodge-38-scaled.jpg",
+    "available_dates": []
+  },
+  {
+    "name": "The Georgian House",
+    "source": "kateandtoms",
+    "sleeps": 23,
+    "location": "Georgian, Wantage, Oxfordshire",
+    "lat": 51.5924661,
+    "lng": -1.3775818999999956,
+    "games": [
+      "Swimming pool"
+    ],
+    "has_games_bonus": false,
+    "price": null,
+    "rating": null,
+    "url": "https://kateandtoms.com/houses/the-georgian-house/",
+    "image": "https://kateandtoms.com/wp-content/uploads/2014/03/Swimming-Pool-at-Ardington-House.jpg",
+    "available_dates": []
   }
 ]
