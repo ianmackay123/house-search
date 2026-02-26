@@ -319,11 +319,15 @@
             }
 
             var allMarkers = [];
-            var sources = Object.keys(bySource);
-            for (var s = 0; s < sources.length; s++) {
-                var source = sources[s];
-                var props = bySource[source];
-                var group = L.layerGroup();
+            var knownSources = ['kateandtoms', 'groupaccommodation', 'airbnb', 'thebigdomain'];
+            var allSources = knownSources.concat(Object.keys(bySource).filter(function(s) { return knownSources.indexOf(s) === -1; }));
+
+            for (var s = 0; s < allSources.length; s++) {
+                var source = allSources[s];
+                var props = bySource[source] || [];
+                var wasChecked = document.getElementById('show_' + source);
+                var keepChecked = !wasChecked || wasChecked.checked;
+                var group = layerGroups[source] || L.layerGroup();
 
                 for (var j = 0; j < props.length; j++) {
                     var p = props[j];
@@ -334,11 +338,13 @@
                     markersByUrl[p.url] = { marker: marker, group: group, prop: p };
                 }
 
-                group.addTo(leafletMap);
+                if (keepChecked) group.addTo(leafletMap);
                 layerGroups[source] = group;
 
+                var count = props.length ? ' (' + props.length + ')' : '';
                 var label = document.createElement('label');
-                label.innerHTML = '<input type="checkbox" id="show_' + source + '" checked onchange="toggleLayer(\'' + source + '\')"> ' + sourceLabel(source) + ' (' + props.length + ')';
+                label.style.color = props.length ? '' : '#aaa';
+                label.innerHTML = '<input type="checkbox" id="show_' + source + '" ' + (keepChecked ? 'checked' : '') + ' onchange="toggleLayer(\'' + source + '\')"> ' + sourceLabel(source) + count;
                 filtersEl.appendChild(label);
             }
 
