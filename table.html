@@ -38,6 +38,8 @@
         tr:hover td { background: #f0f7ff; }
         tr.bonus td { background: #fff5f5; }
         tr.bonus:hover td { background: #ffe8e8; }
+        tr.dismissed td { opacity: 0.35; }
+        tr.dismissed:hover td { opacity: 0.5; }
         .source-badge {
             display: inline-block; padding: 2px 8px; border-radius: 10px;
             font-size: 11px; font-weight: 600; color: white;
@@ -57,16 +59,10 @@
         .thumb:hover { opacity: 0.85; }
         .thumb-wrap:hover .thumb-large { display: block; }
         .thumb-large {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            width: 320px;
-            height: 220px;
-            object-fit: cover;
-            border-radius: 6px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-            pointer-events: none;
-            transform: translate(-50%, calc(-100% - 10px));
+            display: none; position: fixed; z-index: 9999;
+            width: 320px; height: 220px; object-fit: cover;
+            border-radius: 6px; box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            pointer-events: none; transform: translate(-50%, calc(-100% - 10px));
         }
         .star-btn { background: none; border: none; cursor: pointer; font-size: 18px; padding: 0 2px; color: #ddd; line-height: 1; }
         .star-btn.starred { color: #f39c12; }
@@ -74,6 +70,23 @@
         tr.starred td { background: #fffbf0; }
         tr.starred.bonus td { background: #fff0e0; }
         tr.starred:hover td, tr.starred.bonus:hover td { background: #fff3d0; }
+        .dismiss-btn {
+            background: none; border: 1px solid #ddd; border-radius: 3px; cursor: pointer;
+            font-size: 11px; padding: 2px 6px; color: #999; white-space: nowrap;
+        }
+        .dismiss-btn:hover { background: #fee; border-color: #e74c3c; color: #e74c3c; }
+        .dismiss-btn.dismissed { background: #eee; color: #bbb; border-color: #ddd; }
+        .note-cell { min-width: 160px; max-width: 260px; }
+        .note-ta {
+            width: 100%; min-height: 36px; resize: vertical;
+            border: 1px solid transparent; border-radius: 3px;
+            font-family: inherit; font-size: 12px; color: #444;
+            padding: 3px 5px; background: transparent; line-height: 1.4;
+        }
+        .note-ta:hover { border-color: #ddd; background: #fafafa; }
+        .note-ta:focus { border-color: #3498db; background: white; outline: none; }
+        .note-ta::placeholder { color: #bbb; }
+        .saving-indicator { font-size: 10px; color: #27ae60; margin-left: 4px; display: none; }
     </style>
 </head>
 <body>
@@ -91,6 +104,7 @@
         <strong style="font-size:13px;margin-left:8px;">Filter:</strong>
         <label><input type="checkbox" id="bonusOnly" onchange="applyFilters()"> Snooker/table tennis only</label>
         <label><input type="checkbox" id="starredOnly" onchange="applyFilters()"> ★ Starred only</label>
+        <label><input type="checkbox" id="hideDismissed" onchange="applyFilters()" checked> Hide dismissed</label>
         <input type="text" id="search" placeholder="Search name, location..." oninput="applyFilters()">
         <span class="count" id="count"></span>
     </div>
@@ -108,6 +122,8 @@
                     <th data-col="price">Price <span class="arrow">&#9650;</span></th>
                     <th data-col="rating">Rating <span class="arrow">&#9650;</span></th>
                     <th data-col="available_dates">Availability <span class="arrow">&#9650;</span></th>
+                    <th style="cursor:default;">Notes</th>
+                    <th style="width:80px;cursor:default;"></th>
                 </tr>
             </thead>
             <tbody id="tbody"></tbody>
@@ -115,7 +131,7 @@
         <div class="no-results" id="no-results" style="display:none;">No matching properties found.</div>
     </div>
 
-    <script src="./stars.js"></script>
+    <script src="./state.js"></script>
     <script>
         async function toggleStarAndRender(url, btn) {
             var isNow = await toggleStar(url);
@@ -124,6 +140,15 @@
             var row = btn.closest('tr');
             if (row) row.classList.toggle('starred', isNow);
             if (document.getElementById('starredOnly').checked) applyFilters();
+        }
+
+        async function toggleDismissAndRender(url, btn) {
+            var isNow = await toggleDismissed(url);
+            btn.textContent = isNow ? 'Undismiss' : 'Not suitable';
+            btn.classList.toggle('dismissed', isNow);
+            var row = btn.closest('tr');
+            if (row) row.classList.toggle('dismissed', isNow);
+            if (document.getElementById('hideDismissed').checked) applyFilters();
         }
 
         var allProperties = [];
@@ -170,12 +195,14 @@
             });
             var bonusOnly = document.getElementById('bonusOnly').checked;
             var starredOnly = document.getElementById('starredOnly').checked;
+            var hideDismissed = document.getElementById('hideDismissed').checked;
             var query = document.getElementById('search').value.toLowerCase().trim();
 
             displayed = allProperties.filter(function(p) {
                 if (!sources.includes(p.source)) return false;
                 if (bonusOnly && !p.has_games_bonus) return false;
                 if (starredOnly && !isStarred(p.url)) return false;
+                if (hideDismissed && isDismissed(p.url)) return false;
                 if (query) {
                     var searchable = [p.name, p.location, (p.games||[]).join(' ')].join(' ').toLowerCase();
                     if (!searchable.includes(query)) return false;
@@ -214,12 +241,20 @@
             var html = '';
             for (var i = 0; i < displayed.length; i++) {
                 var p = displayed[i];
-                var isStarredProp = isStarred(p.url);
-                var rowClass = (p.has_games_bonus ? 'bonus' : '') + (isStarredProp ? ' starred' : '');
+                var isStarredProp    = isStarred(p.url);
+                var isDismissedProp  = isDismissed(p.url);
+                var note             = getNote(p.url);
+                var rowClass = (p.has_games_bonus ? 'bonus' : '')
+                    + (isStarredProp   ? ' starred'   : '')
+                    + (isDismissedProp ? ' dismissed'  : '');
+                var urlJs = p.url.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+
                 html += '<tr class="' + rowClass + '">';
-                // Star button
-                html += '<td style="text-align:center;padding:4px;"><button class="star-btn' + (isStarredProp ? ' starred' : '') + '" onclick="toggleStarAndRender(\'' + p.url + '\', this)">' + (isStarredProp ? '★' : '☆') + '</button></td>';
-                // Thumbnail with hover-to-enlarge
+                // Star
+                html += '<td style="text-align:center;padding:4px;">'
+                    + '<button class="star-btn' + (isStarredProp ? ' starred' : '') + '" onclick="toggleStarAndRender(\'' + urlJs + '\', this)">'
+                    + (isStarredProp ? '★' : '☆') + '</button></td>';
+                // Thumbnail
                 if (p.image) {
                     html += '<td style="padding:4px 8px;">'
                         + '<div class="thumb-wrap">'
@@ -239,6 +274,14 @@
                 html += '<td>' + esc(p.price) + '</td>';
                 html += '<td>' + esc(p.rating) + '</td>';
                 html += '<td class="dates">' + (p.available_dates && p.available_dates.length ? esc(p.available_dates.join(', ')) : '<span style="color:#ccc;">-</span>') + '</td>';
+                // Notes
+                html += '<td class="note-cell">'
+                    + '<textarea class="note-ta" placeholder="Add notes…" oninput="scheduleNoteSave(\'' + urlJs + '\', this.value)">'
+                    + esc(note) + '</textarea></td>';
+                // Dismiss
+                html += '<td style="white-space:nowrap;">'
+                    + '<button class="dismiss-btn' + (isDismissedProp ? ' dismissed' : '') + '" onclick="toggleDismissAndRender(\'' + urlJs + '\', this)">'
+                    + (isDismissedProp ? 'Undismiss' : 'Not suitable') + '</button></td>';
                 html += '</tr>';
             }
             tbody.innerHTML = html;
@@ -258,10 +301,9 @@
                 sortAsc = true;
             }
 
-            // Update header arrows
             document.querySelectorAll('#header-row th').forEach(function(h) {
                 h.classList.remove('sorted');
-                h.querySelector('.arrow').innerHTML = '&#9650;';
+                if (h.querySelector('.arrow')) h.querySelector('.arrow').innerHTML = '&#9650;';
             });
             th.classList.add('sorted');
             th.querySelector('.arrow').innerHTML = sortAsc ? '&#9650;' : '&#9660;';
@@ -269,7 +311,7 @@
             sortAndRender();
         });
 
-        // Track mouse position to place large preview near cursor
+        // Track mouse for large thumbnail preview
         document.addEventListener('mousemove', function(e) {
             var large = document.querySelector('.thumb-wrap:hover .thumb-large');
             if (large) {
@@ -278,14 +320,13 @@
             }
         });
 
-        // Load data and starred state in parallel
+        // Load data and state in parallel
         Promise.all([
             fetch('./properties.json').then(function(r) { return r.ok ? r.json() : []; }).catch(function() { return []; }),
-            loadStarred()
+            loadState()
         ]).then(function(results) {
-            var data = results[0];
-            allProperties = data;
-            displayed = data.slice();
+            allProperties = results[0];
+            displayed = allProperties.slice();
             sortAndRender();
         }).catch(function() {
             document.getElementById('no-results').style.display = 'block';

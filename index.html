@@ -64,7 +64,7 @@
         <strong>Show:</strong>
     </div>
 
-    <script src="./stars.js"></script>
+    <script src="./state.js"></script>
     <script>
         let leafletMap;
         const layerGroups = {};
@@ -107,6 +107,18 @@
             applyStarredFilter();
         }
 
+        async function toggleDismissFromPopup(url, btn) {
+            var isNow = await toggleDismissed(url);
+            btn.textContent = isNow ? 'Undismiss' : 'Not suitable';
+            btn.style.background = isNow ? '#e74c3c' : '#bdc3c7';
+            var entry = markersByUrl[url];
+            if (entry) {
+                var el = entry.marker.getElement();
+                if (el) el.style.opacity = isNow ? '0.3' : '1';
+            }
+            applyStarredFilter();
+        }
+
         function applyStarredFilter() {
             var starredOnly = document.getElementById('show_starred_only') && document.getElementById('show_starred_only').checked;
             Object.keys(markersByUrl).forEach(function(url) {
@@ -114,6 +126,9 @@
                 var sourceCb = document.getElementById('show_' + entry.prop.source);
                 var sourceOn = !sourceCb || sourceCb.checked;
                 var starOn = !starredOnly || isStarred(url);
+                // Dim dismissed markers
+                var el = entry.marker.getElement();
+                if (el) el.style.opacity = isDismissed(url) ? '0.3' : '1';
                 if (sourceOn && starOn) {
                     if (!entry.group.hasLayer(entry.marker)) entry.group.addLayer(entry.marker);
                 } else {
@@ -170,14 +185,28 @@
 
             html += '<p style="margin:2px 0;font-size:11px;color:#888;">Source: ' + sourceLabel(prop.source) + '</p>';
 
-            var isStarredProp = isStarred(prop.url);
-            html += '<div style="margin-top:8px;display:flex;gap:8px;align-items:center;">';
+            var isStarredProp   = isStarred(prop.url);
+            var isDismissedProp = isDismissed(prop.url);
+            var note            = getNote(prop.url);
+
+            // Notes textarea
+            html += '<textarea'
+                + ' oninput="scheduleNoteSave(' + JSON.stringify(prop.url) + ', this.value)"'
+                + ' placeholder="Add notes…"'
+                + ' style="width:100%;margin-top:8px;padding:5px 7px;font-family:inherit;font-size:12px;border:1px solid #ddd;border-radius:4px;resize:vertical;min-height:42px;box-sizing:border-box;">'
+                + esc(note) + '</textarea>';
+
+            // Action buttons row
+            html += '<div style="margin-top:6px;display:flex;gap:6px;align-items:center;flex-wrap:wrap;">';
             html += '<a href="' + esc(prop.url) + '" target="_blank" rel="noopener noreferrer"'
-                + ' style="display:inline-block;padding:6px 14px;' + sourceLinkStyle(prop.source) + ';color:white;text-decoration:none;border-radius:4px;font-size:13px;flex:1;">'
-                + 'View Property &rarr;</a>';
+                + ' style="display:inline-block;padding:6px 12px;' + sourceLinkStyle(prop.source) + ';color:white;text-decoration:none;border-radius:4px;font-size:12px;flex:1;">'
+                + 'View &rarr;</a>';
             html += '<button onclick="toggleStarFromPopup(' + JSON.stringify(prop.url) + ', this)"'
-                + ' style="padding:6px 10px;background:' + (isStarredProp ? '#f39c12' : '#95a5a6') + ';color:white;border:none;border-radius:4px;font-size:13px;cursor:pointer;white-space:nowrap;">'
-                + (isStarredProp ? '★ Starred' : '☆ Star this') + '</button>';
+                + ' style="padding:6px 8px;background:' + (isStarredProp ? '#f39c12' : '#95a5a6') + ';color:white;border:none;border-radius:4px;font-size:12px;cursor:pointer;">'
+                + (isStarredProp ? '★ Starred' : '☆ Star') + '</button>';
+            html += '<button onclick="toggleDismissFromPopup(' + JSON.stringify(prop.url) + ', this)"'
+                + ' style="padding:6px 8px;background:' + (isDismissedProp ? '#e74c3c' : '#bdc3c7') + ';color:white;border:none;border-radius:4px;font-size:12px;cursor:pointer;">'
+                + (isDismissedProp ? 'Undismiss' : 'Not suitable') + '</button>';
             html += '</div>';
             html += '</div>';
             return html;
@@ -195,7 +224,7 @@
         }
 
         async function init() {
-            var results = await Promise.all([loadProperties(), loadStarred()]);
+            var results = await Promise.all([loadProperties(), loadState()]);
             var properties = results[0];
 
             // Group by source
@@ -262,6 +291,7 @@
                     var featureGroup = L.featureGroup(allMarkers);
                     leafletMap.fitBounds(featureGroup.getBounds().pad(0.1));
                 }
+                applyStarredFilter(); // apply initial dismissed opacity
 
                 if (properties.length === 0) {
                     document.getElementById('loading').style.display = 'flex';
