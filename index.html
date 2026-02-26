@@ -117,6 +117,7 @@
             <button class="scrape-btn" onclick="startScrape('groupaccommodation')">Group Accom.</button>
             <button class="scrape-btn" onclick="startScrape('thebigdomain')">Big Domain</button>
             <button class="scrape-btn" onclick="startScrape('bighouseexperience')">Big House Exp.</button>
+            <button class="scrape-btn" onclick="startScrape('snaptrip')">Snaptrip</button>
             <button class="scrape-btn" id="btn-kill" style="background:#c0392b;display:none;" onclick="killScrape()">Stop</button>
         </div>
         <div id="scrape-log"></div>
@@ -314,7 +315,7 @@
             }
 
             var allMarkers = [];
-            var knownSources = ['kateandtoms', 'groupaccommodation', 'airbnb', 'thebigdomain', 'bighouseexperience'];
+            var knownSources = ['kateandtoms', 'groupaccommodation', 'airbnb', 'thebigdomain', 'bighouseexperience', 'snaptrip'];
             var allSources = knownSources.concat(Object.keys(bySource).filter(function(s) { return knownSources.indexOf(s) === -1; }));
 
             for (var s = 0; s < allSources.length; s++) {
