@@ -31,7 +31,7 @@ function filterUK(properties) {
 
 async function saveResults(results) {
   const filtered = filterUK(results);
-  await writeFile(OUTPUT, JSON.stringify(filtered, null, 2));
+  await writeFile(OUTPUT, JSON.stringify(filtered));
   console.log(`[Save] Wrote ${filtered.length} mappable properties to ${OUTPUT}`);
   try {
     const res = await fetch(JSONBIN_URL, {

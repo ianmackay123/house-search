@@ -292,18 +292,18 @@
 
         async function loadProperties() {
             try {
-                var resp = await fetch(PROPS_BIN, { headers: { 'X-Access-Key': PROPS_KEY } });
+                var resp = await fetch('./properties.json');
                 if (!resp.ok) throw new Error('HTTP ' + resp.status);
-                var data = await resp.json();
-                return data.record || [];
+                return await resp.json();
             } catch (err) {
-                console.warn('JSONbin load failed, trying local:', err.message);
+                console.warn('Local properties.json failed, trying JSONbin:', err.message);
                 try {
-                    var resp2 = await fetch('./properties.json');
+                    var resp2 = await fetch(PROPS_BIN, { headers: { 'X-Access-Key': PROPS_KEY } });
                     if (!resp2.ok) throw new Error('HTTP ' + resp2.status);
-                    return await resp2.json();
+                    var data = await resp2.json();
+                    return data.record || [];
                 } catch (err2) {
-                    console.warn('Could not load properties.json:', err2.message);
+                    console.warn('JSONbin also failed:', err2.message);
                     return [];
                 }
             }

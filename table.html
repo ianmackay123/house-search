@@ -453,12 +453,14 @@
         var PROPS_KEY = '$2a$10$GM2DacykC6URSakJENStXORhYWLBkBdhNtQdDHtOw.7FoSOpfpcrS';
 
         function loadProperties() {
-            return fetch(PROPS_BIN, { headers: { 'X-Access-Key': PROPS_KEY } })
+            return fetch('./properties.json')
                 .then(function(r) { return r.ok ? r.json() : Promise.reject('HTTP ' + r.status); })
-                .then(function(d) { return d.record || []; })
                 .catch(function(err) {
-                    console.warn('JSONbin load failed, trying local:', err);
-                    return fetch('./properties.json').then(function(r) { return r.ok ? r.json() : []; }).catch(function() { return []; });
+                    console.warn('Local properties.json failed, trying JSONbin:', err);
+                    return fetch(PROPS_BIN, { headers: { 'X-Access-Key': PROPS_KEY } })
+                        .then(function(r) { return r.ok ? r.json() : Promise.reject('HTTP ' + r.status); })
+                        .then(function(d) { return d.record || []; })
+                        .catch(function() { return []; });
                 });
         }
 
