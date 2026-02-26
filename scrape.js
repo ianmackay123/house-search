@@ -7,9 +7,19 @@ import { scrapeBigHouseExperience } from './scrapers/bighouseexperience.js';
 import { scrapeSnaptrip } from './scrapers/snaptrip.js';
 import { scrapeSykesCottages } from './scrapers/sykescottages.js';
 
+import { readFile as readFileEnv } from 'fs/promises';
+
 const OUTPUT = 'properties.json';
-const JSONBIN_URL = 'https://api.jsonbin.io/v3/b/69a013e2ae596e708f4b8024';
-const JSONBIN_KEY = '$2a$10$GM2DacykC6URSakJENStXORhYWLBkBdhNtQdDHtOw.7FoSOpfpcrS';
+
+async function loadEnv() {
+  try {
+    const raw = await readFileEnv('.env', 'utf-8');
+    return Object.fromEntries(raw.split('\n').filter(l => l.includes('=')).map(l => l.split('=')));
+  } catch { return {}; }
+}
+const _env = await loadEnv();
+const GIST_ID    = _env.GIST_PROPS_ID || '';
+const GIST_TOKEN = _env.GIST_TOKEN    || '';
 
 // Load existing properties.json, keeping entries from sources not being re-scraped
 async function loadExisting(excludeSources) {
@@ -35,15 +45,15 @@ async function saveResults(results) {
   await writeFile(OUTPUT, JSON.stringify(filtered));
   console.log(`[Save] Wrote ${filtered.length} mappable properties to ${OUTPUT}`);
   try {
-    const res = await fetch(JSONBIN_URL, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json', 'X-Access-Key': JSONBIN_KEY },
-      body: JSON.stringify(filtered),
+    const res = await fetch(`https://api.github.com/gists/${GIST_ID}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `token ${GIST_TOKEN}` },
+      body: JSON.stringify({ files: { 'properties.json': { content: JSON.stringify(filtered) } } }),
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    console.log(`[Save] Synced ${filtered.length} properties to JSONbin`);
+    console.log(`[Save] Synced ${filtered.length} properties to GitHub Gist`);
   } catch (err) {
-    console.warn(`[Save] JSONbin sync failed: ${err.message}`);
+    console.warn(`[Save] Gist sync failed: ${err.message}`);
   }
 }
 

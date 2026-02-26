@@ -119,10 +119,12 @@
             <button class="scrape-btn" onclick="startScrape('thebigdomain')">Big Domain</button>
             <button class="scrape-btn" onclick="startScrape('bighouseexperience')">Big House Exp.</button>
             <button class="scrape-btn" onclick="startScrape('snaptrip')">Snaptrip</button>
+            <button class="scrape-btn" onclick="startScrape('sykescottages')">Sykes</button>
             <button class="scrape-btn" id="btn-kill" style="background:#c0392b;display:none;" onclick="killScrape()">Stop</button>
         </div>
         <div id="scrape-log"></div>
     </div>
+    <script src="./config.js" onerror="console.warn('config.js not found — state sync disabled')"></script>
     <script src="./state.js"></script>
     <script>
         let leafletMap;
@@ -296,8 +298,7 @@
             return html;
         }
 
-        var PROPS_BIN = 'https://api.jsonbin.io/v3/b/69a013e2ae596e708f4b8024/latest';
-        var PROPS_KEY = '$2a$10$GM2DacykC6URSakJENStXORhYWLBkBdhNtQdDHtOw.7FoSOpfpcrS';
+        var GIST_URL = 'https://gist.githubusercontent.com/ianmackay123/8632e6db6e5aa9967676fd50edd99e39/raw/properties.json';
 
         async function loadProperties() {
             try {
@@ -305,12 +306,11 @@
                 if (!resp.ok) throw new Error('HTTP ' + resp.status);
                 return await resp.json();
             } catch (err) {
-                console.warn('Local properties.json failed, trying JSONbin:', err.message);
+                console.warn('Local properties.json failed, trying Gist:', err.message);
                 try {
-                    var resp2 = await fetch(PROPS_BIN, { headers: { 'X-Access-Key': PROPS_KEY } });
+                    var resp2 = await fetch(GIST_URL + '?t=' + Date.now());
                     if (!resp2.ok) throw new Error('HTTP ' + resp2.status);
-                    var data = await resp2.json();
-                    return data.record || [];
+                    return await resp2.json();
                 } catch (err2) {
                     console.warn('JSONbin also failed:', err2.message);
                     return [];

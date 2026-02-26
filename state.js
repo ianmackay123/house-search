@@ -1,9 +1,10 @@
 // state.js — per-property state: starred, dismissed, notes
-// Synced via JSONbin.io — no login or token prompts needed.
+// Synced via GitHub Gist. Credentials loaded from config.js (gitignored).
 
-const _BIN_ID  = '69a009eaae596e708f4b620b';
-const _BIN_KEY = '$2a$10$GM2DacykC6URSakJENStXORhYWLBkBdhNtQdDHtOw.7FoSOpfpcrS';
-const _BIN_URL = 'https://api.jsonbin.io/v3/b/' + _BIN_ID;
+const _GIST_ID    = (typeof GIST_STATE_ID !== 'undefined') ? GIST_STATE_ID : '';
+const _GIST_TOKEN = (typeof GIST_TOKEN    !== 'undefined') ? GIST_TOKEN    : '';
+const _GIST_RAW   = 'https://gist.githubusercontent.com/ianmackay123/' + _GIST_ID + '/raw/state.json';
+const _GIST_API   = 'https://api.github.com/gists/' + _GIST_ID;
 
 let _state = { starred: [], dismissed: [], notes: {} };
 let _noteTimers = {};
@@ -12,23 +13,16 @@ let _noteTimers = {};
 
 async function loadState() {
     try {
-        var resp = await fetch(_BIN_URL + '/latest', {
-            headers: { 'X-Access-Key': _BIN_KEY }
-        });
+        var resp = await fetch(_GIST_RAW + '?t=' + Date.now());
         if (resp.ok) {
-            var data = await resp.json();
-            _state = data.record || {};
-            _state.starred   = _state.starred   || [];
-            _state.dismissed = _state.dismissed || [];
-            _state.notes     = _state.notes     || {};
+            _state = await resp.json();
         }
     } catch (e) {
         console.warn('[State] Load failed:', e);
-        try { _state = JSON.parse(localStorage.getItem('house-search-state') || '{}'); } catch (e2) {}
-        _state.starred   = _state.starred   || [];
-        _state.dismissed = _state.dismissed || [];
-        _state.notes     = _state.notes     || {};
     }
+    _state.starred   = _state.starred   || [];
+    _state.dismissed = _state.dismissed || [];
+    _state.notes     = _state.notes     || {};
 }
 
 // Starred
@@ -62,17 +56,16 @@ function scheduleNoteSave(url, text) {
 
 async function _save() {
     try {
-        var resp = await fetch(_BIN_URL, {
-            method: 'PUT',
+        var resp = await fetch(_GIST_API, {
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
-                'X-Access-Key': _BIN_KEY,
+                'Authorization': 'token ' + _GIST_TOKEN,
             },
-            body: JSON.stringify(_state),
+            body: JSON.stringify({ files: { 'state.json': { content: JSON.stringify(_state) } } }),
         });
         if (!resp.ok) console.warn('[State] Save failed:', resp.status);
     } catch (e) {
         console.warn('[State] Save error:', e);
-        localStorage.setItem('house-search-state', JSON.stringify(_state));
     }
 }
