@@ -178,6 +178,12 @@
             return games.includes('hot tub') || games.includes('swimming pool') || games.includes('sauna');
         }
 
+        function getZIndex(url) {
+            if (isStarred(url))    return 1000;
+            if (isDismissed(url))  return -100;
+            return 0;
+        }
+
         function getIcon(prop) {
             var big = hasWaterFeature(prop);
             if (isDismissed(prop.url)) return createIcon('#aaaaaa', big ? 22 : 14);
@@ -191,7 +197,7 @@
             btn.textContent = isNow ? '★ Starred' : '☆ Star this';
             btn.style.background = isNow ? '#f39c12' : '#95a5a6';
             var entry = markersByUrl[url];
-            if (entry) entry.marker.setIcon(getIcon(entry.prop));
+            if (entry) entry.marker.setIcon(getIcon(entry.prop)); entry.marker.setZIndexOffset(getZIndex(entry.prop.url));
             applyStarredFilter();
         }
 
@@ -200,7 +206,7 @@
             btn.textContent = isNow ? 'Undismiss' : 'Not suitable';
             btn.style.background = isNow ? '#e74c3c' : '#bdc3c7';
             var entry = markersByUrl[url];
-            if (entry) entry.marker.setIcon(getIcon(entry.prop));
+            if (entry) entry.marker.setIcon(getIcon(entry.prop)); entry.marker.setZIndexOffset(getZIndex(entry.prop.url));
             applyStarredFilter();
         }
 
@@ -215,7 +221,7 @@
                 var starOn = !starredOnly || isStarred(url);
                 var waterOn = !waterOnly || hasWaterFeature(entry.prop);
                 var noNoteOn = !noNotesOnly || !getNote(url);
-                entry.marker.setIcon(getIcon(entry.prop));
+                entry.marker.setIcon(getIcon(entry.prop)); entry.marker.setZIndexOffset(getZIndex(entry.prop.url));
                 if (sourceOn && starOn && waterOn && noNoteOn) {
                     if (!entry.group.hasLayer(entry.marker)) entry.group.addLayer(entry.marker);
                 } else {
@@ -357,7 +363,7 @@
 
                 for (var j = 0; j < props.length; j++) {
                     var p = props[j];
-                    var marker = L.marker([p.lat, p.lng], { icon: getIcon(p) });
+                    var marker = L.marker([p.lat, p.lng], { icon: getIcon(p), zIndexOffset: getZIndex(p.url) });
                     marker.bindPopup(buildPopup(p), { maxWidth: 320 });
                     marker.on('popupopen', (function(prop) { return function() {
                         this.setPopupContent(buildPopup(prop));
