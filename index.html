@@ -57,6 +57,7 @@
         <div class="legend-item"><span class="legend-dot green"></span> Has snooker / table tennis</div>
         <div class="legend-item"><span class="legend-dot blue"></span> All other properties</div>
         <div class="legend-item"><span class="legend-dot" style="background:#aaa;"></span> Dismissed</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#3498db;width:8px;height:8px;"></span> No hot tub / pool / sauna (smaller)</div>
         <p style="margin-top:8px;font-size:11px;color:#666;">Click pins for details & links. Dogs | Sleeps 20+ | 24-27 or 25-28 Sep</p>
         <a href="./table.html" style="display:inline-block;margin-top:8px;font-size:12px;color:#2980b9;">View as table &rarr;</a>
     </div>
@@ -166,11 +167,17 @@
             });
         }
 
+        function hasWaterFeature(prop) {
+            var games = (prop.games || []).join(' ').toLowerCase();
+            return games.includes('hot tub') || games.includes('swimming pool') || games.includes('sauna');
+        }
+
         function getIcon(prop) {
-            if (isDismissed(prop.url)) return createIcon('#aaaaaa', 22);
-            if (isStarred(prop.url)) return createIcon('#f39c12', 32);
-            if (prop.has_games_bonus) return createIcon('#27ae60', 28);
-            return createIcon('#3498db', 24);
+            var big = hasWaterFeature(prop);
+            if (isDismissed(prop.url)) return createIcon('#aaaaaa', big ? 22 : 14);
+            if (isStarred(prop.url)) return createIcon('#f39c12', big ? 32 : 20);
+            if (prop.has_games_bonus) return createIcon('#27ae60', big ? 28 : 18);
+            return createIcon('#3498db', big ? 24 : 16);
         }
 
         async function toggleStarFromPopup(url, btn) {
@@ -193,13 +200,15 @@
 
         function applyStarredFilter() {
             var starredOnly = document.getElementById('show_starred_only') && document.getElementById('show_starred_only').checked;
+            var waterOnly = document.getElementById('show_water_only') && document.getElementById('show_water_only').checked;
             Object.keys(markersByUrl).forEach(function(url) {
                 var entry = markersByUrl[url];
                 var sourceCb = document.getElementById('show_' + entry.prop.source);
                 var sourceOn = !sourceCb || sourceCb.checked;
                 var starOn = !starredOnly || isStarred(url);
+                var waterOn = !waterOnly || hasWaterFeature(entry.prop);
                 entry.marker.setIcon(getIcon(entry.prop));
-                if (sourceOn && starOn) {
+                if (sourceOn && starOn && waterOn) {
                     if (!entry.group.hasLayer(entry.marker)) entry.group.addLayer(entry.marker);
                 } else {
                     if (entry.group.hasLayer(entry.marker)) entry.group.removeLayer(entry.marker);
@@ -365,6 +374,11 @@
             starLabel.style.paddingTop = '6px';
             starLabel.innerHTML = '<input type="checkbox" id="show_starred_only" ' + (getSavedFilter('show_starred_only', false) ? 'checked' : '') + ' onchange="saveFilterState();applyStarredFilter()"> ★ Starred only';
             filtersEl.appendChild(starLabel);
+
+            var waterLabel = document.createElement('label');
+            waterLabel.style.marginTop = '3px';
+            waterLabel.innerHTML = '<input type="checkbox" id="show_water_only" ' + (getSavedFilter('show_water_only', false) ? 'checked' : '') + ' onchange="saveFilterState();applyStarredFilter()"> Hot tub / pool / sauna only';
+            filtersEl.appendChild(waterLabel);
 
             applyStarredFilter();
 
