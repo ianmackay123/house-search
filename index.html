@@ -358,8 +358,7 @@
                     var marker = L.marker([p.lat, p.lng], { icon: getIcon(p) });
                     marker.bindPopup(buildPopup(p), { maxWidth: 320 });
                     marker.on('popupopen', (function(prop) { return function() {
-                        var el = marker.getPopup().getElement();
-                        if (el) { var ta = el.querySelector('textarea'); if (ta) ta.value = getNote(prop.url); }
+                        this.setPopupContent(buildPopup(prop));
                     }; })(p));
                     group.addLayer(marker);
                     allMarkers.push(marker);
