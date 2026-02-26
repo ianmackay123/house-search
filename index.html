@@ -189,9 +189,11 @@
             var isDismissedProp = isDismissed(prop.url);
             var note            = getNote(prop.url);
 
+            var urlQ = "'" + prop.url + "'"; // single-quoted for safe use inside onclick="..."
+
             // Notes textarea
             html += '<textarea'
-                + ' oninput="scheduleNoteSave(' + JSON.stringify(prop.url) + ', this.value)"'
+                + ' oninput="scheduleNoteSave(' + urlQ + ', this.value)"'
                 + ' placeholder="Add notes…"'
                 + ' style="width:100%;margin-top:8px;padding:5px 7px;font-family:inherit;font-size:12px;border:1px solid #ddd;border-radius:4px;resize:vertical;min-height:42px;box-sizing:border-box;">'
                 + esc(note) + '</textarea>';
@@ -201,10 +203,10 @@
             html += '<a href="' + esc(prop.url) + '" target="_blank" rel="noopener noreferrer"'
                 + ' style="display:inline-block;padding:6px 12px;' + sourceLinkStyle(prop.source) + ';color:white;text-decoration:none;border-radius:4px;font-size:12px;flex:1;">'
                 + 'View &rarr;</a>';
-            html += '<button onclick="toggleStarFromPopup(' + JSON.stringify(prop.url) + ', this)"'
+            html += '<button onclick="toggleStarFromPopup(' + urlQ + ', this)"'
                 + ' style="padding:6px 8px;background:' + (isStarredProp ? '#f39c12' : '#95a5a6') + ';color:white;border:none;border-radius:4px;font-size:12px;cursor:pointer;">'
                 + (isStarredProp ? '★ Starred' : '☆ Star') + '</button>';
-            html += '<button onclick="toggleDismissFromPopup(' + JSON.stringify(prop.url) + ', this)"'
+            html += '<button onclick="toggleDismissFromPopup(' + urlQ + ', this)"'
                 + ' style="padding:6px 8px;background:' + (isDismissedProp ? '#e74c3c' : '#bdc3c7') + ';color:white;border:none;border-radius:4px;font-size:12px;cursor:pointer;">'
                 + (isDismissedProp ? 'Undismiss' : 'Not suitable') + '</button>';
             html += '</div>';
