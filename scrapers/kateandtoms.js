@@ -158,7 +158,7 @@ async function scrapeProperty(context, slug) {
       // Look for place name patterns in intro text
       const prepositions = 'in|near|outside|overlooking|of|to|from|around|between|towards';
       const placeRegex = new RegExp('(?:streets|village|town|heart|edge|hills|coast|shores|borders|outskirts|countryside|lanes|roads)?\\s*(?:' + prepositions + ')\\s+([A-Z][a-z]{2,}(?:\\s+[A-Z][a-z]+)?)', 'g');
-      const skipWords = new Set(['England', 'Britain', 'The', 'This', 'Your', 'Our', 'Here', 'Maybe', 'But', 'And', 'With', 'From', 'Cook', 'Sleep', 'Watch', 'Explore', 'Discover', 'Book', 'Set']);
+      const skipWords = new Set(['England', 'Britain', 'The', 'This', 'Your', 'Our', 'Here', 'Maybe', 'But', 'And', 'With', 'From', 'Cook', 'Sleep', 'Watch', 'Explore', 'Discover', 'Book', 'Set', 'Instagram', 'Insta', 'Facebook', 'Twitter', 'Pinterest', 'Tiktok', 'Youtube', 'Google', 'Kate', 'Tom', 'More', 'View', 'Read', 'Find', 'Get', 'See', 'Call', 'Visit', 'Check', 'Help', 'Privacy', 'Terms']);
       let specificLocation = '';
       let match;
       while ((match = placeRegex.exec(introText)) !== null) {
