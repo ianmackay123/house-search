@@ -171,17 +171,28 @@ async function scrapeProperty(context, entry) {
       // Main image from page
       const img = document.querySelector('.owl-carousel img, [class*="gallery"] img, [class*="photo"] img, [class*="hero"] img')?.src || null;
 
-      return { name, meta, location, sleeps, price, rating, games, img };
+      // Coordinates from maplat/maplng JS vars embedded in page scripts
+      let lat = null, lng = null;
+      for (const s of document.querySelectorAll('script')) {
+        const t = s.textContent;
+        const latM = t.match(/maplat[^=]*=\s*["']?(-?\d+\.\d+)/);
+        const lngM = t.match(/maplng[^=]*=\s*["']?(-?\d+\.\d+)/);
+        if (latM && lngM) { lat = parseFloat(latM[1]); lng = parseFloat(lngM[1]); break; }
+      }
+
+      return { name, meta, location, sleeps, price, rating, games, img, lat, lng };
     });
 
     if (!details.name) return null;
     if (details.sleeps && details.sleeps < 20) return null;
 
-    // Geocode location
-    let lat = null, lng = null;
-    if (details.location) {
-      const coords = await geocode(details.location + ', UK');
-      if (coords) { lat = coords.lat; lng = coords.lng; }
+    // Fall back to geocoding only if page had no coords
+    let lat = details.lat, lng = details.lng;
+    if (!lat || !lng) {
+      if (details.location) {
+        const coords = await geocode(details.location + ', UK');
+        if (coords) { lat = coords.lat; lng = coords.lng; }
+      }
     }
 
     // Use search result image if detail page image not found
