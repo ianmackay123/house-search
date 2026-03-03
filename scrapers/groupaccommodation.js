@@ -173,7 +173,7 @@ async function scrapeProperty(context, url, enrichmentData) {
       const games = [];
       const textLower = pageText.toLowerCase();
       if (textLower.includes('table tennis') || textLower.includes('ping pong')) games.push('Table tennis');
-      if (textLower.includes('snooker')) games.push('Snooker');
+      if (textLower.includes('snooker')) games.push(/full[\s-]?size[d]?\s+snooker/.test(textLower) ? 'Full-size snooker' : 'Snooker');
       if (/pool\s*table/.test(textLower) || /\bpool\b/.test(textLower) && textLower.includes('games')) games.push('Pool');
       if (textLower.includes('table football') || textLower.includes('foosball')) games.push('Table football');
       if (textLower.includes('darts')) games.push('Darts');

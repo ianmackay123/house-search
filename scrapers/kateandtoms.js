@@ -117,8 +117,14 @@ async function scrapeProperty(context, slug) {
       let location = '';
       if (meta.length >= 1) {
         const sleepsText = meta[0]?.textContent?.trim() || '';
-        const m = sleepsText.match(/(\d+)/);
-        if (m) sleeps = parseInt(m[1], 10);
+        // Handle ranges like "Sleeps 18-24" — take the upper bound
+        const rangeMatch = sleepsText.match(/(\d+)\s*[-–]\s*(\d+)/);
+        if (rangeMatch) {
+          sleeps = Math.max(parseInt(rangeMatch[1], 10), parseInt(rangeMatch[2], 10));
+        } else {
+          const m = sleepsText.match(/(\d+)/);
+          if (m) sleeps = parseInt(m[1], 10);
+        }
       }
       if (meta.length >= 2) {
         location = meta[1]?.textContent?.trim() || '';
@@ -135,7 +141,7 @@ async function scrapeProperty(context, slug) {
 
       const games = [];
       if (widgetTexts.includes('table tennis') || widgetTexts.includes('ping pong') || widgetTexts.includes('ping-pong')) games.push('Table tennis');
-      if (widgetTexts.includes('snooker')) games.push('Snooker');
+      if (widgetTexts.includes('snooker')) games.push(/full[\s-]?size[d]?\s+snooker/.test(widgetTexts) ? 'Full-size snooker' : 'Snooker');
       if (widgetTexts.includes('pool table') || widgetTexts.match(/\bpool\b.*table/) || widgetTexts.match(/table.*\bpool\b/)) games.push('Pool');
       if (widgetTexts.includes('table football') || widgetTexts.includes('foosball')) games.push('Table football');
       if (widgetTexts.includes('darts') || widgetTexts.includes('dartboard')) games.push('Darts');

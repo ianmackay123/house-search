@@ -6,6 +6,7 @@ import { scrapeTheBigDomain } from './scrapers/thebigdomain.js';
 import { scrapeBigHouseExperience } from './scrapers/bighouseexperience.js';
 import { scrapeSnaptrip } from './scrapers/snaptrip.js';
 import { scrapeSykesCottages } from './scrapers/sykescottages.js';
+import { scrapeTheBigHouseCo } from './scrapers/thebighouseco.js';
 
 const OUTPUT = 'properties.json';
 
@@ -78,6 +79,7 @@ async function main() {
     { name: 'Big House Experience', key: 'bighouseexperience', fn: scrapeBigHouseExperience },
     { name: 'Snaptrip', key: 'snaptrip', fn: scrapeSnaptrip },
     { name: 'Sykes Cottages', key: 'sykescottages', fn: scrapeSykesCottages },
+    { name: 'The Big House Co', key: 'thebighouseco', fn: scrapeTheBigHouseCo },
   ];
 
   const scrapers = onlySource

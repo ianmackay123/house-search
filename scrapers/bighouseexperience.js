@@ -127,7 +127,7 @@ async function scrapeProperty(context, entry) {
       const text = allText.toLowerCase();
       const games = [];
       if (text.includes('table tennis') || text.includes('ping pong') || text.includes('ping-pong')) games.push('Table tennis');
-      if (text.includes('snooker')) games.push('Snooker');
+      if (text.includes('snooker')) games.push(/full[\s-]?size[d]?\s+snooker/.test(text) ? 'Full-size snooker' : 'Snooker');
       if (/pool table|\btable.*pool\b|\bpool\b.*table/.test(text)) games.push('Pool');
       if (text.includes('table football') || text.includes('foosball')) games.push('Table football');
       if (text.includes('darts') || text.includes('dartboard')) games.push('Darts');

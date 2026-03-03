@@ -11,6 +11,7 @@
     "scrape:bhe": "node scrape.js --only=bighouseexperience",
     "scrape:snaptrip": "node scrape.js --only=snaptrip",
     "scrape:sykes": "node scrape.js --only=sykescottages",
+    "scrape:bhc": "node scrape.js --only=thebighouseco",
     "serve": "node server.js"
   },
   "dependencies": {

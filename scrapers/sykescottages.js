@@ -148,7 +148,7 @@ async function fetchProperty(entry) {
 
   const games = [];
   if (fullText.includes('table tennis') || fullText.includes('ping pong') || fullText.includes('ping-pong')) games.push('Table tennis');
-  if (fullText.includes('snooker')) games.push('Snooker');
+  if (fullText.includes('snooker')) games.push(/full[\s-]?size[d]?\s+snooker/.test(fullText) ? 'Full-size snooker' : 'Snooker');
   if (/pool table|\btable.*pool\b|\bpool\b.*table/.test(fullText)) games.push('Pool');
   if (fullText.includes('table football') || fullText.includes('foosball')) games.push('Table football');
   if (fullText.includes('darts') || fullText.includes('dartboard')) games.push('Darts');

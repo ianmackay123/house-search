@@ -46,6 +46,13 @@
             display: flex; align-items: center; justify-content: center;
             z-index: 2000; font-size: 18px; color: #333;
         }
+        @keyframes pulse-yellow {
+            0%, 100% { box-shadow: 0 0 4px 2px rgba(241, 196, 15, 0.3); }
+            50% { box-shadow: 0 0 12px 6px rgba(241, 196, 15, 0.8); }
+        }
+        .pulse-yellow {
+            animation: pulse-yellow 1.5s ease-in-out infinite;
+        }
     </style>
 </head>
 <body>
@@ -57,6 +64,7 @@
         <div class="legend-item"><span class="legend-dot green"></span> Has snooker / table tennis</div>
         <div class="legend-item"><span class="legend-dot blue"></span> All other properties</div>
         <div class="legend-item"><span class="legend-dot" style="background:#aaa;"></span> Dismissed</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#f1c40f;animation:pulse-yellow 1.5s ease-in-out infinite;"></span> Full-size snooker (pulsing)</div>
         <div class="legend-item"><span class="legend-dot" style="background:#3498db;width:8px;height:8px;"></span> No hot tub / pool / sauna (smaller)</div>
         <p style="margin-top:8px;font-size:11px;color:#666;">Click pins for details & links. Dogs | Sleeps 20+ | 24-27 or 25-28 Sep</p>
         <a href="./table.html" style="display:inline-block;margin-top:8px;font-size:12px;color:#2980b9;">View as table &rarr;</a>
@@ -124,6 +132,7 @@
             <button class="scrape-btn" onclick="startScrape('bighouseexperience')">Big House Exp.</button>
             <button class="scrape-btn" onclick="startScrape('snaptrip')">Snaptrip</button>
             <button class="scrape-btn" onclick="startScrape('sykescottages')">Sykes</button>
+            <button class="scrape-btn" onclick="startScrape('thebighouseco')">Big House Co</button>
             <button class="scrape-btn" id="btn-kill" style="background:#c0392b;display:none;" onclick="killScrape()">Stop</button>
         </div>
         <div id="scrape-log"></div>
@@ -163,10 +172,10 @@
             applyStarredFilter();
         }
 
-        function createIcon(color, size) {
+        function createIcon(color, size, extraClass) {
             return L.divIcon({
                 className: 'custom-pin',
-                html: '<div style="width:' + size + 'px;height:' + size + 'px;background:' + color + ';border:3px solid white;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.4);"></div>',
+                html: '<div class="' + (extraClass || '') + '" style="width:' + size + 'px;height:' + size + 'px;background:' + color + ';border:3px solid white;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.4);"></div>',
                 iconSize: [size, size],
                 iconAnchor: [size/2, size/2],
                 popupAnchor: [0, -size/2 - 2]
@@ -186,10 +195,11 @@
 
         function getIcon(prop) {
             var big = hasWaterFeature(prop);
+            var pulse = prop.has_full_snooker ? 'pulse-yellow' : '';
             if (isDismissed(prop.url)) return createIcon('#aaaaaa', big ? 22 : 14);
-            if (isStarred(prop.url)) return createIcon('#f39c12', big ? 32 : 20);
-            if (prop.has_games_bonus) return createIcon('#27ae60', big ? 28 : 18);
-            return createIcon('#3498db', big ? 24 : 16);
+            if (isStarred(prop.url)) return createIcon('#f39c12', big ? 32 : 20, pulse);
+            if (prop.has_games_bonus) return createIcon('#27ae60', big ? 28 : 18, pulse);
+            return createIcon('#3498db', big ? 24 : 16, pulse);
         }
 
         async function toggleStarFromPopup(url, btn) {
@@ -214,6 +224,7 @@
             var starredOnly = document.getElementById('show_starred_only') && document.getElementById('show_starred_only').checked;
             var waterOnly = document.getElementById('show_water_only') && document.getElementById('show_water_only').checked;
             var noNotesOnly = document.getElementById('show_no_notes_only') && document.getElementById('show_no_notes_only').checked;
+            var fullSnookerOnly = document.getElementById('show_full_snooker_only') && document.getElementById('show_full_snooker_only').checked;
             Object.keys(markersByUrl).forEach(function(url) {
                 var entry = markersByUrl[url];
                 var sourceCb = document.getElementById('show_' + entry.prop.source);
@@ -221,8 +232,9 @@
                 var starOn = !starredOnly || isStarred(url);
                 var waterOn = !waterOnly || hasWaterFeature(entry.prop);
                 var noNoteOn = !noNotesOnly || !getNote(url);
+                var snookerOn = !fullSnookerOnly || entry.prop.has_full_snooker;
                 entry.marker.setIcon(getIcon(entry.prop)); entry.marker.setZIndexOffset(getZIndex(entry.prop.url));
-                if (sourceOn && starOn && waterOn && noNoteOn) {
+                if (sourceOn && starOn && waterOn && noNoteOn && snookerOn) {
                     if (!entry.group.hasLayer(entry.marker)) entry.group.addLayer(entry.marker);
                 } else {
                     if (entry.group.hasLayer(entry.marker)) entry.group.removeLayer(entry.marker);
@@ -235,7 +247,8 @@
                 kateandtoms: "Kate & Tom's",
                 groupaccommodation: 'Group Accom.',
                 airbnb: 'Airbnb',
-                thebigdomain: 'Big Domain'
+                thebigdomain: 'Big Domain',
+                thebighouseco: 'Big House Co'
             };
             return labels[source] || source;
         }
@@ -275,6 +288,9 @@
                 html += '<p style="margin:2px 0;font-size:13px;"><strong>Available:</strong> ' + esc(prop.available_dates.join(', ')) + '</p>';
             }
 
+            if (prop.has_full_snooker) {
+                html += '<p style="margin:4px 0 2px;font-size:11px;color:#d4a017;font-weight:bold;">&#127911; FULL-SIZE SNOOKER TABLE</p>';
+            }
             if (prop.has_games_bonus) {
                 html += '<p style="margin:4px 0 2px;font-size:11px;color:#e74c3c;font-weight:bold;">&#9733; HAS TABLE TENNIS / SNOOKER</p>';
             }
@@ -352,7 +368,7 @@
             }
 
             var allMarkers = [];
-            var knownSources = ['kateandtoms', 'groupaccommodation', 'airbnb', 'thebigdomain', 'bighouseexperience', 'snaptrip'];
+            var knownSources = ['kateandtoms', 'groupaccommodation', 'airbnb', 'thebigdomain', 'bighouseexperience', 'snaptrip', 'sykescottages', 'thebighouseco'];
             var allSources = knownSources.concat(Object.keys(bySource).filter(function(s) { return knownSources.indexOf(s) === -1; }));
 
             for (var s = 0; s < allSources.length; s++) {
@@ -399,6 +415,11 @@
             noNotesLabel.style.marginTop = '3px';
             noNotesLabel.innerHTML = '<input type="checkbox" id="show_no_notes_only" ' + (getSavedFilter('show_no_notes_only', false) ? 'checked' : '') + ' onchange="saveFilterState();applyStarredFilter()"> No notes yet';
             filtersEl.appendChild(noNotesLabel);
+
+            var fullSnookerLabel = document.createElement('label');
+            fullSnookerLabel.style.marginTop = '3px';
+            fullSnookerLabel.innerHTML = '<input type="checkbox" id="show_full_snooker_only" ' + (getSavedFilter('show_full_snooker_only', false) ? 'checked' : '') + ' onchange="saveFilterState();applyStarredFilter()"> Full-size snooker only';
+            filtersEl.appendChild(fullSnookerLabel);
 
             applyStarredFilter();
 
