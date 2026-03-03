@@ -180,7 +180,11 @@ async function scrapeProperty(context, url, enrichmentData) {
       if (/pool\s*table/.test(textLower) || /\bpool\b/.test(textLower) && textLower.includes('games')) games.push('Pool');
       if (textLower.includes('table football') || textLower.includes('foosball')) games.push('Table football');
       if (textLower.includes('darts')) games.push('Darts');
-      if (textLower.includes('hot tub')) games.push('Hot tub');
+      if (textLower.includes('hot tub') || textLower.includes('jacuzzi')) games.push('Hot tub');
+      if (textLower.includes('indoor pool') || textLower.includes('indoor swimming')) games.push('Indoor pool');
+      else if (textLower.includes('outdoor pool') || textLower.includes('outdoor swimming') || textLower.includes('lido')) games.push('Outdoor pool');
+      else if (textLower.includes('heated pool')) games.push('Heated pool');
+      else if (textLower.includes('swimming pool') || textLower.includes('private pool')) games.push('Swimming pool');
       if (textLower.includes('piano')) games.push('Piano');
       if (textLower.includes('fire pit') || textLower.includes('fire-pit') || textLower.includes('firepit')) games.push('Fire pit');
 
@@ -257,6 +261,8 @@ async function scrapeProperty(context, url, enrichmentData) {
       }
     }
 
+    // Track if we have explicit coordinates from the page
+    let coords_exact = !!(details.lat && details.lng);
     // Geocode if still no coordinates
     if (!details.lat && details.location) {
       const coords = await geocode(details.location);
@@ -272,6 +278,7 @@ async function scrapeProperty(context, url, enrichmentData) {
       location: details.location,
       lat: details.lat,
       lng: details.lng,
+      coords_exact,
       games: details.games,
       image: details.image,
       url,

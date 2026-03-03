@@ -167,8 +167,11 @@ async function fetchProperty(entry) {
   if (fullText.includes('games console') || fullText.includes('playstation') || fullText.includes('xbox') || fullText.includes('nintendo')) games.push('Games console');
   if (fullText.includes('cinema') || fullText.includes('movie room') || fullText.includes('film room')) games.push('Cinema');
   if (fullText.includes('piano')) games.push('Piano');
-  if (fullText.includes('hot tub') || amenities.includes('hot_tub')) games.push('Hot tub');
-  if (fullText.includes('swimming pool') || fullText.includes('indoor pool') || amenities.includes('swimming_pool')) games.push('Swimming pool');
+  if (fullText.includes('hot tub') || fullText.includes('jacuzzi') || amenities.includes('hot_tub')) games.push('Hot tub');
+  if (fullText.includes('indoor pool') || fullText.includes('indoor swimming') || amenities.includes('indoor_pool')) games.push('Indoor pool');
+  else if (fullText.includes('outdoor pool') || fullText.includes('outdoor swimming') || amenities.includes('outdoor_pool')) games.push('Outdoor pool');
+  else if (fullText.includes('heated pool')) games.push('Heated pool');
+  else if (fullText.includes('swimming pool') || fullText.includes('private pool') || amenities.includes('swimming_pool')) games.push('Swimming pool');
   if (fullText.includes('tennis court')) games.push('Tennis court');
   if (fullText.includes('sauna')) games.push('Sauna');
   if (fullText.includes('games room') || fullText.includes('games barn') || fullText.includes('games/play')) games.push('Games room');
@@ -181,6 +184,7 @@ async function fetchProperty(entry) {
     location,
     lat,
     lng,
+    coords_exact: !!(lat && lng),
     games,
     image,
     url: entry.url,

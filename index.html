@@ -63,6 +63,7 @@
         <div class="legend-item"><span class="legend-dot gold"></span> Starred / interested</div>
         <div class="legend-item"><span class="legend-dot green"></span> Has snooker / table tennis</div>
         <div class="legend-item"><span class="legend-dot blue"></span> All other properties</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#8b0000;"></span> Approximate location (geocoded)</div>
         <div class="legend-item"><span class="legend-dot" style="background:#aaa;"></span> Dismissed</div>
         <div class="legend-item"><span class="legend-dot" style="background:#f1c40f;animation:pulse-yellow 1.5s ease-in-out infinite;"></span> Full-size snooker (pulsing)</div>
         <div class="legend-item"><span class="legend-dot" style="background:#3498db;width:8px;height:8px;"></span> No hot tub / pool / sauna (smaller)</div>
@@ -133,6 +134,9 @@
             <button class="scrape-btn" onclick="startScrape('snaptrip')">Snaptrip</button>
             <button class="scrape-btn" onclick="startScrape('sykescottages')">Sykes</button>
             <button class="scrape-btn" onclick="startScrape('thebighouseco')">Big House Co</button>
+            <button class="scrape-btn" onclick="startScrape('oliverstravels')">Oliver's</button>
+            <button class="scrape-btn" onclick="startScrape('coolstays')">Coolstays</button>
+            <button class="scrape-btn" onclick="startScrape('landedhouses')">Landed</button>
             <button class="scrape-btn" id="btn-kill" style="background:#c0392b;display:none;" onclick="killScrape()">Stop</button>
         </div>
         <div id="scrape-log"></div>
@@ -198,6 +202,7 @@
             var pulse = prop.has_full_snooker ? 'pulse-yellow' : '';
             if (isDismissed(prop.url)) return createIcon('#aaaaaa', big ? 22 : 14);
             if (isStarred(prop.url)) return createIcon('#f39c12', big ? 32 : 20, pulse);
+            if (prop.coords_exact === false) return createIcon('#8b0000', big ? 24 : 16, pulse);
             if (prop.has_games_bonus) return createIcon('#27ae60', big ? 28 : 18, pulse);
             return createIcon('#3498db', big ? 24 : 16, pulse);
         }
@@ -248,7 +253,10 @@
                 groupaccommodation: 'Group Accom.',
                 airbnb: 'Airbnb',
                 thebigdomain: 'Big Domain',
-                thebighouseco: 'Big House Co'
+                thebighouseco: 'Big House Co',
+                oliverstravels: "Oliver's Travels",
+                coolstays: "Coolstays",
+                landedhouses: "Landed Houses"
             };
             return labels[source] || source;
         }
@@ -272,6 +280,7 @@
             if (prop.image) {
                 html += '<a href="' + esc(prop.url) + '" target="_blank" rel="noopener noreferrer">'
                     + '<img src="' + esc(prop.image) + '" alt="' + esc(prop.name) + '"'
+                    + ' referrerpolicy="no-referrer" crossorigin="anonymous"'
                     + ' style="width:100%;height:150px;object-fit:cover;border-radius:4px;display:block;margin-bottom:8px;"'
                     + ' onerror="this.style.display=\'none\'">'
                     + '</a>';
@@ -288,6 +297,15 @@
                 html += '<p style="margin:2px 0;font-size:13px;"><strong>Available:</strong> ' + esc(prop.available_dates.join(', ')) + '</p>';
             }
 
+            // Pool/hot tub badges
+            var poolLabels = { indoor: 'Indoor pool', outdoor: 'Outdoor pool', heated: 'Heated pool', unknown: 'Swimming pool' };
+            if (prop.pool_type) {
+                html += '<p style="margin:4px 0 2px;font-size:11px;color:#2980b9;font-weight:bold;">&#x1F3CA; ' + poolLabels[prop.pool_type] + '</p>';
+            }
+            if (prop.has_hot_tub) {
+                html += '<p style="margin:4px 0 2px;font-size:11px;color:#e67e22;font-weight:bold;">&#x2668;&#xFE0F; Hot tub</p>';
+            }
+
             if (prop.has_full_snooker) {
                 html += '<p style="margin:4px 0 2px;font-size:11px;color:#d4a017;font-weight:bold;">&#127911; FULL-SIZE SNOOKER TABLE</p>';
             }
@@ -295,6 +313,9 @@
                 html += '<p style="margin:4px 0 2px;font-size:11px;color:#e74c3c;font-weight:bold;">&#9733; HAS TABLE TENNIS / SNOOKER</p>';
             }
 
+            if (prop.coords_exact === false) {
+                html += '<p style="margin:4px 0 2px;font-size:11px;color:#8b0000;font-weight:bold;">&#x26A0; Approximate location (geocoded)</p>';
+            }
             html += '<p style="margin:2px 0;font-size:11px;color:#888;">Source: ' + sourceLabel(prop.source) + '</p>';
 
             var isStarredProp   = isStarred(prop.url);
@@ -368,7 +389,7 @@
             }
 
             var allMarkers = [];
-            var knownSources = ['kateandtoms', 'groupaccommodation', 'airbnb', 'thebigdomain', 'bighouseexperience', 'snaptrip', 'sykescottages', 'thebighouseco'];
+            var knownSources = ['kateandtoms', 'groupaccommodation', 'airbnb', 'thebigdomain', 'bighouseexperience', 'snaptrip', 'sykescottages', 'thebighouseco', 'oliverstravels', 'coolstays', 'landedhouses'];
             var allSources = knownSources.concat(Object.keys(bySource).filter(function(s) { return knownSources.indexOf(s) === -1; }));
 
             for (var s = 0; s < allSources.length; s++) {

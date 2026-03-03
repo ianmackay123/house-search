@@ -45,10 +45,18 @@ export async function geocode(locationStr) {
     return result;
   }
 
-  // Fallback: try each comma-separated part individually, starting from the first
-  // (most specific, e.g. "Painswick" in "Painswick, Cotswolds")
+  // Fallback: try each comma-separated part, skipping overly broad regions
+  const BROAD_TERMS = new Set([
+    'england', 'scotland', 'wales', 'northern ireland', 'ireland',
+    'britain', 'britain & ireland', 'great britain', 'united kingdom', 'uk',
+    'the south west', 'the south east', 'the north west', 'the north east',
+    'the midlands', 'east anglia', 'the north', 'the south',
+  ]);
   const parts = query.split(',').map(s => s.trim()).filter(Boolean);
-  for (const part of parts) {
+  // Try non-broad parts first, then broad ones as last resort
+  const specific = parts.filter(p => !BROAD_TERMS.has(p.toLowerCase()));
+  const broad = parts.filter(p => BROAD_TERMS.has(p.toLowerCase()));
+  for (const part of [...specific, ...broad]) {
     if (cache.has(part)) {
       result = cache.get(part);
       if (result) {

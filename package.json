@@ -12,6 +12,9 @@
     "scrape:snaptrip": "node scrape.js --only=snaptrip",
     "scrape:sykes": "node scrape.js --only=sykescottages",
     "scrape:bhc": "node scrape.js --only=thebighouseco",
+    "scrape:ot": "node scrape.js --only=oliverstravels",
+    "scrape:cs": "node scrape.js --only=coolstays",
+    "scrape:lh": "node scrape.js --only=landedhouses",
     "serve": "node server.js"
   },
   "dependencies": {

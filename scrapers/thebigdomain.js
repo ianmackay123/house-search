@@ -165,8 +165,11 @@ async function scrapeProperty(context, entry) {
       if (amenText.includes('games console') || amenText.includes('playstation') || amenText.includes('xbox') || amenText.includes('nintendo')) games.push('Games console');
       if (amenText.includes('cinema') || amenText.includes('movie room') || amenText.includes('film room')) games.push('Cinema');
       if (amenText.includes('piano')) games.push('Piano');
-      if (amenText.includes('hot tub')) games.push('Hot tub');
-      if (amenText.includes('indoor pool') || amenText.includes('swimming pool')) games.push('Swimming pool');
+      if (amenText.includes('hot tub') || amenText.includes('jacuzzi')) games.push('Hot tub');
+      if (amenText.includes('indoor pool') || amenText.includes('indoor swimming')) games.push('Indoor pool');
+      else if (amenText.includes('outdoor pool') || amenText.includes('outdoor swimming') || amenText.includes('lido')) games.push('Outdoor pool');
+      else if (amenText.includes('heated pool')) games.push('Heated pool');
+      else if (amenText.includes('swimming pool') || amenText.includes('private pool')) games.push('Swimming pool');
       if (amenText.includes('sauna')) games.push('Sauna');
       if (amenText.includes('tennis court')) games.push('Tennis court');
       if (amenText.includes('games room') || amenText.includes('games/play')) games.push('Games room');
@@ -192,6 +195,7 @@ async function scrapeProperty(context, entry) {
 
     // Fall back to geocoding only if page had no coords
     let lat = details.lat, lng = details.lng;
+    let coords_exact = !!(lat && lng);
     if (!lat || !lng) {
       if (details.location) {
         const coords = await geocode(details.location + ', UK');
@@ -207,6 +211,7 @@ async function scrapeProperty(context, entry) {
       sleeps: details.sleeps,
       location: details.location,
       lat, lng,
+      coords_exact,
       games: details.games,
       image,
       url: entry.url,

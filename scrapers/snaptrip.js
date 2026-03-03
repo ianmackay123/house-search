@@ -49,6 +49,7 @@ export async function scrapeSnaptrip(options = {}) {
           location: entry.town?.path || entry.town?.name || '',
           lat: entry.lat,
           lng: entry.lng,
+          coords_exact: !!(entry.lat && entry.lng),
           games,
           image: entry.images?.[0]?.url || null,
           url: BASE + entry.link,
@@ -194,8 +195,11 @@ async function fetchGames(link) {
     if (fullText.includes('games console') || fullText.includes('playstation') || fullText.includes('xbox') || fullText.includes('nintendo')) games.push('Games console');
     if (fullText.includes('cinema') || fullText.includes('movie room') || fullText.includes('film room')) games.push('Cinema');
     if (fullText.includes('piano')) games.push('Piano');
-    if (fullText.includes('hot tub')) games.push('Hot tub');
-    if (fullText.includes('indoor pool') || fullText.includes('swimming pool')) games.push('Swimming pool');
+    if (fullText.includes('hot tub') || fullText.includes('jacuzzi')) games.push('Hot tub');
+    if (fullText.includes('indoor pool') || fullText.includes('indoor swimming')) games.push('Indoor pool');
+    else if (fullText.includes('outdoor pool') || fullText.includes('outdoor swimming') || fullText.includes('lido')) games.push('Outdoor pool');
+    else if (fullText.includes('heated pool')) games.push('Heated pool');
+    else if (fullText.includes('swimming pool') || fullText.includes('private pool')) games.push('Swimming pool');
     if (fullText.includes('sauna')) games.push('Sauna');
     if (fullText.includes('tennis court')) games.push('Tennis court');
     if (fullText.includes('games room') || fullText.includes('games/play')) games.push('Games room');

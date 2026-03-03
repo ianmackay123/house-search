@@ -7,6 +7,9 @@ import { scrapeBigHouseExperience } from './scrapers/bighouseexperience.js';
 import { scrapeSnaptrip } from './scrapers/snaptrip.js';
 import { scrapeSykesCottages } from './scrapers/sykescottages.js';
 import { scrapeTheBigHouseCo } from './scrapers/thebighouseco.js';
+import { scrapeOliversTravels } from './scrapers/oliverstravels.js';
+import { scrapeCoolstays } from './scrapers/coolstays.js';
+import { scrapeLandedHouses } from './scrapers/landedhouses.js';
 
 const OUTPUT = 'properties.json';
 
@@ -39,8 +42,12 @@ function filterUK(properties) {
   });
 }
 
+function filterPoolOrHotTub(properties) {
+  return properties.filter(p => p.has_pool_or_hottub);
+}
+
 async function saveResults(results) {
-  const filtered = filterUK(results);
+  const filtered = filterPoolOrHotTub(filterUK(results));
   await writeFile(OUTPUT, JSON.stringify(filtered));
   console.log(`[Save] Wrote ${filtered.length} mappable properties to ${OUTPUT}`);
   try {
@@ -80,6 +87,9 @@ async function main() {
     { name: 'Snaptrip', key: 'snaptrip', fn: scrapeSnaptrip },
     { name: 'Sykes Cottages', key: 'sykescottages', fn: scrapeSykesCottages },
     { name: 'The Big House Co', key: 'thebighouseco', fn: scrapeTheBigHouseCo },
+    { name: "Oliver's Travels", key: 'oliverstravels', fn: scrapeOliversTravels },
+    { name: 'Coolstays', key: 'coolstays', fn: scrapeCoolstays },
+    { name: 'Landed Houses', key: 'landedhouses', fn: scrapeLandedHouses },
   ];
 
   const scrapers = onlySource
@@ -119,11 +129,12 @@ async function main() {
 
   await Promise.allSettled(promises);
 
-  const filtered = filterUK(results);
+  const ukFiltered = filterUK(results);
+  const filtered = filterPoolOrHotTub(ukFiltered);
   const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
 
   console.log(`\n=== Summary ===`);
-  console.log(`Total scraped: ${results.length}, mappable (UK with coords): ${filtered.length}, dropped: ${results.length - filtered.length}`);
+  console.log(`Total scraped: ${results.length}, UK with coords: ${ukFiltered.length}, with pool/hot tub: ${filtered.length}, dropped: ${results.length - filtered.length}`);
   console.log(`Time: ${elapsed}s`);
   if (errors.length) {
     console.log(`Errors: ${errors.length}`);

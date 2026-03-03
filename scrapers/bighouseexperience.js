@@ -138,8 +138,11 @@ async function scrapeProperty(context, entry) {
       if (text.includes('games console') || text.includes('playstation') || text.includes('xbox') || text.includes('nintendo')) games.push('Games console');
       if (text.includes('cinema') || text.includes('movie room') || text.includes('film room')) games.push('Cinema');
       if (text.includes('piano')) games.push('Piano');
-      if (text.includes('hot tub')) games.push('Hot tub');
-      if (text.includes('swimming pool') || text.includes('indoor pool')) games.push('Swimming pool');
+      if (text.includes('hot tub') || text.includes('jacuzzi')) games.push('Hot tub');
+      if (text.includes('indoor pool') || text.includes('indoor swimming')) games.push('Indoor pool');
+      else if (text.includes('outdoor pool') || text.includes('outdoor swimming') || text.includes('lido')) games.push('Outdoor pool');
+      else if (text.includes('heated pool')) games.push('Heated pool');
+      else if (text.includes('swimming pool') || text.includes('private pool')) games.push('Swimming pool');
       if (text.includes('tennis court')) games.push('Tennis court');
       if (text.includes('sauna')) games.push('Sauna');
       if (text.includes('games room')) games.push('Games room');
@@ -162,6 +165,7 @@ async function scrapeProperty(context, entry) {
       location: details.location,
       lat: details.lat,
       lng: details.lng,
+      coords_exact: !!(details.lat && details.lng),
       games: details.games,
       image,
       url: entry.url,

@@ -194,6 +194,7 @@ async function extractListings(page) {
         location: 'England',
         lat: coord ? coord.lat : null,
         lng: coord ? coord.lng : null,
+        coords_exact: !!(coord && coord.lat && coord.lng),
         games: [],
         sleeps: 20,
         available_dates: [],

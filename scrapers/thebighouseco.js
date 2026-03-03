@@ -122,8 +122,11 @@ async function scrapeProperty(context, card) {
       if (text.includes('games console') || text.includes('playstation') || text.includes('xbox') || text.includes('nintendo')) games.push('Games console');
       if (text.includes('cinema') || text.includes('movie room') || text.includes('film room')) games.push('Cinema');
       if (text.includes('piano')) games.push('Piano');
-      if (text.includes('hot tub')) games.push('Hot tub');
-      if (text.includes('swimming pool') || text.includes('indoor pool')) games.push('Swimming pool');
+      if (text.includes('hot tub') || text.includes('jacuzzi')) games.push('Hot tub');
+      if (text.includes('indoor pool') || text.includes('indoor swimming')) games.push('Indoor pool');
+      else if (text.includes('outdoor pool') || text.includes('outdoor swimming') || text.includes('lido')) games.push('Outdoor pool');
+      else if (text.includes('heated pool')) games.push('Heated pool');
+      else if (text.includes('swimming pool') || text.includes('private pool')) games.push('Swimming pool');
       if (text.includes('tennis court')) games.push('Tennis court');
       if (text.includes('sauna')) games.push('Sauna');
       if (text.includes('games room')) games.push('Games room');
@@ -144,17 +147,32 @@ async function scrapeProperty(context, card) {
     // Use best available image: listing thumbnail or first gallery image
     const image = card.image || (details.galleryImages.length > 0 ? details.galleryImages[0] : null);
 
-    // Geocode location since the site has no coordinates
-    const locationForGeocode = location || card.name;
-    console.log(`[BHC] Geocoding "${locationForGeocode}" for ${card.name}...`);
-    const coords = await geocode(locationForGeocode);
+    // Extract coordinates from Google Maps embed in raw HTML (inside noscript/lazy-load wrapper)
+    const html = await page.content();
+    let lat = null, lng = null;
+    const mapsMatch = html.match(/google\.com\/maps\/embed\?pb=[^"']*/);
+    if (mapsMatch) {
+      const latMatch = mapsMatch[0].match(/!3d(-?[\d.]+)/);
+      const lngMatch = mapsMatch[0].match(/!2d(-?[\d.]+)/);
+      if (latMatch) lat = parseFloat(latMatch[1]);
+      if (lngMatch) lng = parseFloat(lngMatch[1]);
+    }
+    let coords_exact = !!(lat && lng);
+    if (!lat || !lng) {
+      const locationForGeocode = location || card.name;
+      console.log(`[BHC] No map coords, geocoding "${locationForGeocode}" for ${card.name}...`);
+      const coords = await geocode(locationForGeocode);
+      lat = coords?.lat || null;
+      lng = coords?.lng || null;
+    }
 
     return {
       name: card.name,
       sleeps: card.sleeps,
       location,
-      lat: coords?.lat || null,
-      lng: coords?.lng || null,
+      lat,
+      lng,
+      coords_exact,
       games: details.games,
       image,
       url: card.url,

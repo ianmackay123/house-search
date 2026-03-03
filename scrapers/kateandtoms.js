@@ -152,8 +152,11 @@ async function scrapeProperty(context, slug) {
       if (widgetTexts.includes('games console') || widgetTexts.includes('playstation') || widgetTexts.includes('xbox') || widgetTexts.includes('nintendo')) games.push('Games console');
       if (widgetTexts.includes('cinema') || widgetTexts.includes('movie room') || widgetTexts.includes('film room')) games.push('Cinema');
       if (widgetTexts.includes('piano') || widgetTexts.includes('grand piano') || widgetTexts.includes('upright piano')) games.push('Piano');
-      if (widgetTexts.includes('hot tub')) games.push('Hot tub');
-      if (widgetTexts.includes('indoor pool') || widgetTexts.includes('swimming pool')) games.push('Swimming pool');
+      if (widgetTexts.includes('hot tub') || widgetTexts.includes('jacuzzi')) games.push('Hot tub');
+      if (widgetTexts.includes('indoor pool') || widgetTexts.includes('indoor swimming')) games.push('Indoor pool');
+      else if (widgetTexts.includes('outdoor pool') || widgetTexts.includes('outdoor swimming') || widgetTexts.includes('lido')) games.push('Outdoor pool');
+      else if (widgetTexts.includes('heated pool')) games.push('Heated pool');
+      else if (widgetTexts.includes('swimming pool') || widgetTexts.includes('private pool')) games.push('Swimming pool');
       if (widgetTexts.includes('fire pit') || widgetTexts.includes('fire-pit') || widgetTexts.includes('firepit')) games.push('Fire pit');
 
       // Try to extract a more specific location from the og:description or page text
@@ -215,6 +218,7 @@ async function scrapeProperty(context, slug) {
   }
 
   // Fall back to geocoding if facts page had no coords
+  let coords_exact = !!(lat && lng);
   if (!lat || !lng) {
     const geocodeQuery = details.specificLocation
       ? `${details.specificLocation}, ${details.location}`
@@ -235,6 +239,7 @@ async function scrapeProperty(context, slug) {
     location: displayLocation,
     lat,
     lng,
+    coords_exact,
     games: details.games,
     image: details.image,
     url: `${BASE}/houses/${slug}/`,
