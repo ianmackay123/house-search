@@ -158,7 +158,7 @@ async function scrapeProperty(context, slug) {
       else if (widgetTexts.includes('heated pool')) games.push('Heated pool');
       else if (widgetTexts.includes('swimming pool') || widgetTexts.includes('private pool')) games.push('Swimming pool');
       if (widgetTexts.includes('fire pit') || widgetTexts.includes('fire-pit') || widgetTexts.includes('firepit')) games.push('Fire pit');
-      if (widgetTexts.includes('moat')) games.push('Moat');
+      if (/\bmoated\b|(?:a|the|its|with|has|surrounded by)\s+moat\b/.test(widgetTexts)) games.push('Moat');
 
       // Try to extract a more specific location from the og:description or page text
       // K&T pages often mention the village/town in the description

@@ -174,7 +174,7 @@ async function scrapeProperty(context, entry) {
       if (amenText.includes('tennis court')) games.push('Tennis court');
       if (amenText.includes('games room') || amenText.includes('games/play')) games.push('Games room');
       if (amenText.includes('fire pit') || amenText.includes('fire-pit') || amenText.includes('firepit')) games.push('Fire pit');
-      if (amenText.includes('moat')) games.push('Moat');
+      if (/\bmoated\b|(?:a|the|its|with|has|surrounded by)\s+moat\b/.test(amenText)) games.push('Moat');
 
       // Main image from page
       const img = document.querySelector('.owl-carousel img, [class*="gallery"] img, [class*="photo"] img, [class*="hero"] img')?.src || null;

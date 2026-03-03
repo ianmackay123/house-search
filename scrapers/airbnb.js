@@ -255,7 +255,7 @@ async function scrapeListingPage(context, url) {
         'pool', 'hot tub', 'jacuzzi', 'sauna', 'snooker', 'billiard', 'pool table',
         'table tennis', 'ping pong', 'ping-pong', 'tennis court', 'games room',
         'games barn', 'cinema', 'home cinema', 'gym', 'bbq', 'barbecue', 'fire pit',
-        'wood burner', 'open fire', 'fireplace', 'piano', 'moat',
+        'wood burner', 'open fire', 'fireplace', 'piano',
       ];
       const amenityEls = document.querySelectorAll(
         '[data-testid="amenity-row"], [data-section-id="AMENITIES"] li, [data-section-id="AMENITIES"] div[class]'
@@ -281,6 +281,10 @@ async function scrapeListingPage(context, url) {
             seenAmenities.add(kw);
           }
         }
+      }
+      // Moat detection (separate from keyword list to avoid nav false positives)
+      if (/\bmoated\b|(?:a|the|its|with|has|surrounded by)\s+moat\b/.test(pageText.toLowerCase())) {
+        result.games.push('Moat');
       }
 
       // Main property photo — prefer JSON-LD schema (present in initial HTML before JS renders)
