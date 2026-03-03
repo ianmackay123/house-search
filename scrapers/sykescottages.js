@@ -137,6 +137,14 @@ async function fetchProperty(entry) {
   const location = ld.address?.streetAddress || '';
   const image = Array.isArray(ld.image) ? ld.image[0] : (ld.image || null);
 
+  // Verify pet-friendly — Sykes search filter is unreliable
+  const petsNo = /class=['"]pets['"][^>]*>[\s\S]*?<strong>\s*No\s*<\/strong>/i.test(html)
+    || /sorry,?\s*no pets/i.test(html);
+  if (petsNo) {
+    console.log(`[Sykes] Skipping ${name} — not pet-friendly`);
+    return null;
+  }
+
   // Parse amenityFeature for games/features
   const amenities = (place.amenityFeature || [])
     .filter(f => f.value === true)
@@ -148,7 +156,10 @@ async function fetchProperty(entry) {
 
   const games = [];
   if (fullText.includes('table tennis') || fullText.includes('ping pong') || fullText.includes('ping-pong')) games.push('Table tennis');
-  if (fullText.includes('snooker')) games.push(/full[\s-]?size[d]?\s+snooker/.test(fullText) ? 'Full-size snooker' : 'Snooker');
+  if (fullText.includes('snooker') || fullText.includes('billiard')) {
+    const isFull = /full[\s-]?size[d]?\s+(?:snooker|billiard)/.test(fullText) || /(?:12[\s-]?f(?:oo)?t|tournament[\s-]?size[d]?|professional[\s-]?size[d]?)\s+(?:snooker|billiard)/.test(fullText);
+    games.push(isFull ? 'Full-size snooker' : 'Snooker');
+  }
   if (/pool table|\btable.*pool\b|\bpool\b.*table/.test(fullText)) games.push('Pool');
   if (fullText.includes('table football') || fullText.includes('foosball')) games.push('Table football');
   if (fullText.includes('darts') || fullText.includes('dartboard')) games.push('Darts');

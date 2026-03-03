@@ -154,7 +154,10 @@ async function scrapeProperty(context, entry) {
       const amenText = amenityItems.join(' ').toLowerCase() + ' ' + allText.toLowerCase();
       const games = [];
       if (amenText.includes('table tennis') || amenText.includes('ping pong') || amenText.includes('ping-pong')) games.push('Table tennis');
-      if (amenText.includes('snooker')) games.push(/full[\s-]?size[d]?\s+snooker/.test(amenText) ? 'Full-size snooker' : 'Snooker');
+      if (amenText.includes('snooker') || amenText.includes('billiard')) {
+        var isFull = /full[\s-]?size[d]?\s+(?:snooker|billiard)/.test(amenText) || /(?:12[\s-]?f(?:oo)?t|tournament[\s-]?size[d]?|professional[\s-]?size[d]?)\s+(?:snooker|billiard)/.test(amenText);
+        games.push(isFull ? 'Full-size snooker' : 'Snooker');
+      }
       if (/\bpool table\b|table.*\bpool\b|\bpool\b.*table/.test(amenText)) games.push('Pool');
       if (amenText.includes('table football') || amenText.includes('foosball')) games.push('Table football');
       if (amenText.includes('darts') || amenText.includes('dartboard')) games.push('Darts');

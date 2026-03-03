@@ -141,7 +141,10 @@ async function scrapeProperty(context, slug) {
 
       const games = [];
       if (widgetTexts.includes('table tennis') || widgetTexts.includes('ping pong') || widgetTexts.includes('ping-pong')) games.push('Table tennis');
-      if (widgetTexts.includes('snooker')) games.push(/full[\s-]?size[d]?\s+snooker/.test(widgetTexts) ? 'Full-size snooker' : 'Snooker');
+      if (widgetTexts.includes('snooker') || widgetTexts.includes('billiard')) {
+        var isFull = /full[\s-]?size[d]?\s+(?:snooker|billiard)/.test(widgetTexts) || /(?:12[\s-]?f(?:oo)?t|tournament[\s-]?size[d]?|professional[\s-]?size[d]?)\s+(?:snooker|billiard)/.test(widgetTexts);
+        games.push(isFull ? 'Full-size snooker' : 'Snooker');
+      }
       if (widgetTexts.includes('pool table') || widgetTexts.match(/\bpool\b.*table/) || widgetTexts.match(/table.*\bpool\b/)) games.push('Pool');
       if (widgetTexts.includes('table football') || widgetTexts.includes('foosball')) games.push('Table football');
       if (widgetTexts.includes('darts') || widgetTexts.includes('dartboard')) games.push('Darts');

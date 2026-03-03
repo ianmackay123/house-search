@@ -13,7 +13,9 @@ export function normalise(raw, source) {
     lng: raw.lng,
     games,
     has_games_bonus: GAMES_BONUS_KEYWORDS.some(kw => gamesLower.includes(kw)),
-    has_full_snooker: gamesLower.includes('full-size snooker') || /full[\s-]?size[d]?\s+snooker/.test(gamesLower),
+    has_full_snooker: gamesLower.includes('full-size snooker')
+      || /full[\s-]?size[d]?\s+(?:snooker|billiard)/.test(gamesLower)
+      || /(?:12[\s-]?f(?:oo)?t|tournament[\s-]?size[d]?|professional[\s-]?size[d]?)\s+(?:snooker|billiard)/.test(gamesLower),
     price: raw.price || null,
     rating: raw.rating || null,
     url: raw.url,

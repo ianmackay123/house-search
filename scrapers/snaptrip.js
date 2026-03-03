@@ -183,7 +183,10 @@ async function fetchGames(link) {
     const fullText = descText + ' ' + metaText;
 
     if (fullText.includes('table tennis') || fullText.includes('ping pong') || fullText.includes('ping-pong')) games.push('Table tennis');
-    if (fullText.includes('snooker')) games.push(/full[\s-]?size[d]?\s+snooker/.test(fullText) ? 'Full-size snooker' : 'Snooker');
+    if (fullText.includes('snooker') || fullText.includes('billiard')) {
+      const isFull = /full[\s-]?size[d]?\s+(?:snooker|billiard)/.test(fullText) || /(?:12[\s-]?f(?:oo)?t|tournament[\s-]?size[d]?|professional[\s-]?size[d]?)\s+(?:snooker|billiard)/.test(fullText);
+      games.push(isFull ? 'Full-size snooker' : 'Snooker');
+    }
     if (/\bpool table\b|table.*\bpool\b|\bpool\b.*table/.test(fullText)) games.push('Pool');
     if (fullText.includes('table football') || fullText.includes('foosball')) games.push('Table football');
     if (fullText.includes('darts') || fullText.includes('dartboard')) games.push('Darts');
