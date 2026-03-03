@@ -202,7 +202,7 @@ async function scrapeProperty(context, candidate) {
       if (text.includes('sauna') || text.includes('steam room')) games.push('Sauna');
       if (amenities.has('games table') || text.includes('games room') || text.includes('games barn')) games.push('Games room');
       if (text.includes('fire pit') || text.includes('fire-pit') || text.includes('firepit')) games.push('Fire pit');
-      if (/\bmoated?\b/.test(text) && !/house on the moat/.test(text)) games.push('Moat');
+      if (/\bmoat(ed)?\b/.test(text) && !/house on the moat/.test(text)) games.push('Moat');
       return games;
     });
 

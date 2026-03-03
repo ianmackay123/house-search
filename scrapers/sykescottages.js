@@ -82,7 +82,7 @@ async function searchDateRange(context, range, limit) {
           // Price from card — shown as "from £X" or "£X for X nights"
           const priceEl = card.querySelector('[class*="price"], .price, .from-price, .property-price');
           const price = priceEl?.textContent?.trim().match(/£[\d,]+/)?.[0] || null;
-          results.push({ url: url.split('?')[0], price });
+          results.push({ url: url.split(/[?#]/)[0], price });
         }
         return results;
       }, BASE);
@@ -183,7 +183,7 @@ async function fetchProperty(entry) {
   if (fullText.includes('sauna')) games.push('Sauna');
   if (fullText.includes('games room') || fullText.includes('games barn') || fullText.includes('games/play')) games.push('Games room');
   if (fullText.includes('fire pit') || fullText.includes('fire-pit') || fullText.includes('firepit')) games.push('Fire pit');
-  if (/\bmoated?\b/.test(fullText) && !/house on the moat/.test(fullText)) games.push('Moat');
+  if (/\bmoat(ed)?\b/.test(fullText) && !/house on the moat/.test(fullText)) games.push('Moat');
   if (fullText.includes('open fire') || fullText.includes('fireplace') || amenities.includes('fireplace')) games.push('Open fire');
 
   return {
