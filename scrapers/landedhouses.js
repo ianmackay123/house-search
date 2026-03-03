@@ -173,7 +173,10 @@ async function scrapeProperty(context, candidate) {
       // Use description text for games detection (not filter nav)
       // Target the main content area, not the full page
       const contentEl = document.querySelector('.property-content, .entry-content, main, article') || document.body;
-      const text = contentEl.innerText.toLowerCase();
+      const fullText = contentEl.innerText.toLowerCase();
+      // Discard everything after "Similar houses" to avoid false positives from other property listings
+      const similarIdx = fullText.indexOf('similar houses');
+      const text = similarIdx > -1 ? fullText.slice(0, similarIdx) : fullText;
 
       if (text.includes('table tennis') || text.includes('ping pong') || text.includes('ping-pong')) games.push('Table tennis');
       if (text.includes('snooker') || text.includes('billiard')) {

@@ -244,6 +244,8 @@
             if (!games || !games.length) return '<span style="color:#ccc;">-</span>';
             var keywords = ['snooker', 'table tennis', 'ping pong', 'moat'];
             return games.map(function(g) {
+                var isMoat = g.toLowerCase() === 'moat';
+                if (isMoat) return '<span class="moat-badge">&#x1F3F0; ' + esc(g) + '</span>';
                 var isHighlight = keywords.some(function(kw) { return g.toLowerCase().includes(kw); });
                 return isHighlight ? '<span class="highlight">' + esc(g) + '</span>' : esc(g);
             }).join(', ');

@@ -127,7 +127,9 @@ async function scrapeProperty(context, candidate) {
         } catch {}
       }
 
-      const text = document.body.innerText.toLowerCase();
+      const fullText = document.body.innerText.toLowerCase();
+      const similarIdx = fullText.indexOf('similar places');
+      const text = similarIdx > -1 ? fullText.slice(0, similarIdx) : fullText;
 
       // Games/amenities detection
       const games = [];
