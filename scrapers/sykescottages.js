@@ -183,7 +183,7 @@ async function fetchProperty(entry) {
   if (fullText.includes('sauna')) games.push('Sauna');
   if (fullText.includes('games room') || fullText.includes('games barn') || fullText.includes('games/play')) games.push('Games room');
   if (fullText.includes('fire pit') || fullText.includes('fire-pit') || fullText.includes('firepit')) games.push('Fire pit');
-  if (/\bmoated\b|(?:a|the|its|with|has|surrounded by)\s+moat\b/.test(fullText)) games.push('Moat');
+  if (/\bmoated?\b/.test(fullText) && !/house on the moat/.test(fullText)) games.push('Moat');
   if (fullText.includes('open fire') || fullText.includes('fireplace') || amenities.includes('fireplace')) games.push('Open fire');
 
   return {

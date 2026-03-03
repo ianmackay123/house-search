@@ -283,7 +283,7 @@ async function scrapeListingPage(context, url) {
         }
       }
       // Moat detection (separate from keyword list to avoid nav false positives)
-      if (/\bmoated\b|(?:a|the|its|with|has|surrounded by)\s+moat\b/.test(pageText.toLowerCase())) {
+      if (/\bmoated?\b/.test(pageText.toLowerCase()) && !/house on the moat/.test(pageText.toLowerCase())) {
         result.games.push('Moat');
       }
 

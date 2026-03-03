@@ -131,7 +131,7 @@ async function scrapeProperty(context, card) {
       if (text.includes('sauna')) games.push('Sauna');
       if (text.includes('games room')) games.push('Games room');
       if (text.includes('fire pit') || text.includes('fire-pit') || text.includes('firepit')) games.push('Fire pit');
-      if (/\bmoated\b|(?:a|the|its|with|has|surrounded by)\s+moat\b/.test(text)) games.push('Moat');
+      if (/\bmoated?\b/.test(text) && !/house on the moat/.test(text)) games.push('Moat');
 
       // Gallery images (lazy-loaded via data-src)
       const galleryImages = [...document.querySelectorAll('img[data-src]')]
