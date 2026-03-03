@@ -56,6 +56,8 @@
         .source-badge.coolstays { background: #2ecc71; }
         .source-badge.landedhouses { background: #9b59b6; }
         .bonus-star { color: #e74c3c; font-weight: bold; }
+        .moat-badge { color: #4a0080; font-weight: bold; font-size: 12px; animation: blink-moat 1s ease-in-out infinite; }
+        @keyframes blink-moat { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
         .games-list { font-size: 12px; color: #555; }
         .games-list .highlight { color: #e74c3c; font-weight: 600; }
         a.prop-link { color: #2980b9; text-decoration: none; font-weight: 500; }
@@ -240,7 +242,7 @@
 
         function highlightGames(games) {
             if (!games || !games.length) return '<span style="color:#ccc;">-</span>';
-            var keywords = ['snooker', 'table tennis', 'ping pong'];
+            var keywords = ['snooker', 'table tennis', 'ping pong', 'moat'];
             return games.map(function(g) {
                 var isHighlight = keywords.some(function(kw) { return g.toLowerCase().includes(kw); });
                 return isHighlight ? '<span class="highlight">' + esc(g) + '</span>' : esc(g);
@@ -338,6 +340,7 @@
                     html += '<td></td>';
                 }
                 html += '<td><a class="prop-link" href="' + esc(p.url) + '" target="_blank">' + esc(p.name) + '</a>';
+                if (p.has_moat) html += ' <span class="moat-badge">&#x1F3F0; MOAT</span>';
                 if (p.has_games_bonus) html += ' <span class="bonus-star">&#9733;</span>';
                 html += '</td>';
                 html += '<td><span class="source-badge ' + p.source + '">' + sourceLabel(p.source) + '</span></td>';

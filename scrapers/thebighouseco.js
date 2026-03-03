@@ -131,6 +131,7 @@ async function scrapeProperty(context, card) {
       if (text.includes('sauna')) games.push('Sauna');
       if (text.includes('games room')) games.push('Games room');
       if (text.includes('fire pit') || text.includes('fire-pit') || text.includes('firepit')) games.push('Fire pit');
+      if (text.includes('moat')) games.push('Moat');
 
       // Gallery images (lazy-loaded via data-src)
       const galleryImages = [...document.querySelectorAll('img[data-src]')]

@@ -255,7 +255,7 @@ async function scrapeListingPage(context, url) {
         'pool', 'hot tub', 'jacuzzi', 'sauna', 'snooker', 'billiard', 'pool table',
         'table tennis', 'ping pong', 'ping-pong', 'tennis court', 'games room',
         'games barn', 'cinema', 'home cinema', 'gym', 'bbq', 'barbecue', 'fire pit',
-        'wood burner', 'open fire', 'fireplace', 'piano',
+        'wood burner', 'open fire', 'fireplace', 'piano', 'moat',
       ];
       const amenityEls = document.querySelectorAll(
         '[data-testid="amenity-row"], [data-section-id="AMENITIES"] li, [data-section-id="AMENITIES"] div[class]'

@@ -46,6 +46,10 @@
             display: flex; align-items: center; justify-content: center;
             z-index: 2000; font-size: 18px; color: #333;
         }
+        @keyframes blink-moat {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
         @keyframes pulse-yellow {
             0%, 100% { box-shadow: 0 0 4px 2px rgba(241, 196, 15, 0.3); }
             50% { box-shadow: 0 0 12px 6px rgba(241, 196, 15, 0.8); }
@@ -306,6 +310,9 @@
                 html += '<p style="margin:4px 0 2px;font-size:11px;color:#e67e22;font-weight:bold;">&#x2668;&#xFE0F; Hot tub</p>';
             }
 
+            if (prop.has_moat) {
+                html += '<p style="margin:4px 0 2px;font-size:13px;color:#4a0080;font-weight:bold;animation:blink-moat 1s ease-in-out infinite;">&#x1F3F0; HAS A MOAT!</p>';
+            }
             if (prop.has_full_snooker) {
                 html += '<p style="margin:4px 0 2px;font-size:11px;color:#d4a017;font-weight:bold;">&#127911; FULL-SIZE SNOOKER TABLE</p>';
             }

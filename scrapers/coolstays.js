@@ -152,6 +152,7 @@ async function scrapeProperty(context, candidate) {
       if (text.includes('sauna') || text.includes('steam room')) games.push('Sauna');
       if (text.includes('games room') || text.includes('games barn')) games.push('Games room');
       if (text.includes('fire pit') || text.includes('fire-pit') || text.includes('firepit')) games.push('Fire pit');
+      if (text.includes('moat')) games.push('Moat');
 
       return { jsonLd, games };
     });

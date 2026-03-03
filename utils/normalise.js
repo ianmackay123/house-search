@@ -28,6 +28,7 @@ export function normalise(raw, source) {
     has_pool_or_hottub: hasPool || hasHotTub,
     pool_type: poolType,
     has_hot_tub: hasHotTub,
+    has_moat: gamesLower.includes('moat'),
     price: raw.price || null,
     rating: raw.rating || null,
     url: raw.url,

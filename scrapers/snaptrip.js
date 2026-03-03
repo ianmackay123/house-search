@@ -204,6 +204,7 @@ async function fetchGames(link) {
     if (fullText.includes('tennis court')) games.push('Tennis court');
     if (fullText.includes('games room') || fullText.includes('games/play')) games.push('Games room');
     if (fullText.includes('fire pit') || fullText.includes('fire-pit') || fullText.includes('firepit')) games.push('Fire pit');
+    if (fullText.includes('moat')) games.push('Moat');
   } catch (err) {
     // Non-fatal: return empty games
   }
