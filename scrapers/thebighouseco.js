@@ -51,7 +51,10 @@ export async function scrapeTheBigHouseCo(options = {}) {
 
           // Get thumbnail image
           const img = article.querySelector('.big-house-featured-image img');
-          const image = img ? (img.src || img.getAttribute('data-src')) : null;
+          const dataSrc = img ? img.getAttribute('data-src') : null;
+          const src = img ? img.src : null;
+          const image = (dataSrc && !dataSrc.startsWith('data:') ? dataSrc : null)
+            || (src && !src.startsWith('data:') ? src : null);
 
           results.push({ name, url, sleeps, features: featureNames, hasDogs, image });
         }
