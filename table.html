@@ -51,6 +51,10 @@
         .source-badge.snaptrip { background: #1a7f5a; }
         .source-badge.thebigdomain { background: #8e44ad; }
         .source-badge.sykescottages { background: #2471a3; }
+        .source-badge.thebighouseco { background: #16a085; }
+        .source-badge.oliverstravels { background: #d35400; }
+        .source-badge.coolstays { background: #2ecc71; }
+        .source-badge.landedhouses { background: #9b59b6; }
         .bonus-star { color: #e74c3c; font-weight: bold; }
         .games-list { font-size: 12px; color: #555; }
         .games-list .highlight { color: #e74c3c; font-weight: 600; }
@@ -127,6 +131,11 @@
         <label><input type="checkbox" data-source="thebigdomain" checked onchange="saveFilterState();applyFilters()"> Big Domain</label>
         <label><input type="checkbox" data-source="bighouseexperience" checked onchange="saveFilterState();applyFilters()"> Big House Exp.</label>
         <label><input type="checkbox" data-source="snaptrip" checked onchange="saveFilterState();applyFilters()"> Snaptrip</label>
+        <label><input type="checkbox" data-source="sykescottages" checked onchange="saveFilterState();applyFilters()"> Sykes</label>
+        <label><input type="checkbox" data-source="thebighouseco" checked onchange="saveFilterState();applyFilters()"> Big House Co</label>
+        <label><input type="checkbox" data-source="oliverstravels" checked onchange="saveFilterState();applyFilters()"> Oliver's</label>
+        <label><input type="checkbox" data-source="coolstays" checked onchange="saveFilterState();applyFilters()"> Coolstays</label>
+        <label><input type="checkbox" data-source="landedhouses" checked onchange="saveFilterState();applyFilters()"> Landed</label>
         <strong style="font-size:13px;margin-left:8px;">Filter:</strong>
         <label><input type="checkbox" id="bonusOnly" onchange="saveFilterState();applyFilters()"> Snooker/table tennis only</label>
         <label><input type="checkbox" id="starredOnly" onchange="saveFilterState();applyFilters()"> ★ Starred only</label>
@@ -143,6 +152,11 @@
         <button class="scrape-btn" onclick="startScrape('thebigdomain')">Big Domain</button>
         <button class="scrape-btn" onclick="startScrape('bighouseexperience')">Big House Exp.</button>
         <button class="scrape-btn" onclick="startScrape('snaptrip')">Snaptrip</button>
+        <button class="scrape-btn" onclick="startScrape('sykescottages')">Sykes</button>
+        <button class="scrape-btn" onclick="startScrape('thebighouseco')">Big House Co</button>
+        <button class="scrape-btn" onclick="startScrape('oliverstravels')">Oliver's</button>
+        <button class="scrape-btn" onclick="startScrape('coolstays')">Coolstays</button>
+        <button class="scrape-btn" onclick="startScrape('landedhouses')">Landed</button>
         <button class="scrape-btn" id="btn-kill" style="background:#c0392b;display:none;" onclick="killScrape()">Stop</button>
         <div id="scrape-log-wrap"></div>
     </div>
@@ -216,7 +230,7 @@
         }
 
         function sourceLabel(s) {
-            return { kateandtoms: "Kate & Tom's", groupaccommodation: 'Group Accom.', airbnb: 'Airbnb', thebigdomain: 'Big Domain' }[s] || s;
+            return { kateandtoms: "Kate & Tom's", groupaccommodation: 'Group Accom.', airbnb: 'Airbnb', thebigdomain: 'Big Domain', bighouseexperience: 'Big House Exp.', snaptrip: 'Snaptrip', sykescottages: 'Sykes', thebighouseco: 'Big House Co', oliverstravels: "Oliver's", coolstays: 'Coolstays', landedhouses: 'Landed' }[s] || s;
         }
 
         function esc(str) {

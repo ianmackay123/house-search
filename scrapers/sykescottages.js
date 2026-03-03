@@ -2,7 +2,7 @@ import { launchBrowser, rateLimit, sleep } from '../utils/browser.js';
 import { normalise } from '../utils/normalise.js';
 
 const BASE = 'https://www.sykescottages.co.uk';
-const TIMEOUT = 20000;
+const TIMEOUT = 45000;
 
 const DATE_RANGES = [
   { start: '24%2F09%2F2026', label: '24-27 Sep' },
@@ -14,6 +14,13 @@ export async function scrapeSykesCottages(options = {}) {
   const { browser, context } = await launchBrowser();
 
   try {
+    // Accept cookie banner on first load to prevent it blocking interactions
+    const cookiePage = await context.newPage();
+    await cookiePage.goto(BASE, { waitUntil: 'domcontentloaded', timeout: TIMEOUT });
+    await cookiePage.locator('#onetrust-accept-btn-handler').click().catch(() => {});
+    await cookiePage.waitForTimeout(1000);
+    await cookiePage.close();
+
     // Phase 1: Collect property URLs from search results for both date ranges
     const propertyMap = new Map(); // url -> { url, dates[], price }
 

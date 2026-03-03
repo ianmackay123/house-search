@@ -133,10 +133,11 @@ async function scrapeProperty(context, candidate) {
       if (text.includes('fire pit') || text.includes('fire-pit') || text.includes('firepit')) games.push('Fire pit');
 
       // Extract coordinates from JSON-LD GeoCoordinates in page HTML
+      // Quotes may be raw or HTML-encoded (&quot;)
       let lat = null, lng = null;
       const html = document.documentElement.innerHTML;
-      const latMatch = html.match(/"latitude"[:\s"]*(-?[\d.]+)/);
-      const lngMatch = html.match(/"longitude"[:\s"]*(-?[\d.]+)/);
+      const latMatch = html.match(/latitude(?:&quot;|")[:\s]*(?:&quot;|")?(-?[\d.]+)/);
+      const lngMatch = html.match(/longitude(?:&quot;|")[:\s]*(?:&quot;|")?(-?[\d.]+)/);
       if (latMatch && lngMatch) {
         lat = parseFloat(latMatch[1]);
         lng = parseFloat(lngMatch[1]);
