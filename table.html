@@ -485,6 +485,13 @@
 
         // Load data and state in parallel
         restoreFilterState();
+
+        // URL params override saved state (e.g. ?favourites=true)
+        var urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('favourites') === 'true' || urlParams.get('favorites') === 'true') {
+            document.getElementById('starredOnly').checked = true;
+        }
+
         Promise.all([
             loadProperties(),
             loadState()
